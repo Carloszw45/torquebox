@@ -1,7 +1,9 @@
 (() => {
   const byId = (id) => document.getElementById(id);
   const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+  const reais = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
   const formatPrice = (cents) => money.format(cents / 100);
+  const formatReais = (cents) => reais.format(cents / 100);
   const cartKey = 'torquebox-cart';
   const bottlePhoto = 'assets/images/qifor-wind-shield-pro.jpg';
   const shippingCharge = 499;
@@ -186,7 +188,9 @@
     modalTrigger = trigger;
     activeModal.classList.remove('hidden');
     document.body.classList.add('overflow-hidden');
-    const initialFocus = id === 'search-modal' ? searchInput : activeModal.querySelector('button[data-close-modal]');
+    const initialFocus = id === 'search-modal' ? searchInput
+      : id === 'pix-modal' ? byId('pix-customer-form').elements.namedItem('name')
+        : activeModal.querySelector('button[data-close-modal]');
     initialFocus.focus({ preventScroll: true });
   }
 
@@ -203,7 +207,7 @@
       closeModal();
     }
     if (event.key !== 'Tab') return;
-    const controls = Array.from(activeModal.querySelectorAll('a[href], button:not([disabled]), input'))
+    const controls = Array.from(activeModal.querySelectorAll('a[href], button:not([disabled]), input:not([type="hidden"]), textarea, select'))
       .filter((element) => element.getClientRects().length > 0);
     const first = controls[0];
     const last = controls.at(-1);
@@ -215,6 +219,164 @@
       first.focus();
     }
   });
+
+  // Pix payments are issued and verified by server-side Cloudflare Pages Functions.
+  // Neither an API key nor an exchange rate chosen by the browser can create a charge.
+  const pixForm = byId('pix-customer-form');
+  const pixSubmit = byId('pix-generate');
+  const pixError = byId('pix-error');
+  const pixStatus = byId('pix-order-status');
+  let pixCharge = null;
+  let pixPollTimeout;
+  let pixPolling = false;
+  let pixPollUntil = 0;
+
+  async function pixApi(path, payload) {
+    const response = await fetch(`/api/pix/${path}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload),
+      cache: 'no-store',
+      credentials: 'same-origin',
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || 'Pix checkout is temporarily unavailable.');
+    return data;
+  }
+
+  async function loadPixEstimate() {
+    pixSubmit.disabled = true;
+    pixError.textContent = '';
+    byId('pix-brl-total').textContent = 'Checking current exchange rate…';
+    byId('pix-rate-info').textContent = 'The final amount is calculated when the Pix charge is created.';
+    // Do not allow a changed cart to use a stale quote.
+    const cartSnapshot = JSON.stringify(cart);
+    try {
+      const quote = await pixApi('quote', { cart });
+      if (cartSnapshot !== JSON.stringify(cart)) {
+        byId('pix-brl-total').textContent = 'Cart changed';
+        pixError.textContent = 'Please close checkout and reopen it to update the amount.';
+        return;
+      }
+      byId('pix-usd-total').textContent = formatPrice(quote.totalUsdCents);
+      byId('pix-brl-total').textContent = formatReais(quote.totalBrlCents);
+      byId('pix-rate-info').textContent = `USD 1 = BRL ${Number(quote.rate).toFixed(4)} · Rate date: ${quote.rateDate}. Final BRL amount may update when you generate Pix.`;
+      pixSubmit.disabled = false;
+    } catch (error) {
+      byId('pix-brl-total').textContent = 'Unavailable';
+      pixError.textContent = error.message;
+    }
+  }
+
+  function displayPixCharge(charge) {
+    pixForm.classList.add('hidden');
+    byId('pix-payment').classList.remove('hidden');
+    pixError.textContent = '';
+    byId('pix-usd-total').textContent = formatPrice(charge.totalUsdCents);
+    byId('pix-brl-total').textContent = formatReais(charge.totalBrlCents);
+    byId('pix-rate-info').textContent = `USD 1 = BRL ${Number(charge.rate).toFixed(4)} · Rate date: ${charge.rateDate}. This BRL amount is now fixed.`;
+    byId('pix-final-amount').textContent = `Pay ${formatReais(charge.totalBrlCents)}`;
+    const rawImage = String(charge.qrCodeBase64).replace(/^data:image\/png;base64,/i, '').replace(/\s+/g, '');
+    if (!/^[a-zA-Z0-9+/]+={0,2}$/.test(rawImage)) throw new Error('The payment QR image is invalid.');
+    byId('pix-qr-image').src = `data:image/png;base64,${rawImage}`;
+    byId('pix-copy-code').value = charge.pixCode;
+    pixStatus.textContent = 'Awaiting confirmation from the Pix provider…';
+    byId('pix-check-status').disabled = false;
+  }
+
+  async function checkPixPayment() {
+    if (!pixCharge || pixPolling) return;
+    pixPolling = true;
+    byId('pix-check-status').disabled = true;
+    try {
+      const result = await pixApi('status', {
+        orderId: pixCharge.orderId,
+        accessToken: pixCharge.accessToken,
+      });
+      if (result.status === 'paid') {
+        pixStatus.textContent = 'Payment confirmed! Thank you for your order. Please save your receipt.';
+        byId('pix-check-status').classList.add('hidden');
+        clearTimeout(pixPollTimeout);
+        pixCharge = null;
+        cart = {};
+        try { localStorage.removeItem(cartKey); } catch { /* Storage can be disabled. */ }
+        updateCart();
+      } else if (['expired', 'cancelled'].includes(result.status)) {
+        pixStatus.textContent = `Pix charge ${result.status}. No payment was confirmed. Please contact support before creating a new payment.`;
+        clearTimeout(pixPollTimeout);
+        pixCharge = null;
+      } else {
+        pixStatus.textContent = 'Waiting for secure payment confirmation…';
+      }
+    } catch {
+      pixStatus.textContent = 'Could not check payment yet. We will retry; do not pay twice.';
+    } finally {
+      pixPolling = false;
+      byId('pix-check-status').disabled = !pixCharge;
+      if (pixCharge && Date.now() < pixPollUntil) {
+        clearTimeout(pixPollTimeout);
+        pixPollTimeout = setTimeout(checkPixPayment, 12_000);
+      }
+    }
+  }
+
+  byId('open-pix-checkout').addEventListener('click', (event) => {
+    if (!Object.keys(cart).length) return;
+    openModal('pix-modal', event.currentTarget);
+    if (pixCharge) {
+      displayPixCharge(pixCharge);
+      return;
+    }
+    byId('pix-payment').classList.add('hidden');
+    byId('pix-check-status').classList.remove('hidden');
+    pixForm.classList.remove('hidden');
+    loadPixEstimate();
+  });
+
+  pixForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (pixSubmit.disabled || pixCharge) return;
+    pixSubmit.disabled = true;
+    pixSubmit.textContent = 'Generating secure Pix…';
+    pixError.textContent = '';
+    const fields = Object.fromEntries(new FormData(pixForm).entries());
+    const customer = {
+      name: fields.name,
+      email: fields.email,
+      phone: fields.phone,
+      address: {
+        line1: fields.line1, line2: fields.line2, city: fields.city,
+        state: fields.state, postalCode: fields.postalCode, country: 'US',
+      },
+    };
+    try {
+      const charge = await pixApi('charge', { cart, customer });
+      if (!charge.orderId || !charge.accessToken || !charge.pixCode || !charge.qrCodeBase64) {
+        throw new Error('Incomplete Pix charge response. Please contact support before paying again.');
+      }
+      pixCharge = charge;
+      displayPixCharge(charge);
+      pixPollUntil = Date.now() + 30 * 60_000;
+      checkPixPayment();
+    } catch (error) {
+      pixError.textContent = `${error.message} If you already received a Pix charge, contact support before trying again.`;
+    } finally {
+      pixSubmit.textContent = 'Generate Pix QR code';
+      pixSubmit.disabled = Boolean(pixCharge);
+    }
+  });
+
+  byId('pix-copy-button').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(byId('pix-copy-code').value);
+      byId('pix-copy-button').textContent = 'Copied!';
+    } catch {
+      byId('pix-copy-code').focus();
+      byId('pix-copy-code').select();
+      byId('pix-copy-button').textContent = 'Select code and copy';
+    }
+  });
+  byId('pix-check-status').addEventListener('click', checkPixPayment);
 
   let toastTimer;
   function addToCart(event) {

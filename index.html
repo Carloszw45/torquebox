@@ -820,7 +820,54 @@
 <span>Total (USD)</span>
 <span id="drawer-total">$0.00</span>
 </div>
-<p class="mt-2 rounded-lg bg-surface-container px-3 py-2 text-center font-body-sm text-body-sm text-on-surface-variant" id="checkout-status">Online checkout is currently unavailable.</p>
+<button class="mt-2 w-full rounded-lg bg-secondary-container px-4 py-3 text-on-secondary-container font-bold uppercase shadow-sm transition hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed" id="open-pix-checkout" type="button">Checkout with Pix</button>
+<p class="text-center font-body-sm text-body-sm text-on-surface-variant" id="checkout-status" role="status">Payments are processed in Brazilian reais (BRL). A Brazilian Pix-enabled bank account is required.</p>
+</div>
+</div>
+</div>
+<!-- PIX CHECKOUT: payment form remains on torque-box.com; card details are never collected. -->
+<div aria-labelledby="pix-title" aria-modal="true" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 hidden" id="pix-modal" role="dialog">
+<div class="absolute inset-0 bg-black/65 backdrop-blur-sm modal-overlay" data-close-modal></div>
+<div class="relative z-10 flex flex-col w-full max-w-xl max-h-[94vh] overflow-hidden rounded-xl border border-outline-variant/30 bg-surface-container-lowest shadow-2xl">
+<div class="flex items-center justify-between gap-3 p-4 border-b border-surface-container bg-surface-container-low">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold uppercase" id="pix-title">Secure Pix Checkout</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">USD prices, converted to BRL before payment</p>
+</div>
+<button aria-label="Close Pix checkout" class="p-2 rounded hover:bg-surface-container-high text-on-surface-variant" data-close-modal type="button"><span aria-hidden="true" class="material-symbols-outlined">close</span></button>
+</div>
+<div class="overflow-y-auto p-4 sm:p-6">
+<div class="rounded-lg bg-surface-container p-4 mb-4" aria-live="polite">
+<div class="flex items-center justify-between gap-3"><span class="font-body-sm text-body-sm text-on-surface-variant">Order total (USD)</span><strong id="pix-usd-total">$0.00</strong></div>
+<div class="flex items-center justify-between gap-3 mt-2"><span class="font-body-md text-body-md">Estimated Pix total (BRL)</span><strong class="text-xl text-primary" id="pix-brl-total">Checking rate…</strong></div>
+<p class="mt-2 text-xs text-on-surface-variant" id="pix-rate-info">The final BRL amount is fixed when the Pix charge is created.</p>
+</div>
+<p class="mb-4 rounded-lg border border-outline-variant/40 p-3 text-sm text-on-surface-variant">Pix payments require access to a Pix-enabled Brazilian banking app. The product will ship to the US address you provide.</p>
+<form class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="pix-customer-form">
+<label class="sm:col-span-2 text-sm font-medium">Full name <input name="name" required minlength="3" maxlength="100" autocomplete="name" placeholder="Full name" class="mt-1 w-full rounded-md border border-outline-variant/60 bg-surface-container-lowest p-3 text-on-surface" /></label>
+<label class="sm:col-span-2 text-sm font-medium">Email <input name="email" type="email" required maxlength="100" autocomplete="email" placeholder="name@example.com" class="mt-1 w-full rounded-md border border-outline-variant/60 bg-surface-container-lowest p-3 text-on-surface" /></label>
+<label class="sm:col-span-2 text-sm font-medium">Phone (optional) <input name="phone" type="tel" maxlength="30" autocomplete="tel" placeholder="+1 555 123 4567" class="mt-1 w-full rounded-md border border-outline-variant/60 bg-surface-container-lowest p-3 text-on-surface" /></label>
+<label class="sm:col-span-2 text-sm font-medium">US street address <input name="line1" required maxlength="160" autocomplete="address-line1" placeholder="Street and house number" class="mt-1 w-full rounded-md border border-outline-variant/60 bg-surface-container-lowest p-3 text-on-surface" /></label>
+<label class="sm:col-span-2 text-sm font-medium">Apartment / suite (optional) <input name="line2" maxlength="160" autocomplete="address-line2" placeholder="Apartment, suite or unit" class="mt-1 w-full rounded-md border border-outline-variant/60 bg-surface-container-lowest p-3 text-on-surface" /></label>
+<label class="text-sm font-medium">City <input name="city" required maxlength="80" autocomplete="address-level2" placeholder="City" class="mt-1 w-full rounded-md border border-outline-variant/60 bg-surface-container-lowest p-3 text-on-surface" /></label>
+<label class="text-sm font-medium">State (2 letters) <input name="state" required maxlength="2" minlength="2" pattern="[a-zA-Z]{2}" autocomplete="address-level1" placeholder="CA" class="mt-1 w-full rounded-md border border-outline-variant/60 bg-surface-container-lowest p-3 text-on-surface uppercase" /></label>
+<label class="sm:col-span-2 text-sm font-medium">US ZIP code <input name="postalCode" required pattern="[0-9]{5}(-[0-9]{4})?" autocomplete="postal-code" placeholder="90210" class="mt-1 w-full rounded-md border border-outline-variant/60 bg-surface-container-lowest p-3 text-on-surface" /></label>
+<input name="country" type="hidden" value="US" />
+<button class="sm:col-span-2 w-full rounded-lg bg-secondary-container py-3.5 px-4 font-bold uppercase text-on-secondary-container transition hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed" id="pix-generate" type="submit" disabled>Generate Pix QR code</button>
+</form>
+<div class="hidden text-center" id="pix-payment" aria-live="polite">
+<p class="font-bold text-primary text-lg">Your Pix charge is ready</p>
+<p class="text-on-surface-variant text-sm mb-3">Open your Brazilian banking app and scan this QR code, or copy the Pix code below.</p>
+<img alt="Pix payment QR code" class="w-56 h-56 mx-auto bg-white p-2 rounded-lg border border-outline-variant" id="pix-qr-image" width="224" height="224" />
+<p class="my-3 text-lg font-bold" id="pix-final-amount"></p>
+<label class="block text-left text-sm font-bold" for="pix-copy-code">Pix copy-and-paste code</label>
+<textarea class="w-full mt-1 p-3 rounded-md border border-outline-variant/60 bg-surface-container-low text-sm break-all" id="pix-copy-code" rows="3" readonly></textarea>
+<button class="mt-2 rounded-lg bg-secondary-container px-5 py-3 font-bold text-on-secondary-container" id="pix-copy-button" type="button">Copy Pix code</button>
+<p class="mt-3 text-sm font-bold" id="pix-order-status" role="status">Awaiting payment confirmation…</p>
+<button class="mt-2 rounded-lg border border-outline-variant/60 px-4 py-2 text-sm font-bold disabled:opacity-50" id="pix-check-status" type="button">Check payment status</button>
+<p class="mt-1 text-xs text-on-surface-variant">Keep this window open while we verify your payment with the payment provider.</p>
+</div>
+<p class="mt-3 text-sm text-error" id="pix-error" role="alert"></p>
 </div>
 </div>
 </div>
