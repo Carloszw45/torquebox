@@ -254,7 +254,7 @@
 <span class="font-spec-code text-spec-code text-secondary font-bold uppercase tracking-wider">Prices in USD</span>
 </div>
 <!-- Option 1 -->
-<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all hover:shadow-md border shadow-sm border-outline-variant/30" data-bottles="1" data-shipping="paid" data-price="19.95" data-title="1 Bottle (Trial Size - 120ml)">
+<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all hover:shadow-md border shadow-sm border-outline-variant/30">
 <div class="flex items-center justify-between gap-space-sm">
 <div class="flex items-center gap-space-sm">
 <input class="w-4 h-4 accent-secondary-container" name="bundle_selection" type="radio" value="1_bottle">
@@ -270,7 +270,7 @@
 </div>
 </label>
 <!-- Option 2 (Active) -->
-<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all border ring-2 ring-secondary-container shadow-md border-secondary-container" data-bottles="2" data-shipping="standard" data-price="29.95" data-title="2 Bottles (Standard 2-Pack)">
+<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all border ring-2 ring-secondary-container shadow-md border-secondary-container">
 <div class="absolute -top-3 right-4 bg-primary text-secondary-container font-spec-code text-spec-code px-2.5 py-0.5 rounded shadow font-bold tracking-wider uppercase flex items-center gap-1">
 <span class="material-symbols-outlined text-[13px]">local_fire_department</span>
                     MOST POPULAR • SAVE 25%
@@ -293,7 +293,7 @@
 </div>
 </label>
 <!-- Option 3 -->
-<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all hover:shadow-md border shadow-sm border-outline-variant/30" data-bottles="3" data-shipping="priority" data-price="38.95" data-title="3 Bottles (Family &amp; Fleet Pack)">
+<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all hover:shadow-md border shadow-sm border-outline-variant/30">
 <div class="absolute -top-3 right-4 bg-surface-container-highest text-primary font-spec-code text-spec-code px-2 py-0.5 rounded shadow font-bold tracking-wider uppercase">
                     MAX VALUE • SAVE 35%
                   </div>
@@ -820,6 +820,7 @@
 <span>Total (USD)</span>
 <span id="drawer-total">$0.00</span>
 </div>
+<button class="hidden w-full rounded-lg bg-secondary-container hover:bg-secondary disabled:opacity-50 text-on-secondary font-label-lg text-label-lg uppercase py-4 focus-visible:ring-2 focus-visible:ring-secondary" id="checkout-btn" type="button">Checkout</button>
 <p class="mt-2 rounded-lg bg-surface-container px-3 py-2 text-center font-body-sm text-body-sm text-on-surface-variant" id="checkout-status">Online checkout is currently unavailable.</p>
 </div>
 </div>
@@ -876,5 +877,26 @@
 </div>
 </div>
 </div>
-<script src="assets/torquebox.js"></script>
+<div aria-labelledby="checkout-title" aria-modal="true" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 hidden" id="checkout-modal" role="dialog">
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-close-modal></div>
+<section class="relative flex flex-col w-full max-w-5xl max-h-[96dvh] bg-surface-container-lowest rounded-t-xl sm:rounded-xl shadow-2xl overflow-hidden">
+<div class="flex items-center justify-between gap-3 border-b border-surface-container px-space-md py-3">
+<button class="flex items-center gap-1 text-body-md text-on-surface-variant hover:text-primary" id="checkout-back" type="button">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">arrow_back</span>
+Back to cart
+</button>
+<h3 class="font-headline-sm text-headline-sm text-primary" id="checkout-title">Checkout</h3>
+<button aria-label="Close checkout" class="p-1 text-on-surface-variant hover:text-primary" data-close-modal type="button">
+<span aria-hidden="true" class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="overflow-y-auto overscroll-contain p-space-md">
+<p class="hidden mb-3 text-center rounded-lg bg-secondary-container/10 px-3 py-2 text-body-sm text-secondary" id="checkout-test-mode">Test mode. No real payments.</p>
+<p aria-live="polite" class="px-2 py-6 text-center text-on-surface-variant" id="payment-message"></p>
+<button class="hidden mx-auto mb-4 px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md" id="checkout-retry" type="button">Try again</button>
+<div id="stripe-checkout"></div>
+</div>
+</section>
+</div>
+<script type="module" src="assets/torquebox.js"></script>
 </body></html>

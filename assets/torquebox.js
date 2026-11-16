@@ -1,19 +1,15 @@
+import { catalog, formatPrice, quoteCart, shippingFor } from './catalog.js';
+import { setupCheckout } from './checkout.js';
+
 (() => {
   const byId = (id) => document.getElementById(id);
-  const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
-  const formatPrice = (cents) => money.format(cents / 100);
   const cartKey = 'torquebox-cart';
   const bottlePhoto = 'assets/images/qifor-wind-shield-pro.jpg';
-  const shippingCharge = 499;
-  const priorityThreshold = 4000;
   const bundles = Array.from(document.querySelectorAll('.bundle-card'), (card) => {
     const radio = card.querySelector('input[name="bundle_selection"]');
     return {
+      ...catalog[radio.value],
       id: radio.value,
-      title: card.dataset.title,
-      bottles: Number(card.dataset.bottles),
-      price: Math.round(Number(card.dataset.price) * 100),
-      shipping: card.dataset.shipping,
       card,
       radio,
     };
@@ -25,31 +21,26 @@
   let selectedBundle = bundles.find((bundle) => bundle.radio.checked) ?? bundles[0];
   let quantity = Number(quantityInput.value);
 
-  function readCart() {
+  function readCartState() {
     try {
       const saved = JSON.parse(localStorage.getItem(cartKey));
-      return Object.fromEntries(bundles.flatMap(({ id }) => {
-        const savedQuantity = saved?.[id];
-        return Number.isSafeInteger(savedQuantity) && savedQuantity > 0 ? [[id, savedQuantity]] : [];
+      const items = Object.fromEntries(bundles.flatMap(({ id, price }) => {
+        const count = saved?.[id];
+        return Number.isSafeInteger(count) && count > 0 && Number.isSafeInteger(count * price * bundles.length)
+          ? [[id, count]]
+          : [];
       }));
+      const paidSessions = Array.isArray(saved?.paidSessions)
+        ? saved.paidSessions.filter((id) => typeof id === 'string').slice(-20)
+        : [];
+      return { items, paidSessions };
     } catch {
-      return {};
+      return null;
     }
   }
 
-  let cart = readCart();
-
-  function shippingFor(subtotal, includedBundles) {
-    if (subtotal === 0) return { cost: 0, label: '' };
-    if (subtotal > priorityThreshold) return { cost: 0, label: 'Free 2-day priority US shipping' };
-    if (includedBundles.some((bundle) => bundle.shipping === 'priority')) {
-      return { cost: 0, label: 'Free priority US shipping' };
-    }
-    if (includedBundles.some((bundle) => bundle.shipping === 'standard')) {
-      return { cost: 0, label: 'Free standard US shipping' };
-    }
-    return { cost: shippingCharge, label: formatPrice(shippingCharge) };
-  }
+  const emptyCart = () => ({ items: {}, paidSessions: [] });
+  let { items: cart, paidSessions } = readCartState() ?? emptyCart();
 
   function showBottlePhoto(container, count) {
     if (container.childElementCount === count) return;
@@ -86,25 +77,21 @@
   }
 
   function updateCart() {
-    const includedBundles = [];
+    const order = quoteCart(cart);
     let kits = 0;
     let bottles = 0;
-    let subtotal = 0;
     for (const bundle of bundles) {
       const kitQuantity = cart[bundle.id] ?? 0;
       bundle.row.classList.toggle('hidden', kitQuantity === 0);
       if (!kitQuantity) continue;
       const linePrice = bundle.price * kitQuantity;
-      includedBundles.push(bundle);
       kits += kitQuantity;
       bottles += bundle.bottles * kitQuantity;
-      subtotal += linePrice;
       bundle.row.querySelector('[data-item-price]').textContent = formatPrice(linePrice);
       bundle.row.querySelector('[data-item-quantity]').textContent = kitQuantity;
       bundle.row.querySelector('[data-cart-action="decrease"]').disabled = kitQuantity === 1;
     }
 
-    const shipping = shippingFor(subtotal, includedBundles);
     const counter = byId('cart-counter');
     counter.textContent = kits;
     counter.classList.toggle('hidden', kits === 0);
@@ -114,20 +101,40 @@
     byId('drawer-volume').classList.toggle('hidden', kits === 0);
     byId('cart-empty').classList.toggle('hidden', kits > 0);
     byId('cart-totals').classList.toggle('hidden', kits === 0);
-    byId('drawer-subtotal').textContent = formatPrice(subtotal);
-    byId('drawer-shipping').textContent = shipping.label;
-    byId('drawer-total').textContent = formatPrice(subtotal + shipping.cost);
+    byId('drawer-subtotal').textContent = formatPrice(order.subtotal);
+    byId('drawer-shipping').textContent = order.shipping.label;
+    byId('drawer-total').textContent = formatPrice(order.total);
+  }
+
+  function saveCart() {
+    try {
+      localStorage.setItem(cartKey, JSON.stringify({ ...cart, paidSessions }));
+    } catch {
+      // The cart still works for this page when browser storage is unavailable.
+    }
+    updateCart();
   }
 
   function setCartQuantity(id, newQuantity) {
     if (newQuantity > 0) cart[id] = newQuantity;
     else delete cart[id];
-    try {
-      localStorage.setItem(cartKey, JSON.stringify(cart));
-    } catch {
-      // The cart still works for this page when browser storage is unavailable.
+    saveCart();
+  }
+
+  function applyPayment(purchasedItems, sessionId) {
+    const saved = readCartState();
+    if (saved) ({ items: cart, paidSessions } = saved);
+    if (paidSessions.includes(sessionId)) {
+      updateCart();
+      return;
     }
-    updateCart();
+    for (const [id, count] of Object.entries(purchasedItems)) {
+      const quantityLeft = (cart[id] ?? 0) - count;
+      if (quantityLeft > 0) cart[id] = quantityLeft;
+      else delete cart[id];
+    }
+    paidSessions = [...paidSessions, sessionId].slice(-20);
+    saveCart();
   }
 
   const cartTemplate = byId('cart-item-template');
@@ -170,9 +177,11 @@
   const searchInput = byId('search-input');
   let activeModal;
   let modalTrigger;
+  let closeCheckout;
 
   function closeModal(restoreFocus = true) {
     if (!activeModal) return;
+    if (activeModal.id === 'checkout-modal') closeCheckout?.();
     activeModal.classList.add('hidden');
     document.body.classList.remove('overflow-hidden');
     if (restoreFocus) modalTrigger?.focus({ preventScroll: true });
@@ -203,7 +212,7 @@
       closeModal();
     }
     if (event.key !== 'Tab') return;
-    const controls = Array.from(activeModal.querySelectorAll('a[href], button:not([disabled]), input'))
+    const controls = Array.from(activeModal.querySelectorAll('a[href], button:not([disabled]), input, iframe'))
       .filter((element) => element.getClientRects().length > 0);
     const first = controls[0];
     const last = controls.at(-1);
@@ -232,7 +241,7 @@
   byId('sticky-atc-btn').addEventListener('click', addToCart);
   window.addEventListener('storage', (event) => {
     if (event.key === cartKey || event.key === null) {
-      cart = readCart();
+      ({ items: cart, paidSessions } = readCartState() ?? emptyCart());
       updateCart();
     }
   });
@@ -321,4 +330,10 @@
   updateStickyBar();
   updateSelection();
   updateCart();
+  closeCheckout = setupCheckout({
+    getCart: () => ({ ...cart }),
+    onPaid: applyPayment,
+    open: () => openModal('checkout-modal', byId('open-cart-btn')),
+    back: () => openModal('cart-modal', byId('open-cart-btn')),
+  });
 })();
