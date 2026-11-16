@@ -1,7 +1,7 @@
 <!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>TORQUEBOX - QIFOR Wind Shield Pro (2-Pack)</title>
+<title>TORQUEBOX - QIFOR Wind Shield Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
@@ -12,6 +12,8 @@
       body { overscroll-behavior: none; }
     }
     ::-webkit-scrollbar { display: none; }
+    .bundle-photo { display: flex; align-items: center; justify-content: center; gap: 1px; }
+    .bundle-photo img { width: 31%; height: 94%; object-fit: cover; object-position: center; }
   </style>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -112,23 +114,15 @@
 <a class="uppercase transition-colors text-secondary-container font-bold" href="#purchase-section">Glass Care</a>
 <a class="font-label-lg text-label-lg uppercase text-on-surface-variant hover:text-on-surface transition-colors" href="#specs-sheet">Exterior Detailing</a>
 <a class="font-label-lg text-label-lg uppercase text-on-surface-variant hover:text-on-surface transition-colors" href="#purchase-section">Bundles</a>
-<button class="font-label-lg text-label-lg uppercase text-on-surface-variant hover:text-on-surface transition-colors modal-trigger" data-modal="track-order-modal">Track Order</button>
 </nav>
 <div class="flex items-center gap-space-md shrink-0">
-
 <button aria-label="Search Products" class="p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center modal-trigger" data-modal="search-modal" type="button">
-
+<span aria-hidden="true" class="material-symbols-outlined text-[24px]">search</span>
 </button>
-<button aria-label="Customer Account" class="p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center modal-trigger" data-modal="account-modal" type="button">
-
+<button aria-label="Shopping Cart" class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" data-modal="cart-modal" id="open-cart-btn" type="button">
+<span aria-hidden="true" class="material-symbols-outlined text-[24px]">shopping_bag</span>
+<span aria-hidden="true" class="absolute -right-1 -top-1 hidden min-w-5 px-1 rounded-full bg-secondary-container text-on-secondary text-[11px] font-bold leading-5 text-center" id="cart-counter">0</span>
 </button>
-<button aria-label="Shopping Cart" class="relative p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" id="open-cart-btn" type="button">
-<span class="material-symbols-outlined text-[24px]">shopping_bag</span>
-
-</button>
-<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 cursor-pointer modal-trigger" data-modal="account-modal">
-<span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
-</div>
 </div>
 </div>
 </div>
@@ -229,7 +223,7 @@
                   </span>
 </div>
 <h1 class="font-headline-lg text-headline-lg uppercase text-primary tracking-tight">QIFOR Wind Shield Pro</h1>
-<p class="font-title-md text-title-md text-on-surface-variant font-medium">Advanced Windshield Cleaning &amp; Clarity Solution (Dual 120ml Pack)</p>
+<p class="font-title-md text-title-md text-on-surface-variant font-medium">Advanced Windshield Cleaning &amp; Clarity Solution</p>
 </div>
 <p class="font-body-md text-body-md text-on-surface-variant bg-surface-container-low p-space-sm rounded-lg leading-relaxed">
                 Engineered for high-speed highway clarity and harsh weather endurance. Eliminates stubborn oil film, road grime, bug splatter, and heavy streaks while maintaining liquid fluidity down to -22°F.
@@ -250,7 +244,7 @@
                 </span>
 <span class="bg-surface-container-high text-primary font-spec-code text-spec-code px-2.5 py-1 rounded-full flex items-center gap-1">
 <span class="material-symbols-outlined text-[14px] text-secondary-container">inventory_2</span>
-                  2x 120ml (4.05 FL OZ)
+<span id="selection-volume">2 × 120 mL (4.05 fl oz each)</span>
                 </span>
 </div>
 <!-- BUNDLES -->
@@ -260,13 +254,13 @@
 <span class="font-spec-code text-spec-code text-secondary font-bold uppercase tracking-wider">Prices in USD</span>
 </div>
 <!-- Option 1 -->
-<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all hover:shadow-md border shadow-sm border-outline-variant/30" data-price="19.95" data-title="1 Bottle (Trial Size - 120ml)">
+<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all hover:shadow-md border shadow-sm border-outline-variant/30" data-bottles="1" data-shipping="paid" data-price="19.95" data-title="1 Bottle (Trial Size - 120ml)">
 <div class="flex items-center justify-between gap-space-sm">
 <div class="flex items-center gap-space-sm">
 <input class="w-4 h-4 accent-secondary-container" name="bundle_selection" type="radio" value="1_bottle">
 <div class="flex flex-col">
 <span class="font-headline-sm text-headline-sm text-primary">1 Bottle (Trial Size - 120ml)</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">$19.95 / each • 1x Trigger Spray</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">$19.95 / bottle • 1 × 120 mL</span>
 </div>
 </div>
 <div class="text-right">
@@ -276,7 +270,7 @@
 </div>
 </label>
 <!-- Option 2 (Active) -->
-<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all border shadow-sm border-outline-variant/30" data-price="29.95" data-title="2 Bottles (Standard 2-Pack)">
+<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all border ring-2 ring-secondary-container shadow-md border-secondary-container" data-bottles="2" data-shipping="standard" data-price="29.95" data-title="2 Bottles (Standard 2-Pack)">
 <div class="absolute -top-3 right-4 bg-primary text-secondary-container font-spec-code text-spec-code px-2.5 py-0.5 rounded shadow font-bold tracking-wider uppercase flex items-center gap-1">
 <span class="material-symbols-outlined text-[13px]">local_fire_department</span>
                     MOST POPULAR • SAVE 25%
@@ -286,7 +280,7 @@
 <input checked="" class="w-4 h-4 accent-secondary-container" name="bundle_selection" type="radio" value="2_bottles">
 <div class="flex flex-col">
 <span class="font-headline-sm text-headline-sm text-primary">2 Bottles (Standard 2-Pack)</span>
-<span class="font-body-sm text-body-sm text-secondary-container font-medium">$14.97 / bottle • 2x Trigger Sprays</span>
+<span class="font-body-sm text-body-sm text-secondary-container font-medium">$14.97 / bottle • 2 × 120 mL</span>
 </div>
 </div>
 <div class="text-right">
@@ -299,7 +293,7 @@
 </div>
 </label>
 <!-- Option 3 -->
-<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all hover:shadow-md border ring-2 ring-secondary-container shadow-md border-secondary-container" data-price="38.95" data-title="3 Bottles (Family &amp; Fleet Pack)">
+<label class="bundle-card cursor-pointer block relative rounded-lg bg-surface-container-lowest p-space-md transition-all hover:shadow-md border shadow-sm border-outline-variant/30" data-bottles="3" data-shipping="priority" data-price="38.95" data-title="3 Bottles (Family &amp; Fleet Pack)">
 <div class="absolute -top-3 right-4 bg-surface-container-highest text-primary font-spec-code text-spec-code px-2 py-0.5 rounded shadow font-bold tracking-wider uppercase">
                     MAX VALUE • SAVE 35%
                   </div>
@@ -327,22 +321,22 @@
 <!-- Stepper -->
 <div class="flex items-center bg-surface-container-low rounded-lg p-1 shadow-inner border border-outline-variant/30">
 <button aria-label="Decrease quantity" class="w-10 h-10 flex items-center justify-center font-headline-sm text-headline-sm text-on-surface hover:bg-surface-container-lowest rounded transition-colors active:scale-95" id="qty-minus" type="button">-</button>
-<input class="w-12 text-center bg-transparent font-headline-sm text-headline-sm text-primary font-bold focus:outline-none" id="qty-input" readonly="" type="text" value="1">
+<input aria-label="Kit quantity to add" class="w-12 text-center bg-transparent font-headline-sm text-headline-sm text-primary font-bold focus:outline-none" id="qty-input" readonly="" type="text" value="1">
 <button aria-label="Increase quantity" class="w-10 h-10 flex items-center justify-center font-headline-sm text-headline-sm text-on-surface hover:bg-surface-container-lowest rounded transition-colors active:scale-95" id="qty-plus" type="button">+</button>
 </div>
 <!-- Main Add To Cart Primary Trigger -->
 <button class="flex-1 bg-secondary-container hover:bg-secondary text-on-secondary font-label-lg text-label-lg uppercase tracking-wider py-4 px-space-md rounded-lg shadow-md hover:shadow-lg transition-all flex flex-col items-center justify-center text-center cursor-pointer active:scale-[0.99]" id="main-atc-btn" type="button">
-<span class="font-bold flex items-center gap-2" id="atc-btn-text"><span class="material-symbols-outlined text-[20px]">shopping_cart</span> ADD TO CART — $38.95 USD</span>
+<span class="font-bold flex items-center gap-2"><span aria-hidden="true" class="material-symbols-outlined text-[20px]">shopping_cart</span><span id="atc-btn-text">ADD TO CART — $29.95 USD</span></span>
 </button>
 </div>
 <div class="flex items-center justify-center gap-1.5 text-on-surface-variant font-spec-code text-spec-code">
 <span class="material-symbols-outlined text-[16px] text-secondary-container">alarm</span>
 <span>Order within <strong class="text-primary font-bold">3 hrs 14 mins</strong> for Same-Day US Dispatch</span>
 </div>
-<!-- Express Checkout -->
+<!-- Cart preview -->
 <button class="w-full bg-primary hover:bg-inverse-surface text-on-primary font-label-lg text-label-lg uppercase py-3.5 px-space-md rounded-lg shadow transition-colors flex items-center justify-center gap-2 modal-trigger" data-modal="cart-modal" type="button">
-<span class="material-symbols-outlined text-[20px]">bolt</span>
-                  BUY WITH SHOP PAY / APPLE PAY
+<span aria-hidden="true" class="material-symbols-outlined text-[20px]">shopping_bag</span>
+                  View Cart
                 </button>
 </div>
 <!-- TRUST BADGES -->
@@ -543,9 +537,6 @@
 <span class="font-spec-code text-spec-code text-secondary-container uppercase tracking-widest font-bold">Driver Testimonials</span>
 <h2 class="font-headline-lg text-headline-lg uppercase text-primary tracking-tight">Verified Enthusiast Feedback</h2>
 </div>
-<button class="bg-primary text-on-primary hover:bg-inverse-surface font-label-lg text-label-lg uppercase px-space-md py-3 rounded-lg transition-colors shadow modal-trigger" data-modal="review-modal" type="button">
-              Write a Review
-            </button>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg items-center bg-surface-container-low p-space-lg rounded-xl">
 <div class="md:col-span-4 flex flex-col items-center justify-center text-center p-space-sm">
@@ -734,7 +725,7 @@
 <span class="faq-icon material-symbols-outlined text-secondary-container transition-transform duration-300">expand_more</span>
 </button>
 <div class="faq-content hidden p-space-md pt-0 text-on-surface-variant font-body-md text-body-md leading-relaxed border-t border-surface-container/50 mt-1">
-                All orders dispatch directly from our domestic fulfillment centers within 24 business hours. The featured 2-Pack qualifies for FREE standard US shipping (2 to 4 business days). We back every order with a 30-day no-hassle money-back guarantee: if your windshield isn't noticeably clearer, return for a full refund.
+                All orders dispatch directly from our domestic fulfillment centers within 24 business hours. US shipping costs $4.99 for orders up to $40 that contain only single-bottle kits. The 2-Pack includes free standard US shipping (2 to 4 business days), and the 3-Pack includes free priority US shipping. Orders over $40 qualify for free 2-day priority US shipping. We back every order with a 30-day no-hassle money-back guarantee: if your windshield isn't noticeably clearer, return for a full refund.
               </div>
 </div>
 </div>
@@ -746,16 +737,16 @@
 <aside class="fixed bottom-0 left-0 right-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md shadow-2xl p-space-sm transform translate-y-full transition-transform duration-300 border-t border-outline-variant/30" id="sticky-bar">
 <div class="max-w-7xl mx-auto flex items-center justify-between gap-space-md">
 <div class="flex items-center gap-space-sm min-w-0">
-<img alt="QIFOR Thumbnail" class="w-11 h-11 object-cover rounded-lg shrink-0 border border-outline-variant/30" src="assets/images/imagem-11.jpg">
+<div class="bundle-photo w-11 h-11 bg-white overflow-hidden rounded-lg shrink-0 border border-outline-variant/30" id="sticky-product-photo" role="img" aria-label="2 QIFOR bottles"></div>
 <div class="flex flex-col min-w-0">
 <span class="font-label-md text-label-md text-primary font-bold truncate">QIFOR Wind Shield Pro</span>
-<span class="font-spec-code text-spec-code text-on-surface-variant truncate" id="sticky-bundle-label">3 Bottles (Family &amp; Fleet Pack)</span>
+<span class="font-spec-code text-spec-code text-on-surface-variant truncate" id="sticky-bundle-label">2 Bottles (Standard 2-Pack)</span>
 </div>
 </div>
 <div class="flex items-center gap-space-sm shrink-0">
 <div class="text-right hidden sm:block">
-<span class="font-headline-sm text-headline-sm text-primary font-bold" id="sticky-price">$38.95</span>
-<span class="block font-spec-code text-spec-code text-secondary font-bold">FREE US SHIPPING</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold" id="sticky-price">$29.95</span>
+<span class="block font-spec-code text-spec-code text-secondary font-bold" id="sticky-shipping">Free standard US shipping</span>
 </div>
 <button class="bg-secondary-container hover:bg-secondary text-on-secondary font-label-lg text-label-lg uppercase tracking-wider py-3 px-space-md rounded-lg shadow font-bold transition-all active:scale-95" id="sticky-atc-btn" type="button">
           Add To Cart
@@ -764,9 +755,9 @@
 </div>
 </aside>
 <!-- FOOTER -->
-<footer class="w-full bg-primary text-on-primary pt-space-xl pb-space-lg">
+<footer class="w-full bg-primary text-on-primary pt-space-xl pb-24">
 <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-xl pb-space-xl">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl pb-space-xl">
 <div class="lg:col-span-2 flex flex-col gap-space-md">
 <div class="flex items-center gap-space-sm">
 <span class="font-headline-md text-headline-md uppercase tracking-tight text-on-primary font-bold">TORQUEBOX</span>
@@ -790,31 +781,14 @@
 <div class="flex flex-col gap-space-sm">
 <h3 class="font-label-lg text-label-lg uppercase tracking-wider text-on-primary">Customer Care</h3>
 <ul class="flex flex-col gap-space-xs">
-<li class="font-body-md text-body-md"><button class="text-left text-on-primary-container hover:text-on-primary transition-colors modal-trigger" data-modal="track-order-modal">Track Active Shipment</button></li>
 <li class="font-body-md text-body-md"><a class="text-on-primary-container hover:text-on-primary transition-colors" href="#faq">Shipping &amp; Returns</a></li>
 <li class="font-body-md text-body-md"><a class="text-on-primary-container hover:text-on-primary transition-colors" href="#faq">30-Day Guarantee</a></li>
 <li class="font-body-md text-body-md"><a class="text-on-primary-container hover:text-on-primary transition-colors" href="#faq">Technical Support Lab</a></li>
 </ul>
 </div>
-<div class="flex flex-col gap-space-sm">
-<h3 class="font-label-lg text-label-lg uppercase tracking-wider text-on-primary">Verified Security</h3>
-<p class="font-body-sm text-body-sm text-on-primary-container">Encrypted 256-bit checkout backed by tier-one processors.</p>
-<div class="flex flex-wrap gap-space-xs pt-space-xs">
-<span class="bg-tertiary-container text-on-primary font-spec-code text-spec-code px-space-sm py-1 rounded">VISA</span>
-<span class="bg-tertiary-container text-on-primary font-spec-code text-spec-code px-space-sm py-1 rounded">MASTERCARD</span>
-<span class="bg-tertiary-container text-on-primary font-spec-code text-spec-code px-space-sm py-1 rounded">AMEX</span>
-<span class="bg-tertiary-container text-on-primary font-spec-code text-spec-code px-space-sm py-1 rounded">APPLE PAY</span>
-<span class="bg-tertiary-container text-on-primary font-spec-code text-spec-code px-space-sm py-1 rounded">PAYPAL</span>
-</div>
-</div>
 </div>
 <div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md text-on-primary-container font-body-sm text-body-sm border-t border-tertiary-container">
 <p>© 2025 TORQUEBOX Performance Car Care. All rights reserved.</p>
-<div class="flex items-center gap-space-lg font-spec-code text-spec-code">
-<a class="hover:text-on-primary transition-colors" href="#">PRIVACY POLICY</a>
-<a class="hover:text-on-primary transition-colors" href="#">TERMS OF SERVICE</a>
-<a class="hover:text-on-primary transition-colors" href="#">CERTIFICATE OF ANALYSIS</a>
-</div>
 </div>
 </div>
 </footer>
@@ -827,432 +801,93 @@
 </div>
 </div>
 <!-- CART SLIDE-OVER DRAWER -->
-<div class="fixed inset-0 z-50 overflow-hidden hidden" id="cart-modal">
-<div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity modal-overlay" data-close-modal="cart-modal"></div>
-<div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
-<div class="w-screen max-w-md bg-surface-container-lowest shadow-2xl flex flex-col">
-<!-- Header -->
+<div aria-labelledby="cart-title" aria-modal="true" class="fixed inset-0 z-50 overflow-hidden hidden" id="cart-modal" role="dialog">
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity modal-overlay" data-close-modal></div>
+<div class="fixed inset-y-0 right-0 w-full max-w-md bg-surface-container-lowest shadow-2xl flex flex-col">
 <div class="p-space-md border-b border-surface-container flex items-center justify-between bg-surface-container-low">
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-secondary-container">shopping_bag</span>
-<h3 class="font-headline-sm text-headline-sm uppercase text-primary">Your Cart (<span id="drawer-cart-count">1</span>)</h3>
+<span aria-hidden="true" class="material-symbols-outlined text-secondary-container">shopping_bag</span>
+<h3 class="font-headline-sm text-headline-sm uppercase text-primary" id="cart-title">Your Cart (<span aria-live="polite" id="drawer-cart-count">0</span>)</h3>
 </div>
-<button class="p-1 rounded text-on-surface-variant hover:text-primary modal-close-btn" data-close-modal="cart-modal" type="button">
-<span class="material-symbols-outlined">close</span>
+<button aria-label="Close cart" class="p-1 rounded text-on-surface-variant hover:text-primary" data-close-modal type="button">
+<span aria-hidden="true" class="material-symbols-outlined">close</span>
 </button>
 </div>
-<!-- Free shipping bar -->
-<div class="bg-secondary-container/10 p-space-sm text-center border-b border-secondary-container/20">
-<p class="font-spec-code text-spec-code text-secondary font-bold">🎉 QUALIFIES FOR FREE 2-DAY US SHIPPING</p>
+<div class="hidden bg-secondary-container/10 p-space-sm text-center border-b border-secondary-container/20" id="drawer-volume">
+<p class="font-spec-code text-spec-code text-secondary font-bold" id="drawer-bottle-summary"></p>
 </div>
-<!-- Items Container -->
-<div class="flex-1 overflow-y-auto p-space-md flex flex-col gap-space-md">
-<div class="flex gap-space-sm bg-surface-container-low p-space-sm rounded-lg border border-outline-variant/30">
-<img alt="Cart item" class="w-20 h-20 object-cover rounded bg-white" src="assets/images/imagem-11.jpg">
-<div class="flex-1 flex flex-col justify-between">
-<div class="flex justify-between items-start">
-<div>
-<h4 class="font-label-md text-label-md font-bold text-primary">QIFOR Wind Shield Pro</h4>
-<p class="font-spec-code text-spec-code text-on-surface-variant" id="drawer-bundle-title">3 Bottles (Family &amp; Fleet Pack)</p>
+<div class="flex-1 overflow-y-auto p-space-md">
+<p class="py-space-md text-center text-on-surface-variant" id="cart-empty">Your cart is empty.</p>
+<div class="flex flex-col gap-space-md" id="cart-items"></div>
 </div>
-<button class="text-on-surface-variant hover:text-error transition-colors" onclick="alert('Item reset to minimum configuration.')" type="button">
-<span class="material-symbols-outlined text-[18px]">delete</span>
-</button>
-</div>
-<div class="flex items-center justify-between mt-2">
-<span class="font-headline-sm text-headline-sm text-primary font-bold" id="drawer-item-price">$38.95</span>
-<span class="font-spec-code text-spec-code text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">Qty: <span id="drawer-qty-val">1</span></span>
-</div>
-</div>
-</div>
-</div>
-<!-- Footer Checkout -->
-<div class="p-space-md border-t border-surface-container bg-surface-container-low flex flex-col gap-space-sm">
+<div class="hidden p-space-md border-t border-surface-container bg-surface-container-low flex flex-col gap-space-sm" id="cart-totals">
 <div class="flex justify-between font-body-md text-body-md">
 <span class="text-on-surface-variant">Subtotal</span>
-<span class="font-bold text-primary text-title-md" id="drawer-subtotal">$38.95</span>
+<span class="font-bold text-primary text-title-md" id="drawer-subtotal">$0.00</span>
 </div>
-<div class="flex justify-between font-body-sm text-body-sm">
-<span class="text-on-surface-variant">Shipping</span>
-<span class="font-bold text-secondary">FREE US PRIORITY</span>
+<div class="flex justify-between gap-3 font-body-sm text-body-sm">
+<span class="text-on-surface-variant">US shipping</span>
+<span class="font-bold text-secondary text-right" id="drawer-shipping"></span>
 </div>
-<button class="w-full bg-secondary-container hover:bg-secondary text-on-secondary font-label-lg text-label-lg uppercase py-4 rounded-lg shadow font-bold transition-all text-center flex items-center justify-center gap-2 mt-2" onclick="alert('Proceeding to Secure 256-Bit SSL Checkout!')" type="button">
-<span class="material-symbols-outlined text-[20px]">lock</span>
-            Checkout Securely
-          </button>
-<p class="font-spec-code text-spec-code text-center text-on-surface-variant">30-Day Money-Back Guarantee Included</p>
+<div class="flex justify-between gap-3 border-t border-surface-container-high pt-2 font-title-md text-title-md font-bold text-primary">
+<span>Total (USD)</span>
+<span id="drawer-total">$0.00</span>
 </div>
-</div>
+<p class="mt-2 rounded-lg bg-surface-container px-3 py-2 text-center font-body-sm text-body-sm text-on-surface-variant" id="checkout-status">Online checkout is currently unavailable.</p>
 </div>
 </div>
+</div>
+<template id="cart-item-template">
+<article class="hidden flex items-start gap-space-sm bg-surface-container-low p-space-sm rounded-lg border border-outline-variant/30">
+<div class="bundle-photo w-20 h-20 shrink-0 rounded bg-white overflow-hidden" data-item-photo role="img"></div>
+<div class="flex-1 min-w-0">
+<div class="flex gap-2 justify-between items-start">
+<div>
+<h4 class="font-label-md text-label-md font-bold text-primary">QIFOR Wind Shield Pro</h4>
+<p class="font-spec-code text-spec-code text-on-surface-variant" data-item-title></p>
+</div>
+<button class="p-1 rounded text-on-surface-variant hover:text-error transition-colors" data-cart-action="remove" type="button">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-2 justify-between mt-2">
+<span class="font-headline-sm text-headline-sm text-primary font-bold" data-item-price></span>
+<div class="flex items-center bg-surface-container rounded">
+<button class="w-8 h-8 hover:bg-surface-container-high disabled:opacity-40" data-cart-action="decrease" type="button">−</button>
+<span class="min-w-6 px-1 text-center font-spec-code text-spec-code" data-item-quantity></span>
+<button class="w-8 h-8 hover:bg-surface-container-high" data-cart-action="increase" type="button">+</button>
+</div>
+</div>
+</div>
+</article>
+</template>
 <!-- SEARCH MODAL -->
-<div class="fixed inset-0 z-50 flex items-center justify-center p-4" id="search-modal">
-<div class="absolute inset-0 bg-black/60 backdrop-blur-sm modal-overlay" data-close-modal="search-modal"></div>
+<div aria-labelledby="search-title" aria-modal="true" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden" id="search-modal" role="dialog">
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm modal-overlay" data-close-modal></div>
 <div class="relative bg-surface-container-lowest rounded-xl max-w-lg w-full p-space-lg shadow-2xl z-10 flex flex-col gap-space-md border border-outline-variant/30">
 <div class="flex items-center justify-between border-b border-surface-container pb-space-sm">
-<h3 class="font-headline-sm text-headline-sm uppercase text-primary font-bold">Search Products</h3>
-<button class="text-on-surface-variant hover:text-primary modal-close-btn" data-close-modal="search-modal" type="button">
-<span class="material-symbols-outlined">close</span>
+<h3 class="font-headline-sm text-headline-sm uppercase text-primary font-bold" id="search-title">Search Products</h3>
+<button aria-label="Close search" class="text-on-surface-variant hover:text-primary" data-close-modal type="button">
+<span aria-hidden="true" class="material-symbols-outlined">close</span>
 </button>
 </div>
-<div class="relative">
-<input class="w-full bg-surface-container-low border border-outline-variant/40 rounded-lg py-3 pl-10 pr-4 font-body-md focus:outline-none focus:ring-2 focus:ring-secondary-container" placeholder="Search glass cleaner, microfiber, coatings..." type="text">
-<span class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant">search</span>
-</div>
+<form class="relative" id="search-form" role="search">
+<label class="sr-only" for="search-input">Search TorqueBox</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/40 rounded-lg py-3 pl-4 pr-12 font-body-md focus:outline-none focus:ring-2 focus:ring-secondary-container" id="search-input" placeholder="Search QIFOR, specifications, reviews…" type="search">
+<button aria-label="Search" class="absolute right-0 inset-y-0 px-3 text-on-surface-variant hover:text-primary" type="submit">
+<span aria-hidden="true" class="material-symbols-outlined">search</span>
+</button>
+</form>
 <div class="flex flex-col gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
-<p class="font-bold text-primary">Popular Searches:</p>
-<div class="flex flex-wrap gap-2">
-<button class="bg-surface-container px-2.5 py-1 rounded hover:bg-surface-container-high text-primary" onclick="window.location.hash='#purchase-section'; closeAllModals();">QIFOR Wind Shield Pro</button>
-<button class="bg-surface-container px-2.5 py-1 rounded hover:bg-surface-container-high text-primary" onclick="window.location.hash='#specs-sheet'; closeAllModals();">Sub-Zero Anti-Freeze</button>
-<button class="bg-surface-container px-2.5 py-1 rounded hover:bg-surface-container-high text-primary" onclick="window.location.hash='#reviews'; closeAllModals();">Customer Reviews</button>
+<p class="font-bold text-primary" id="search-results-title">Popular searches</p>
+<div class="flex flex-wrap gap-2" id="search-results">
+<a class="bg-surface-container px-2.5 py-1 rounded hover:bg-surface-container-high text-primary" data-search-keywords="glass care windshield cleaner wash concentrate bundle kit bottle pack 120 ml" href="#purchase-section">QIFOR Wind Shield Pro</a>
+<a class="bg-surface-container px-2.5 py-1 rounded hover:bg-surface-container-high text-primary" data-search-keywords="subzero specifications cold temperature freeze lab" href="#specs-sheet">Sub-Zero Anti-Freeze</a>
+<a class="bg-surface-container px-2.5 py-1 rounded hover:bg-surface-container-high text-primary" data-search-keywords="ratings feedback verified buyers photos" href="#reviews">Customer Reviews</a>
+</div>
+<p class="hidden" id="search-status" role="status">No matching results.</p>
 </div>
 </div>
 </div>
-</div>
-<!-- ACCOUNT MODAL -->
-<div class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden" id="account-modal">
-<div class="absolute inset-0 bg-black/60 backdrop-blur-sm modal-overlay" data-close-modal="account-modal"></div>
-<div class="relative bg-surface-container-lowest rounded-xl max-w-md w-full p-space-lg shadow-2xl z-10 flex flex-col gap-space-md border border-outline-variant/30">
-<div class="flex items-center justify-between border-b border-surface-container pb-space-sm">
-<h3 class="font-headline-sm text-headline-sm uppercase text-primary font-bold">TORQUEBOX Account</h3>
-<button class="text-on-surface-variant hover:text-primary modal-close-btn" data-close-modal="account-modal" type="button">
-<span class="material-symbols-outlined">close</span>
-</button>
-</div>
-<form class="flex flex-col gap-space-sm" onsubmit="event.preventDefault(); alert('Sign In simulated successfully!'); closeAllModals();">
-<div>
-<label class="font-label-md text-label-md block mb-1 text-primary">Email Address</label>
-<input class="w-full bg-surface-container-low border border-outline-variant/40 rounded-lg p-2.5 font-body-md focus:outline-none focus:ring-2 focus:ring-secondary-container" placeholder="name@domain.com" required="" type="email">
-</div>
-<div>
-<label class="font-label-md text-label-md block mb-1 text-primary">Password</label>
-<input class="w-full bg-surface-container-low border border-outline-variant/40 rounded-lg p-2.5 font-body-md focus:outline-none focus:ring-2 focus:ring-secondary-container" placeholder="••••••••" required="" type="password">
-</div>
-<button class="w-full bg-primary hover:bg-inverse-surface text-on-primary font-label-lg text-label-lg uppercase py-3 rounded-lg mt-2 transition-colors" type="submit">Sign In</button>
-</form>
-</div>
-</div>
-<!-- TRACK ORDER MODAL -->
-<div class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden" id="track-order-modal">
-<div class="absolute inset-0 bg-black/60 backdrop-blur-sm modal-overlay" data-close-modal="track-order-modal"></div>
-<div class="relative bg-surface-container-lowest rounded-xl max-w-md w-full p-space-lg shadow-2xl z-10 flex flex-col gap-space-md border border-outline-variant/30">
-<div class="flex items-center justify-between border-b border-surface-container pb-space-sm">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-secondary-container">local_shipping</span>
-<h3 class="font-headline-sm text-headline-sm uppercase text-primary font-bold">Track Shipment</h3>
-</div>
-<button class="text-on-surface-variant hover:text-primary modal-close-btn" data-close-modal="track-order-modal" type="button">
-<span class="material-symbols-outlined">close</span>
-</button>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Enter your order ID or tracking code to query real-time USPS / FedEx status.</p>
-<form class="flex flex-col gap-space-sm" onsubmit="event.preventDefault(); alert('Tracking active: Order #TQ-88492 is in transit via USPS Priority (Expected: 2 Days).'); closeAllModals();">
-<input class="w-full bg-surface-container-low border border-outline-variant/40 rounded-lg p-2.5 font-body-md focus:outline-none focus:ring-2 focus:ring-secondary-container" placeholder="e.g. TQ-89421 or 940011..." required="" type="text">
-<button class="w-full bg-secondary-container hover:bg-secondary text-on-secondary font-label-lg text-label-lg uppercase py-3 rounded-lg transition-colors font-bold" type="submit">Track Order</button>
-</form>
-</div>
-</div>
-<!-- DEMO VIDEO & ZOOM MODAL -->
-
-<!-- WRITE REVIEW MODAL -->
-<div class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden" id="review-modal">
-<div class="absolute inset-0 bg-black/60 backdrop-blur-sm modal-overlay" data-close-modal="review-modal"></div>
-<div class="relative bg-surface-container-lowest rounded-xl max-w-md w-full p-space-lg shadow-2xl z-10 flex flex-col gap-space-md border border-outline-variant/30">
-<div class="flex items-center justify-between border-b border-surface-container pb-space-sm">
-<h3 class="font-headline-sm text-headline-sm uppercase text-primary font-bold">Write a Review</h3>
-<button class="text-on-surface-variant hover:text-primary modal-close-btn" data-close-modal="review-modal" type="button">
-<span class="material-symbols-outlined">close</span>
-</button>
-</div>
-<form class="flex flex-col gap-space-sm" onsubmit="event.preventDefault(); showToast('Review Submitted', 'Thank you! Your feedback will appear shortly.'); closeAllModals();">
-<div>
-<label class="font-label-md text-label-md block mb-1 text-primary">Overall Rating</label>
-<div class="flex gap-1 text-secondary-container text-[24px] cursor-pointer">
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
-<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
-</div>
-</div>
-<div>
-<label class="font-label-md text-label-md block mb-1 text-primary">Review Headline</label>
-<input class="w-full bg-surface-container-low border border-outline-variant/40 rounded-lg p-2.5 font-body-md focus:outline-none focus:ring-2 focus:ring-secondary-container" placeholder="e.g. Best clarity I've ever had" required="" type="text">
-</div>
-<div>
-<label class="font-label-md text-label-md block mb-1 text-primary">Your Review</label>
-<textarea class="w-full bg-surface-container-low border border-outline-variant/40 rounded-lg p-2.5 font-body-md focus:outline-none focus:ring-2 focus:ring-secondary-container" placeholder="Share your experience..." required="" rows="3"></textarea>
-</div>
-<button class="w-full bg-primary hover:bg-inverse-surface text-on-primary font-label-lg text-label-lg uppercase py-3 rounded-lg transition-colors font-bold mt-1" type="submit">Submit Review</button>
-</form>
-</div>
-</div>
-<!-- INTERACTIVITY ENGINE -->
-<script>
-    // State management
-    let state = {
-      pricePerUnit: 29.95,
-      quantity: 1,
-      bundleTitle: "2 Bottles (Standard 2-Pack)",
-      cartCount: 1
-    };
-
-    function formatPrice(val) {
-      return (val * state.quantity).toFixed(2);
-    }
-
-    function updateAllDisplays() {
-      const totalPrice = formatPrice(state.pricePerUnit);
-      
-      // Update Main ATC button
-      const atcBtnText = document.getElementById('atc-btn-text');
-      if (atcBtnText) {
-        atcBtnText.innerHTML = '<span class="material-symbols-outlined text-[20px]">shopping_cart</span> ADD TO CART — $' + totalPrice + ' USD';
-      }
-
-      // Update Sticky bar
-      const stickyPrice = document.getElementById('sticky-price');
-      const stickyBundleLabel = document.getElementById('sticky-bundle-label');
-      if (stickyPrice) stickyPrice.textContent = '$' + totalPrice;
-      if (stickyBundleLabel) stickyBundleLabel.textContent = state.bundleTitle;
-
-      // Update Cart Drawer Items
-      const drawerPrice = document.getElementById('drawer-item-price');
-      const drawerSubtotal = document.getElementById('drawer-subtotal');
-      const drawerQty = document.getElementById('drawer-qty-val');
-      const drawerTitle = document.getElementById('drawer-bundle-title');
-      const drawerCount = document.getElementById('drawer-cart-count');
-      const cartCounter = document.getElementById('cart-counter');
-
-      if (drawerPrice) drawerPrice.textContent = '$' + totalPrice;
-      if (drawerSubtotal) drawerSubtotal.textContent = '$' + totalPrice;
-      if (drawerQty) drawerQty.textContent = state.quantity;
-      if (drawerTitle) drawerTitle.textContent = state.bundleTitle;
-      if (drawerCount) drawerCount.textContent = state.cartCount;
-      if (cartCounter) cartCounter.textContent = state.cartCount;
-    }
-
-    // Toast notification
-    function showToast(title, msg) {
-      const toast = document.getElementById('toast');
-      const toastTitle = document.getElementById('toast-title');
-      const toastMsg = document.getElementById('toast-msg');
-      if (!toast) return;
-
-      if (title) toastTitle.textContent = title;
-      if (msg) toastMsg.textContent = msg;
-
-      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
-      toast.classList.add('opacity-100', 'translate-y-0');
-
-      setTimeout(() => {
-        toast.classList.remove('opacity-100', 'translate-y-0');
-        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
-      }, 3000);
-    }
-
-    // Modal management
-    function openModal(id) {
-      const modal = document.getElementById(id);
-      if (modal) modal.classList.remove('hidden');
-    }
-
-    function closeAllModals() {
-      const modals = document.querySelectorAll('#cart-modal, #search-modal, #account-modal, #track-order-modal, #demo-video-modal, #review-modal');
-      modals.forEach(m => m.classList.add('hidden'));
-    }
-
-    document.querySelectorAll('.modal-trigger').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = btn.getAttribute('data-modal');
-        if (target) openModal(target);
-      });
-    });
-
-    document.querySelectorAll('.modal-close-btn, .modal-overlay').forEach(el => {
-      el.addEventListener('click', () => {
-        const target = el.getAttribute('data-close-modal');
-        if (target) {
-          const m = document.getElementById(target);
-          if (m) m.classList.add('hidden');
-        } else {
-          closeAllModals();
-        }
-      });
-    });
-
-    // Cart Drawer Direct Button
-    const openCartBtn = document.getElementById('open-cart-btn');
-    if (openCartBtn) {
-      openCartBtn.addEventListener('click', () => openModal('cart-modal'));
-    }
-
-    // Bundle selection logic
-    const bundleCards = document.querySelectorAll('.bundle-card');
-    bundleCards.forEach(card => {
-      card.addEventListener('click', function() {
-        bundleCards.forEach(c => {
-          c.classList.remove('ring-2', 'ring-secondary-container', 'shadow-md', 'border-secondary-container');
-          c.classList.add('shadow-sm', 'border-outline-variant/30');
-          const radio = c.querySelector('input[type="radio"]');
-          if (radio) radio.checked = false;
-        });
-
-        this.classList.add('ring-2', 'ring-secondary-container', 'shadow-md', 'border-secondary-container');
-        this.classList.remove('shadow-sm', 'border-outline-variant/30');
-
-        const activeRadio = this.querySelector('input[type="radio"]');
-        if (activeRadio) activeRadio.checked = true;
-
-        state.pricePerUnit = parseFloat(this.getAttribute('data-price')) || 29.95;
-        state.bundleTitle = this.getAttribute('data-title') || "2 Bottles (Standard 2-Pack)";
-        updateAllDisplays();
-      });
-    });
-
-    // Quantity Increment / Decrement
-    const qtyInput = document.getElementById('qty-input');
-    const qtyMinus = document.getElementById('qty-minus');
-    const qtyPlus = document.getElementById('qty-plus');
-
-    if (qtyMinus && qtyPlus && qtyInput) {
-      qtyMinus.addEventListener('click', () => {
-        if (state.quantity > 1) {
-          state.quantity--;
-          qtyInput.value = state.quantity;
-          updateAllDisplays();
-        }
-      });
-      qtyPlus.addEventListener('click', () => {
-        if (state.quantity < 20) {
-          state.quantity++;
-          qtyInput.value = state.quantity;
-          updateAllDisplays();
-        }
-      });
-    }
-
-    // Add to Cart handlers
-    function handleAddToCart() {
-      state.cartCount = state.quantity;
-      updateAllDisplays();
-      showToast('Item Added to Cart!', state.bundleTitle + ' (' + state.quantity + 'x)');
-      setTimeout(() => {
-        openModal('cart-modal');
-      }, 400);
-    }
-
-    const mainAtcBtn = document.getElementById('main-atc-btn');
-    const stickyAtcBtn = document.getElementById('sticky-atc-btn');
-
-    if (mainAtcBtn) mainAtcBtn.addEventListener('click', handleAddToCart);
-    if (stickyAtcBtn) stickyAtcBtn.addEventListener('click', handleAddToCart);
-
-    // Gallery thumbnail switcher
-    const mainImg = document.getElementById('main-product-img');
-    const thumbBtns = document.querySelectorAll('.gallery-thumb-btn');
-
-    thumbBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        thumbBtns.forEach(t => {
-          t.classList.remove('ring-2', 'ring-secondary-container', 'opacity-100');
-          t.classList.add('opacity-70');
-        });
-        this.classList.add('ring-2', 'ring-secondary-container', 'opacity-100');
-        this.classList.remove('opacity-70');
-
-        const newSrc = this.getAttribute('data-src') || this.querySelector('img').src;
-        if (mainImg && newSrc) {
-          mainImg.style.opacity = '0.3';
-          setTimeout(() => {
-            mainImg.src = newSrc;
-            mainImg.style.opacity = '1';
-          }, 120);
-        }
-      });
-    });
-
-    // FAQ Accordion
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-      const trigger = item.querySelector('.faq-trigger');
-      const content = item.querySelector('.faq-content');
-      const icon = item.querySelector('.faq-icon');
-
-      trigger.addEventListener('click', () => {
-        const isHidden = content.classList.contains('hidden');
-        // Close others
-        faqItems.forEach(other => {
-          other.querySelector('.faq-content').classList.add('hidden');
-          const otherIcon = other.querySelector('.faq-icon');
-          if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
-        });
-
-        if (isHidden) {
-          content.classList.remove('hidden');
-          if (icon) icon.style.transform = 'rotate(180deg)';
-        }
-      });
-    });
-
-    // Review Filters
-    const reviewFilters = document.querySelectorAll('.review-filter-btn');
-    const reviewCards = document.querySelectorAll('.review-card');
-
-    reviewFilters.forEach(btn => {
-      btn.addEventListener('click', function() {
-        reviewFilters.forEach(b => {
-          b.classList.remove('bg-primary', 'text-on-primary', 'font-bold');
-          b.classList.add('bg-surface-container', 'text-on-surface');
-        });
-        this.classList.add('bg-primary', 'text-on-primary', 'font-bold');
-        this.classList.remove('bg-surface-container', 'text-on-surface');
-
-        const tag = this.getAttribute('data-tag');
-        reviewCards.forEach(card => {
-          if (tag === 'all' || card.getAttribute('data-category') === tag) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // Sticky Bottom Bar visibility on scroll
-    const stickyBar = document.getElementById('sticky-bar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 400) {
-        stickyBar.classList.remove('translate-y-full');
-      } else {
-        stickyBar.classList.add('translate-y-full');
-      }
-    });
-
-    // Initialize display values
-    updateAllDisplays();
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script src="assets/torquebox.js"></script>
 </body></html>
