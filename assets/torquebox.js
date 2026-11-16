@@ -1,9 +1,7 @@
 (() => {
   const byId = (id) => document.getElementById(id);
   const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
-  const reais = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
   const formatPrice = (cents) => money.format(cents / 100);
-  const formatReais = (cents) => reais.format(cents / 100);
   const cartKey = 'torquebox-cart';
   const bottlePhoto = 'assets/images/qifor-wind-shield-pro.jpg';
   const shippingCharge = 499;
@@ -244,27 +242,25 @@
     return data;
   }
 
-  async function loadPixEstimate() {
+  async function checkPixCheckoutAvailability() {
     pixSubmit.disabled = true;
     pixError.textContent = '';
     byId('pix-usd-total').textContent = byId('drawer-total').textContent;
-    byId('pix-brl-total').textContent = 'Checking current exchange rate…';
-    byId('pix-rate-info').textContent = 'The final amount is calculated when the Pix charge is created.';
+    byId('pix-availability').textContent = 'Checking Pix availability…';
     // Do not allow a changed cart to use a stale quote.
     const cartSnapshot = JSON.stringify(cart);
     try {
       const quote = await pixApi('quote', { cart });
       if (cartSnapshot !== JSON.stringify(cart)) {
-        byId('pix-brl-total').textContent = 'Cart changed';
+        byId('pix-availability').textContent = 'The cart has changed.';
         pixError.textContent = 'Please close checkout and reopen it to update the amount.';
         return;
       }
       byId('pix-usd-total').textContent = formatPrice(quote.totalUsdCents);
-      byId('pix-brl-total').textContent = formatReais(quote.totalBrlCents);
-      byId('pix-rate-info').textContent = `USD 1 = BRL ${Number(quote.rate).toFixed(4)} · Rate date: ${quote.rateDate}. Final BRL amount may update when you generate Pix.`;
+      byId('pix-availability').textContent = 'Your bank will show the converted amount before you authorize the payment.';
       pixSubmit.disabled = false;
     } catch (error) {
-      byId('pix-brl-total').textContent = 'Unavailable';
+      byId('pix-availability').textContent = 'Pix is currently unavailable.';
       pixError.textContent = error.message;
     }
   }
@@ -274,9 +270,7 @@
     byId('pix-payment').classList.remove('hidden');
     pixError.textContent = '';
     byId('pix-usd-total').textContent = formatPrice(charge.totalUsdCents);
-    byId('pix-brl-total').textContent = formatReais(charge.totalBrlCents);
-    byId('pix-rate-info').textContent = `USD 1 = BRL ${Number(charge.rate).toFixed(4)} · Rate date: ${charge.rateDate}. This BRL amount is now fixed.`;
-    byId('pix-final-amount').textContent = `Pay ${formatReais(charge.totalBrlCents)}`;
+    byId('pix-availability').textContent = 'The converted amount is included in the Pix code. Your bank will show it before payment.';
     const rawImage = String(charge.qrCodeBase64).replace(/^data:image\/png;base64,/i, '').replace(/\s+/g, '');
     if (!/^[a-zA-Z0-9+/]+={0,2}$/.test(rawImage)) throw new Error('The payment QR image is invalid.');
     byId('pix-qr-image').src = `data:image/png;base64,${rawImage}`;
@@ -331,7 +325,7 @@
     byId('pix-payment').classList.add('hidden');
     byId('pix-check-status').classList.remove('hidden');
     pixForm.classList.remove('hidden');
-    loadPixEstimate();
+    checkPixCheckoutAvailability();
   });
 
   pixForm.addEventListener('submit', async (event) => {
