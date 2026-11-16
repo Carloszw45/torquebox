@@ -1,6 +1,6 @@
 import {
-  checkoutIsConfigured, errorResponse, getUsdBrlRate, pixouRequest,
-  priceCart, readSmallJson, requireSameOrigin, responseJson, toBrlCents, validateCustomer,
+  checkoutIsConfigured, errorResponse, pixouRequest,
+  priceCart, readSmallJson, requireSameOrigin, responseJson, validateCustomer,
 } from '../../_lib/pix.js';
 import { digestToken, makeOrderToken } from '../../_lib/orders.js';
 
@@ -8,7 +8,7 @@ const WEBHOOK_URL = 'https://torque-box.com/api/pix/webhook';
 
 export async function onRequestPost({ request, env }) {
   if (!checkoutIsConfigured(env)) {
-    return responseJson({ error: 'Pix checkout is being configured.' }, 503);
+    return responseJson({ error: 'O pagamento Pix está sendo configurado.' }, 503);
   }
 
   let orderId;
@@ -17,10 +17,9 @@ export async function onRequestPost({ request, env }) {
     const input = await readSmallJson(request);
     const cart = priceCart(input.cart);
     const customer = validateCustomer(input.customer);
-    const fx = await getUsdBrlRate();
-    const brlCents = toBrlCents(cart.totalUsdCents, fx.rate);
+    const brlCents = cart.totalBrlCents;
     if (brlCents < 600 || brlCents > 300_000) {
-      return responseJson({ error: 'Order exceeds the payment processor limits.' }, 400);
+      return responseJson({ error: 'O valor excede os limites da operadora de pagamentos.' }, 400);
     }
 
     orderId = crypto.randomUUID();
@@ -28,15 +27,15 @@ export async function onRequestPost({ request, env }) {
     const tokenHash = await digestToken(accessToken);
     const now = new Date().toISOString();
 
-    // Save delivery details before asking the processor to create a payable charge.
+    // Campos USD/FX são mantidos por compatibilidade com o banco atual; pedidos brasileiros são cobrados em BRL.
     await env.TORQUEBOX_DB.prepare(`INSERT INTO torque_orders
       (id, access_token_hash, status, items_json, customer_name, customer_email,
        customer_phone, shipping_address_json, usd_subtotal_cents, usd_shipping_cents,
        usd_total_cents, brl_total_cents, fx_rate, fx_date, created_at, updated_at)
       VALUES (?, ?, 'creating', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(
       orderId, tokenHash, JSON.stringify(cart.items), customer.name, customer.email,
-      customer.phone, JSON.stringify(customer.address), cart.subtotalUsdCents,
-      cart.shippingUsdCents, cart.totalUsdCents, brlCents, fx.rate, fx.date, now, now,
+      customer.phone, JSON.stringify(customer.address), 0,
+      0, 0, brlCents, 1, new Date().toISOString().slice(0, 10), now, now,
     ).run();
 
     const result = await pixouRequest(env, '/charge', {
@@ -47,7 +46,7 @@ export async function onRequestPost({ request, env }) {
         amount: brlCents,
         buyer: { name: customer.name, email: customer.email },
         product: { name: 'TorqueBox QIFOR Wind Shield Pro' },
-        offer: { name: 'TorqueBox windshield care', quantity: cart.bottleCount },
+        offer: { name: 'TorqueBox cuidados com os vidros', quantity: cart.bottleCount },
         postbackUrl: WEBHOOK_URL,
       }),
     });
@@ -68,9 +67,6 @@ export async function onRequestPost({ request, env }) {
       status: 'pending',
       currency: 'BRL',
       totalBrlCents: brlCents,
-      totalUsdCents: cart.totalUsdCents,
-      rate: fx.rate,
-      rateDate: fx.date,
       pixCode: result.pix.code,
       qrCodeBase64: result.pix.qrcode_base64,
     }, 201);
@@ -85,7 +81,7 @@ export async function onRequestPost({ request, env }) {
       }
     }
     if (error instanceof Error && /^Payment provider|^Exchange rate/.test(error.message)) {
-      return responseJson({ error: 'Pix is temporarily unavailable. Please try again later.' }, 502);
+      return responseJson({ error: 'O Pix está temporariamente indisponível. Tente novamente.' }, 502);
     }
     return errorResponse(error, 400);
   }

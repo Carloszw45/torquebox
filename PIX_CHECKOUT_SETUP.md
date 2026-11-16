@@ -1,60 +1,33 @@
-# TORQUEBOX — ativação do checkout Pix no Cloudflare Pages
+# TORQUEBOX — checkout Pix em reais (Brasil)
 
-O formulário de compra, a cotação USD→BRL e o QR Code ficam **dentro de `torque-box.com`**. A PIXOU processa o pagamento em reais, enquanto a Cloudflare armazena o pedido e verifica sua situação pela API. A chave privada nunca aparece no HTML ou JavaScript público.
+O site **torque-box.com** mostra produtos QIFOR com preços em reais e cobra por meio da API da Pixou, sem redirecionamento. O Pix é criado e confirmado pelo servidor: o navegador nunca recebe a chave privada.
 
-## Antes de começar
+## Preços configurados (valores preliminares)
+- 1 frasco de 120 mL: R$ 39,90 + R$ 9,90 de frete = R$ 49,80.
+- Kit de 2: R$ 69,90 com frete grátis.
+- Kit de 3: R$ 94,90 com frete grátis.
+- Pedidos com subtotal a partir de R$ 79,90 também têm frete grátis.
 
-- Confirme com a PIXOU que a conta pode **receber cobranças via API** e que os dados do adquirente estão aprovados.
-- O comprador precisa de um aplicativo bancário que faça **Pix brasileiro**. Em geral, um consumidor dos EUA sem conta Pix não conseguirá pagar, embora o frete e os preços da loja estejam em USD.
-- No momento, a operação de expedição é manual: pedidos pagos são registrados no banco D1; ainda não há integração com fornecedor, e-mail transacional nem emissão de documentos fiscais.
+Os preços são **de teste** até confirmar custo posto no Brasil, tributos, embalagem, entrega ao consumidor, taxas da operadora e reserva para devoluções. Ainda não há cálculo dinâmico de frete por CEP: apenas a tabela fixa acima. Não prometa entrega em 7 dias sem confirmar com o fornecedor.
 
-## 1. Criar o banco dos pedidos
+## Configuração do checkout
 
-1. Acesse o painel Cloudflare, vá em **Workers & Pages → D1 SQL Database** (ou **Storage & databases → D1**).
-2. Crie um banco chamado **`torquebox-orders`**.
-3. Dentro dele, abra a seção **Console**.
-4. Execute o conteúdo do arquivo [`migrations/0001_torque_orders.sql`](migrations/0001_torque_orders.sql). Ele cria a tabela `torque_orders`.
+1. No Cloudflare Pages, mantenha o D1 ligado com nome `TORQUEBOX_DB`.
+2. Mantenha o token Pixou como Secret `PIXOU_SECRET_TOKEN` no ambiente de produção. Nunca coloque o token em código, GitHub ou conversa.
+3. A tabela existente `torque_orders` continua compatível. Em pedidos brasileiros, a coluna `brl_total_cents` contém o valor cobrado; as antigas colunas `usd_*_cents` ficam em zero e `fx_rate` recebe 1 somente por compatibilidade retroativa, pois **não há mais conversão de câmbio**.
+4. Confirme a conexão GitHub → Cloudflare e aguarde o novo deploy do repositório.
+5. Verifique carrinho, kits, valores do orçamento Pix, CPF/dados exigidos pela operadora (se houver), endereço com UF e CEP brasileiros, confirmação de pagamento e tela de agradecimento.
+6. Não efetue pagamentos reais somente para testar aparência; faça teste autorizado com valor baixo e possibilidade de estorno verificados.
+7. Consulte pedidos pagos no D1 antes de enviar mercadoria.
 
-## 2. Vincular o D1 ao site publicado
+**Atenção:** não há integração automática com fornecedor, cotação de frete por CEP, confirmação de postagem ou e-mails transacionais. O lojista deve validar prazo e viabilidade da entrega.
 
-1. Abra **Workers & Pages → torquebox → Settings → Bindings → Add → D1 Database**.
-2. Em **Variable name**, digite exatamente **`TORQUEBOX_DB`**.
-3. Em **D1 database**, selecione **`torquebox-orders`**.
-4. Salve para o ambiente **Production** (e Preview, se for testar previews).
-
-## 3. Cadastrar o token privado da PIXOU
-
-1. Dentro do projeto **torquebox**, abra **Settings → Variables and Secrets → Add**.
-2. Em **Variable name**, use exatamente **`PIXOU_SECRET_TOKEN`**.
-3. Em **Value**, cole o *Secret Token* completo criado em **PIXOU → Integrações → API**.
-4. Selecione **Encrypt** para armazená-lo como **Secret** e salve no ambiente **Production**.
-5. **Não envie o token no chat e nunca o adicione ao repositório, ao HTML nem ao JavaScript do navegador.**
-
-## 4. Publicar e testar
-
-1. Depois que os arquivos deste checkout estiverem publicados no GitHub, confirme que a Cloudflare implantou a versão mais recente de **torquebox**. Se você configurou o D1 ou Secret depois do deploy, faça **Redeploy**.
-2. Abra `https://torque-box.com` e adicione um produto ao carrinho.
-3. Clique **Checkout with Pix**. Confira o valor em dólar; o checkout calcula a conversão nos bastidores, sem mostrar um preço em reais no site.
-4. Preencha os dados reais do comprador e o endereço de entrega nos Estados Unidos. Gere o código Pix.
-5. Para testar a confirmação de verdade, faça um pagamento de pequeno valor **somente depois de verificar as taxas e a possibilidade de estorno da PIXOU**. Não use códigos Pix fictícios em produção.
-6. No banco D1, consulte `SELECT id, status, usd_total_cents, brl_total_cents, fx_rate, fx_date, customer_email, shipping_address_json, paid_at FROM torque_orders ORDER BY created_at DESC LIMIT 20;`.
-7. Só separe e envie o pedido depois que o status estiver **`paid`**. A página do comprador também consulta a API autenticada da PIXOU para confirmar o pagamento; o webhook sozinho não é aceito como prova.
-
-## Regras implementadas
-
-- Os preços e o frete são recalculados no servidor em **centavos de dólar**, sem confiar nos números enviados pelo navegador.
-- Cotação **USD→BRL da PTAX/BCB via Frankfurter** em cache por até 15 minutos. Em dias sem nova publicação, usa-se a última cotação disponível, limitada a uma defasagem de 8 dias; se a consulta falhar, a compra não é gerada.
-- O checkout **não mostra o valor em BRL** na página. Quando o Pix é criado, o valor convertido em BRL é fixado e salvo junto com a cotação e a data. O comprador confere o valor convertido ao escanear o QR Code ou abrir o código Pix no aplicativo bancário, antes de autorizar o pagamento.
-- Endpoint de cobrança: `/api/pix/charge`; consulta: `/api/pix/status`; callback: `/api/pix/webhook`.
-- A confirmação depende de consulta autenticada ao registro da PIXOU, conferindo identificador, método e valor da transação. A PIXOU não documenta assinatura digital do webhook no material usado nesta integração.
-- Uma compra não é marcada como paga apenas porque o navegador ou o webhook afirmou isso.
-
-## Testes locais
+## Testes
 
 ```sh
 node --test tests/*.test.mjs
 ```
 
-O teste de navegador exige Chromium e permissões de execução gráfica/headless; em ambientes que bloqueiam a inicialização do navegador, ele é ignorado, mas os testes de preço e segurança do servidor continuam.
+A interface no navegador exige Playwright e Chromium disponíveis. Os testes da API são separados.
 
-Referências: [Cloudflare Pages Functions e Bindings](https://developers.cloudflare.com/pages/functions/bindings/), [D1](https://developers.cloudflare.com/d1/get-started/), [Frankfurter](https://frankfurter.dev/), [PIXOU API](https://www.pixoupay.com/apidocumentacao).
+Documentação: [Cloudflare Pages Functions](https://developers.cloudflare.com/pages/functions/) e [PIXOU API](https://www.pixoupay.com/apidocumentacao).

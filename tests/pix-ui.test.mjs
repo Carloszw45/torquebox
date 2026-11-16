@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-test('customer sees USD only, generates Pix and receives confirmation without leaving the site', async (t) => {
+test('customer sees BRL only, generates Pix and receives confirmation without leaving the site', async (t) => {
   const server = createServer(async (req, res) => {
     const path = req.url === '/' ? 'index.html' : decodeURIComponent(req.url).replace(/^\//, '');
     if (!['index.html', 'assets/torquebox.js'].includes(path) && !/^assets\/images\/[\w.-]+$/.test(path)) {
@@ -41,15 +41,16 @@ test('customer sees USD only, generates Pix and receives confirmation without le
     let requestedCart;
     await page.route('**/api/pix/quote', async (route) => {
       requestedCart = JSON.parse(route.request().postData()).cart;
-      await route.fulfill({ json: { totalUsdCents: 2995, totalBrlCents: 16289, rate: 5.4387, rateDate: '2026-11-16' } });
+      await route.fulfill({ json: { totalBrlCents: 6990 } });
     });
     await page.route('**/api/pix/charge', async (route) => {
       const request = JSON.parse(route.request().postData());
       assert.deepEqual(request.cart, { '2_bottles': 1 });
-      assert.equal(request.customer.address.state, 'CA');
+      assert.equal(request.customer.address.state, 'MG');
+      assert.equal(request.customer.address.country, 'BR');
       await route.fulfill({ json: {
         orderId: 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', accessToken: 'a'.repeat(64),
-        totalUsdCents: 2995, totalBrlCents: 16289, rate: 5.4387, rateDate: '2026-11-16',
+        totalBrlCents: 6990,
         pixCode: '000201010212...TESTPIX',
         qrCodeBase64: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9X5GvpMAAAAASUVORK5CYII=',
       } });
@@ -64,22 +65,22 @@ test('customer sees USD only, generates Pix and receives confirmation without le
     assert.equal(await page.locator('#cart-counter').textContent(), '1');
     await page.locator('#open-pix-checkout').click();
     await page.waitForFunction(() => !document.getElementById('pix-generate').disabled);
-    assert.match(await page.locator('#pix-modal').innerText(), /\$29\.95/);
-    assert.doesNotMatch(await page.locator('#pix-modal').innerText(), /R\$\s*162,89|Estimated Pix total/);
+    assert.match(await page.locator('#pix-modal').innerText(), /R\$\s*69,90/);
+    assert.doesNotMatch(await page.locator('#pix-modal').innerText(), /\$\s*29\.95|USD/);
     assert.deepEqual(requestedCart, { '2_bottles': 1 });
-    await page.locator('input[name="name"]').fill('Alex Walker');
+    await page.locator('input[name="name"]').fill('Carlos Silva');
     await page.locator('input[name="email"]').fill('alex@example.com');
-    await page.locator('input[name="line1"]').fill('123 Main Street');
-    await page.locator('input[name="city"]').fill('Los Angeles');
-    await page.locator('input[name="state"]').fill('CA');
-    await page.locator('input[name="postalCode"]').fill('90001');
+    await page.locator('input[name="line1"]').fill('Rua das Flores, 123');
+    await page.locator('input[name="city"]').fill('Contagem');
+    await page.locator('input[name="state"]').fill('MG');
+    await page.locator('input[name="postalCode"]').fill('32040-000');
     await page.locator('#pix-generate').click();
     await page.locator('#pix-success').waitFor({ state: 'visible' });
-    assert.match(await page.locator('#pix-success').innerText(), /Thank you for your order!/);
-    assert.match(await page.locator('#pix-success').innerText(), /within 7 days of payment confirmation/i);
+    assert.match(await page.locator('#pix-success').innerText(), /Obrigado pela compra!/);
+    assert.match(await page.locator('#pix-success').innerText(), /Prazo de entrega:/i);
     assert.match(await page.locator('#pix-success-order').innerText(), /aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa/);
     assert.equal(await page.locator('#pix-pending').isVisible(), false);
-    assert.doesNotMatch(await page.locator('#pix-modal').innerText(), /R\$\s*162,89/);
+    assert.doesNotMatch(await page.locator('#pix-modal').innerText(), /USD/);
     assert.equal(await page.locator('#cart-counter').isVisible(), false);
     assert.equal(new URL(page.url()).host, `127.0.0.1:${server.address().port}`);
   } finally {

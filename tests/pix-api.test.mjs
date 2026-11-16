@@ -14,7 +14,7 @@ function request(path, body) {
   });
 }
 
-test('Pix checkout stores USD/BRL amounts and confirms only authenticated provider-paid transactions', async () => {
+test('Pix checkout stores BRL amounts and confirms only authenticated provider-paid transactions', async () => {
   const db = new DatabaseSync(':memory:');
   const migration = await readFile(new URL('../migrations/0001_torque_orders.sql', import.meta.url), 'utf8');
   db.exec(migration);
@@ -37,14 +37,11 @@ test('Pix checkout stores USD/BRL amounts and confirms only authenticated provid
   let recordedAmount;
   try {
     globalThis.fetch = async (url, options) => {
-      if (String(url).includes('frankfurter.dev')) {
-        return Response.json({ date: new Date().toISOString().slice(0, 10), rate: 5.4387 });
-      }
       assert.equal(options.headers.Authorization, 'Bearer test-only-private-token');
       if (String(url).endsWith('/charge')) {
         const charge = JSON.parse(options.body);
         assert.equal(charge.payment_method, 'pix');
-        assert.equal(charge.amount, 16289);
+        assert.equal(charge.amount, 6990);
         assert.equal(charge.postbackUrl, 'https://torque-box.com/api/pix/webhook');
         recordedAmount = charge.amount;
         return Response.json({ data: {
@@ -64,19 +61,19 @@ test('Pix checkout stores USD/BRL amounts and confirms only authenticated provid
 
     const customer = {
       name: 'Alex Walker', email: 'alex@example.com', phone: '',
-      address: { line1: '123 Main St', line2: '', city: 'Los Angeles', state: 'CA', postalCode: '90001', country: 'US' },
+      address: { line1: 'Rua das Flores, 123', line2: '', city: 'Contagem', state: 'MG', postalCode: '32040-000', country: 'BR' },
     };
     const createdResponse = await createCharge({
       request: request('charge', { cart: { '2_bottles': 1 }, customer }), env,
     });
     assert.equal(createdResponse.status, 201);
     const created = await createdResponse.json();
-    assert.equal(created.totalUsdCents, 2995);
-    assert.equal(created.totalBrlCents, 16289);
+    assert.equal(created.currency, 'BRL');
+    assert.equal(created.totalBrlCents, 6990);
     assert.ok(created.accessToken);
     const row = db.prepare('SELECT * FROM torque_orders WHERE id = ?').get(created.orderId);
-    assert.equal(row.usd_total_cents, 2995);
-    assert.equal(row.brl_total_cents, 16289);
+    assert.equal(row.usd_total_cents, 0);
+    assert.equal(row.brl_total_cents, 6990);
     assert.equal(row.status, 'pending');
     assert.equal(row.access_token_hash.length, 64);
     assert.equal(row.access_token_hash.includes(created.accessToken), false);

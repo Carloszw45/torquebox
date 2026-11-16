@@ -1,8 +1,8 @@
 // Server-only checkout rules. Never trust product prices or totals from the browser.
 const BUNDLES = Object.freeze({
-  '1_bottle': { name: '1 Bottle (120 mL)', bottles: 1, usdCents: 1995 },
-  '2_bottles': { name: '2 Bottles (240 mL)', bottles: 2, usdCents: 2995 },
-  '3_bottles': { name: '3 Bottles (360 mL)', bottles: 3, usdCents: 3895 },
+  '1_bottle': { name: '1 frasco (120 mL)', bottles: 1, brlCents: 3990 },
+  '2_bottles': { name: '2 frascos (240 mL)', bottles: 2, brlCents: 6990 },
+  '3_bottles': { name: '3 frascos (360 mL)', bottles: 3, brlCents: 9490 },
 });
 
 const FX_URL = 'https://api.frankfurter.dev/v2/rate/usd/brl?providers=bcb';
@@ -40,35 +40,35 @@ export function requireSameOrigin(request) {
 
 export function priceCart(cart) {
   if (!cart || typeof cart !== 'object' || Array.isArray(cart)) {
-    throw new Error('Invalid cart.');
+    throw new Error('Carrinho inválido.');
   }
   const entries = Object.entries(cart);
-  if (!entries.length || entries.length > 3) throw new Error('Your cart is empty or invalid.');
+  if (!entries.length || entries.length > 3) throw new Error('Seu carrinho está vazio ou inválido.');
 
-  let subtotalUsdCents = 0;
+  let subtotalBrlCents = 0;
   let kitCount = 0;
   let bottleCount = 0;
   const items = entries.map(([id, quantity]) => {
     const bundle = BUNDLES[id];
     if (!bundle || !Number.isSafeInteger(quantity) || quantity < 1 || quantity > 20) {
-      throw new Error('Invalid product or quantity.');
+      throw new Error('Produto ou quantidade inválidos.');
     }
-    subtotalUsdCents += bundle.usdCents * quantity;
+    subtotalBrlCents += bundle.brlCents * quantity;
     kitCount += quantity;
     bottleCount += bundle.bottles * quantity;
-    return { id, name: bundle.name, quantity, unitUsdCents: bundle.usdCents };
+    return { id, name: bundle.name, quantity, unitBrlCents: bundle.brlCents };
   });
-  if (kitCount > 20) throw new Error('The maximum is 20 kits per order.');
+  if (kitCount > 20) throw new Error('O limite é de 20 kits por pedido.');
 
-  const freeShipping = subtotalUsdCents > 4000 || entries.some(([id]) => id !== '1_bottle');
-  const shippingUsdCents = freeShipping ? 0 : 499;
+  const freeShipping = subtotalBrlCents >= 7990 || entries.some(([id]) => id !== '1_bottle');
+  const shippingBrlCents = freeShipping ? 0 : 990;
   return {
     items,
     kitCount,
     bottleCount,
-    subtotalUsdCents,
-    shippingUsdCents,
-    totalUsdCents: subtotalUsdCents + shippingUsdCents,
+    subtotalBrlCents,
+    shippingBrlCents,
+    totalBrlCents: subtotalBrlCents + shippingBrlCents,
   };
 }
 
@@ -101,10 +101,10 @@ export function validateCustomer(value) {
   const email = String(value.email ?? '').trim().toLowerCase();
   const phone = String(value.phone ?? '').trim();
   const address = value.address;
-  if (name.length < 3 || name.length > 100) throw new Error('Enter your full name.');
-  if (email.length > 100 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Enter a valid email.');
-  if (phone.length > 30) throw new Error('Invalid phone number.');
-  if (!address || typeof address !== 'object') throw new Error('Enter your delivery address.');
+  if (name.length < 3 || name.length > 100) throw new Error('Informe seu nome completo.');
+  if (email.length > 100 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Informe um e-mail válido.');
+  if (phone.length > 30) throw new Error('Número de telefone inválido.');
+  if (!address || typeof address !== 'object') throw new Error('Informe o endereço de entrega.');
 
   const line1 = String(address.line1 ?? '').trim();
   const line2 = String(address.line2 ?? '').trim();
@@ -113,10 +113,10 @@ export function validateCustomer(value) {
   const postalCode = String(address.postalCode ?? '').trim();
   const country = String(address.country ?? '').trim().toUpperCase();
 
-  if (!line1 || line1.length > 160 || line2.length > 160) throw new Error('Enter your street address.');
-  if (!city || city.length > 80 || !/^[A-Z]{2}$/.test(state)) throw new Error('Enter your city and 2-letter state.');
-  if (!/^\d{5}(?:-\d{4})?$/.test(postalCode) || country !== 'US') {
-    throw new Error('Enter a valid US delivery ZIP code.');
+  if (!line1 || line1.length > 160 || line2.length > 160) throw new Error('Informe rua e número.');
+  if (!city || city.length > 80 || !/^(AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)$/.test(state)) throw new Error('Informe sua cidade e a sigla do estado (UF).');
+  if (!/^\d{5}-?\d{3}$/.test(postalCode) || country !== 'BR') {
+    throw new Error('Informe um CEP válido do Brasil.');
   }
   return { name, email, phone, address: { line1, line2, city, state, postalCode, country } };
 }

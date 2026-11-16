@@ -1,11 +1,11 @@
 (() => {
   const byId = (id) => document.getElementById(id);
-  const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+  const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
   const formatPrice = (cents) => money.format(cents / 100);
   const cartKey = 'torquebox-cart';
   const bottlePhoto = 'assets/images/qifor-wind-shield-pro.jpg';
-  const shippingCharge = 499;
-  const priorityThreshold = 4000;
+  const shippingCharge = 990;
+  const priorityThreshold = 7990;
   const bundles = Array.from(document.querySelectorAll('.bundle-card'), (card) => {
     const radio = card.querySelector('input[name="bundle_selection"]');
     return {
@@ -41,19 +41,19 @@
 
   function shippingFor(subtotal, includedBundles) {
     if (subtotal === 0) return { cost: 0, label: '' };
-    if (subtotal > priorityThreshold) return { cost: 0, label: 'Free US shipping' };
+    if (subtotal > priorityThreshold) return { cost: 0, label: 'Frete grátis' };
     if (includedBundles.some((bundle) => bundle.shipping === 'priority')) {
-      return { cost: 0, label: 'Free US shipping' };
+      return { cost: 0, label: 'Frete grátis' };
     }
     if (includedBundles.some((bundle) => bundle.shipping === 'standard')) {
-      return { cost: 0, label: 'Free standard US shipping' };
+      return { cost: 0, label: 'Frete grátis' };
     }
     return { cost: shippingCharge, label: formatPrice(shippingCharge) };
   }
 
   function showBottlePhoto(container, count) {
     if (container.childElementCount === count) return;
-    container.setAttribute('aria-label', `${count} QIFOR ${count === 1 ? 'bottle' : 'bottles'}`);
+    container.setAttribute('aria-label', `${count} ${count === 1 ? 'frasco' : 'frascos'} QIFOR`);
     const photos = Array.from({ length: count }, () => {
       const photo = document.createElement('img');
       photo.src = bottlePhoto;
@@ -77,11 +77,11 @@
     quantityInput.value = quantity;
     quantityMinus.disabled = quantity <= 1;
     quantityPlus.disabled = quantity >= 20;
-    byId('selection-volume').textContent = `${selectedBundle.bottles} × 120 mL (4.05 fl oz each)`;
-    byId('atc-btn-text').textContent = `ADD TO CART — ${formatPrice(price)} USD`;
+    byId('selection-volume').textContent = `${selectedBundle.bottles} × 120 mL cada`;
+    byId('atc-btn-text').textContent = `ADICIONAR AO CARRINHO — ${formatPrice(price)}`;
     byId('sticky-price').textContent = formatPrice(price);
     byId('sticky-bundle-label').textContent = selectedBundle.title;
-    byId('sticky-shipping').textContent = shipping.cost ? `${shipping.label} US shipping` : shipping.label;
+    byId('sticky-shipping').textContent = shipping.cost ? `${shipping.label} de frete` : shipping.label;
     showBottlePhoto(byId('sticky-product-photo'), selectedBundle.bottles);
   }
 
@@ -108,9 +108,9 @@
     const counter = byId('cart-counter');
     counter.textContent = kits;
     counter.classList.toggle('hidden', kits === 0);
-    byId('open-cart-btn').setAttribute('aria-label', `Shopping Cart (${kits} ${kits === 1 ? 'kit' : 'kits'})`);
+    byId('open-cart-btn').setAttribute('aria-label', `Carrinho (${kits} ${kits === 1 ? 'kit' : 'kits'})`);
     byId('drawer-cart-count').textContent = kits;
-    byId('drawer-bottle-summary').textContent = `${bottles} ${bottles === 1 ? 'bottle' : 'bottles'} total`;
+    byId('drawer-bottle-summary').textContent = `${bottles} ${bottles === 1 ? 'frasco' : 'frascos'} no total`;
     byId('drawer-volume').classList.toggle('hidden', kits === 0);
     byId('cart-empty').classList.toggle('hidden', kits > 0);
     byId('cart-totals').classList.toggle('hidden', kits === 0);
@@ -146,9 +146,9 @@
     const increase = row.querySelector('[data-cart-action="increase"]');
     const decrease = row.querySelector('[data-cart-action="decrease"]');
     const remove = row.querySelector('[data-cart-action="remove"]');
-    increase.setAttribute('aria-label', `Increase quantity for ${bundle.title}`);
-    decrease.setAttribute('aria-label', `Decrease quantity for ${bundle.title}`);
-    remove.setAttribute('aria-label', `Remove ${bundle.title} from cart`);
+    increase.setAttribute('aria-label', `Aumentar quantidade de ${bundle.title}`);
+    decrease.setAttribute('aria-label', `Diminuir quantidade de ${bundle.title}`);
+    remove.setAttribute('aria-label', `Remover ${bundle.title} do carrinho`);
     increase.addEventListener('click', () => setCartQuantity(bundle.id, cart[bundle.id] + 1));
     decrease.addEventListener('click', () => setCartQuantity(bundle.id, cart[bundle.id] - 1));
     remove.addEventListener('click', () => {
@@ -238,7 +238,7 @@
       credentials: 'same-origin',
     });
     const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.error || 'Pix checkout is temporarily unavailable.');
+    if (!response.ok) throw new Error(data.error || 'Pagamento Pix temporariamente indisponível.');
     return data;
   }
 
@@ -246,21 +246,21 @@
     pixSubmit.disabled = true;
     pixError.textContent = '';
     byId('pix-usd-total').textContent = byId('drawer-total').textContent;
-    byId('pix-availability').textContent = 'Checking Pix availability…';
+    byId('pix-availability').textContent = 'Verificando disponibilidade do Pix…';
     // Do not allow a changed cart to use a stale quote.
     const cartSnapshot = JSON.stringify(cart);
     try {
       const quote = await pixApi('quote', { cart });
       if (cartSnapshot !== JSON.stringify(cart)) {
-        byId('pix-availability').textContent = 'The cart has changed.';
-        pixError.textContent = 'Please close checkout and reopen it to update the amount.';
+        byId('pix-availability').textContent = 'O carrinho foi alterado.';
+        pixError.textContent = 'Feche o checkout e abra novamente para atualizar o total.';
         return;
       }
-      byId('pix-usd-total').textContent = formatPrice(quote.totalUsdCents);
-      byId('pix-availability').textContent = 'Your bank will show the converted amount before you authorize the payment.';
+      byId('pix-usd-total').textContent = formatPrice(quote.totalBrlCents);
+      byId('pix-availability').textContent = 'Você verá o valor exato em reais antes de confirmar o Pix no seu banco.';
       pixSubmit.disabled = false;
     } catch (error) {
-      byId('pix-availability').textContent = 'Pix is currently unavailable.';
+      byId('pix-availability').textContent = 'O Pix está indisponível no momento.';
       pixError.textContent = error.message;
     }
   }
@@ -271,13 +271,13 @@
     byId('pix-pending').classList.remove('hidden');
     byId('pix-success').classList.add('hidden');
     pixError.textContent = '';
-    byId('pix-usd-total').textContent = formatPrice(charge.totalUsdCents);
-    byId('pix-availability').textContent = 'The converted amount is included in the Pix code. Your bank will show it before payment.';
+    byId('pix-usd-total').textContent = formatPrice(charge.totalBrlCents);
+    byId('pix-availability').textContent = 'O código Pix contém o valor do pedido em reais. Confira no seu aplicativo bancário.';
     const rawImage = String(charge.qrCodeBase64).replace(/^data:image\/png;base64,/i, '').replace(/\s+/g, '');
-    if (!/^[a-zA-Z0-9+/]+={0,2}$/.test(rawImage)) throw new Error('The payment QR image is invalid.');
+    if (!/^[a-zA-Z0-9+/]+={0,2}$/.test(rawImage)) throw new Error('Não foi possível gerar a imagem do QR Code.');
     byId('pix-qr-image').src = `data:image/png;base64,${rawImage}`;
     byId('pix-copy-code').value = charge.pixCode;
-    pixStatus.textContent = 'Awaiting confirmation from the Pix provider…';
+    pixStatus.textContent = 'Aguardando confirmação da operadora Pix…';
     byId('pix-check-status').disabled = false;
   }
 
@@ -300,14 +300,14 @@
         try { localStorage.removeItem(cartKey); } catch { /* Storage can be disabled. */ }
         updateCart();
       } else if (['expired', 'cancelled'].includes(result.status)) {
-        pixStatus.textContent = `Pix charge ${result.status}. No payment was confirmed. Please contact support before creating a new payment.`;
+        pixStatus.textContent = `Cobrança Pix encerrada (${result.status}). Nenhum pagamento foi confirmado. Entre em contato com o suporte antes de tentar novamente.`;
         clearTimeout(pixPollTimeout);
         pixCharge = null;
       } else {
-        pixStatus.textContent = 'Waiting for secure payment confirmation…';
+        pixStatus.textContent = 'Aguardando confirmação segura do pagamento…';
       }
     } catch {
-      pixStatus.textContent = 'Could not check payment yet. We will retry; do not pay twice.';
+      pixStatus.textContent = 'Ainda não conseguimos confirmar o pagamento. Vamos tentar novamente. Não pague duas vezes.';
     } finally {
       pixPolling = false;
       byId('pix-check-status').disabled = !pixCharge;
@@ -335,7 +335,7 @@
     event.preventDefault();
     if (pixSubmit.disabled || pixCharge) return;
     pixSubmit.disabled = true;
-    pixSubmit.textContent = 'Generating secure Pix…';
+    pixSubmit.textContent = 'Gerando Pix seguro…';
     pixError.textContent = '';
     const fields = Object.fromEntries(new FormData(pixForm).entries());
     const customer = {
@@ -344,22 +344,22 @@
       phone: fields.phone,
       address: {
         line1: fields.line1, line2: fields.line2, city: fields.city,
-        state: fields.state, postalCode: fields.postalCode, country: 'US',
+        state: fields.state, postalCode: fields.postalCode, country: 'BR',
       },
     };
     try {
       const charge = await pixApi('charge', { cart, customer });
       if (!charge.orderId || !charge.accessToken || !charge.pixCode || !charge.qrCodeBase64) {
-        throw new Error('Incomplete Pix charge response. Please contact support before paying again.');
+        throw new Error('A resposta da operadora Pix veio incompleta. Procure o suporte antes de pagar novamente.');
       }
       pixCharge = charge;
       displayPixCharge(charge);
       pixPollUntil = Date.now() + 30 * 60_000;
       checkPixPayment();
     } catch (error) {
-      pixError.textContent = `${error.message} If you already received a Pix charge, contact support before trying again.`;
+      pixError.textContent = `${error.message} Se uma cobrança Pix já foi gerada, procure o suporte antes de tentar novamente.`;
     } finally {
-      pixSubmit.textContent = 'Generate Pix QR code';
+      pixSubmit.textContent = 'Gerar QR Code Pix';
       pixSubmit.disabled = Boolean(pixCharge);
     }
   });
@@ -367,11 +367,11 @@
   byId('pix-copy-button').addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(byId('pix-copy-code').value);
-      byId('pix-copy-button').textContent = 'Copied!';
+      byId('pix-copy-button').textContent = 'Copiado!';
     } catch {
       byId('pix-copy-code').focus();
       byId('pix-copy-code').select();
-      byId('pix-copy-button').textContent = 'Select code and copy';
+      byId('pix-copy-button').textContent = 'Selecione e copie o código';
     }
   });
   byId('pix-check-status').addEventListener('click', checkPixPayment);
@@ -406,7 +406,7 @@
       link.classList.toggle('hidden', !matchesQuery);
       return matchesQuery;
     });
-    byId('search-results-title').textContent = words.length ? 'Search results' : 'Popular searches';
+    byId('search-results-title').textContent = words.length ? 'Resultados da busca' : 'Buscas populares';
     byId('search-status').classList.toggle('hidden', matches.length > 0);
     return matches;
   }

@@ -1,31 +1,26 @@
 import {
-  checkoutIsConfigured, errorResponse, getUsdBrlRate, priceCart,
-  readSmallJson, requireSameOrigin, responseJson, toBrlCents,
+  checkoutIsConfigured, errorResponse, priceCart,
+  readSmallJson, requireSameOrigin, responseJson,
 } from '../../_lib/pix.js';
 
 export async function onRequestPost({ request, env }) {
   if (!checkoutIsConfigured(env)) {
-    return responseJson({ error: 'Pix checkout is being configured.' }, 503);
+    return responseJson({ error: 'O pagamento Pix está sendo configurado.' }, 503);
   }
   try {
     requireSameOrigin(request);
     const { cart } = await readSmallJson(request);
     const order = priceCart(cart);
-    const fx = await getUsdBrlRate();
-    const totalBrlCents = toBrlCents(order.totalUsdCents, fx.rate);
+    const totalBrlCents = order.totalBrlCents;
     if (totalBrlCents < 600 || totalBrlCents > 300_000) {
-      return responseJson({ error: 'Order exceeds the payment processor limits.' }, 400);
+      return responseJson({ error: 'O valor excede os limites da operadora de pagamentos.' }, 400);
     }
     return responseJson({
-      subtotalUsdCents: order.subtotalUsdCents,
-      shippingUsdCents: order.shippingUsdCents,
-      totalUsdCents: order.totalUsdCents,
+      subtotalBrlCents: order.subtotalBrlCents,
+      shippingBrlCents: order.shippingBrlCents,
       totalBrlCents,
       currency: 'BRL',
-      rate: fx.rate,
-      rateDate: fx.date,
-      rateSource: fx.provider,
-      note: 'The final BRL amount is fixed when the Pix QR Code is generated.',
+      note: 'O valor do Pix é cobrado em reais conforme o total do pedido.',
     });
   } catch (error) {
     console.error(JSON.stringify({ action: 'pix_quote_failed', message: String(error) }));
