@@ -34,7 +34,7 @@ O formulário de compra, a cotação USD→BRL e o QR Code ficam **dentro de `to
 
 1. Depois que os arquivos deste checkout estiverem publicados no GitHub, confirme que a Cloudflare implantou a versão mais recente de **torquebox**. Se você configurou o D1 ou Secret depois do deploy, faça **Redeploy**.
 2. Abra `https://torque-box.com` e adicione um produto ao carrinho.
-3. Clique **Checkout with Pix**. Confira o valor em dólar e o valor convertido em reais.
+3. Clique **Checkout with Pix**. Confira o valor em dólar; o checkout calcula a conversão nos bastidores, sem mostrar um preço em reais no site.
 4. Preencha os dados reais do comprador e o endereço de entrega nos Estados Unidos. Gere o código Pix.
 5. Para testar a confirmação de verdade, faça um pagamento de pequeno valor **somente depois de verificar as taxas e a possibilidade de estorno da PIXOU**. Não use códigos Pix fictícios em produção.
 6. No banco D1, consulte `SELECT id, status, usd_total_cents, brl_total_cents, fx_rate, fx_date, customer_email, shipping_address_json, paid_at FROM torque_orders ORDER BY created_at DESC LIMIT 20;`.
@@ -44,7 +44,7 @@ O formulário de compra, a cotação USD→BRL e o QR Code ficam **dentro de `to
 
 - Os preços e o frete são recalculados no servidor em **centavos de dólar**, sem confiar nos números enviados pelo navegador.
 - Cotação **USD→BRL da PTAX/BCB via Frankfurter** em cache por até 15 minutos. Em dias sem nova publicação, usa-se a última cotação disponível, limitada a uma defasagem de 8 dias; se a consulta falhar, a compra não é gerada.
-- O checkout mostra uma **estimativa em BRL** antes do pagamento. Quando o Pix é criado, o valor em BRL é fixado e salvo junto com a cotação e a data.
+- O checkout **não mostra o valor em BRL** na página. Quando o Pix é criado, o valor convertido em BRL é fixado e salvo junto com a cotação e a data. O comprador confere o valor convertido ao escanear o QR Code ou abrir o código Pix no aplicativo bancário, antes de autorizar o pagamento.
 - Endpoint de cobrança: `/api/pix/charge`; consulta: `/api/pix/status`; callback: `/api/pix/webhook`.
 - A confirmação depende de consulta autenticada ao registro da PIXOU, conferindo identificador, método e valor da transação. A PIXOU não documenta assinatura digital do webhook no material usado nesta integração.
 - Uma compra não é marcada como paga apenas porque o navegador ou o webhook afirmou isso.
