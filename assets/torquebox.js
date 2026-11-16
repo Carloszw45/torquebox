@@ -41,9 +41,9 @@
 
   function shippingFor(subtotal, includedBundles) {
     if (subtotal === 0) return { cost: 0, label: '' };
-    if (subtotal > priorityThreshold) return { cost: 0, label: 'Free 2-day priority US shipping' };
+    if (subtotal > priorityThreshold) return { cost: 0, label: 'Free US shipping' };
     if (includedBundles.some((bundle) => bundle.shipping === 'priority')) {
-      return { cost: 0, label: 'Free priority US shipping' };
+      return { cost: 0, label: 'Free US shipping' };
     }
     if (includedBundles.some((bundle) => bundle.shipping === 'standard')) {
       return { cost: 0, label: 'Free standard US shipping' };
@@ -268,6 +268,8 @@
   function displayPixCharge(charge) {
     pixForm.classList.add('hidden');
     byId('pix-payment').classList.remove('hidden');
+    byId('pix-pending').classList.remove('hidden');
+    byId('pix-success').classList.add('hidden');
     pixError.textContent = '';
     byId('pix-usd-total').textContent = formatPrice(charge.totalUsdCents);
     byId('pix-availability').textContent = 'The converted amount is included in the Pix code. Your bank will show it before payment.';
@@ -289,8 +291,9 @@
         accessToken: pixCharge.accessToken,
       });
       if (result.status === 'paid') {
-        pixStatus.textContent = 'Payment confirmed! Thank you for your order. Please save your receipt.';
-        byId('pix-check-status').classList.add('hidden');
+        byId('pix-success-order').textContent = pixCharge.orderId;
+        byId('pix-pending').classList.add('hidden');
+        byId('pix-success').classList.remove('hidden');
         clearTimeout(pixPollTimeout);
         pixCharge = null;
         cart = {};
