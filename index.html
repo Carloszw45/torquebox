@@ -98,7 +98,7 @@
 <header class="fixed top-0 left-0 right-0 z-50 shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
 <div class="bg-primary text-on-primary py-space-xs">
 <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter flex items-center justify-center text-center">
-<p class="font-label-md text-label-md tracking-wider uppercase">🇺🇸 US SPRING FLASH SALE: Free 2-Day Priority Shipping Over $40 <span class="text-secondary-container mx-space-xs">•</span> 30-Day Money-Back Guarantee</p>
+<p class="font-label-md text-label-md tracking-wider uppercase">🇺🇸 US SPRING FLASH SALE: Free Shipping Over $40 <span class="text-secondary-container mx-space-xs">•</span> Delivery Within 7 Days</p>
 </div>
 </div>
 <div class="bg-surface-container-lowest">
@@ -310,7 +310,7 @@
 <span class="line-through font-body-sm text-body-sm text-outline-variant">$59.85</span>
 <span class="font-headline-md text-headline-md text-primary font-bold">$38.95</span>
 </div>
-<span class="block font-spec-code text-spec-code text-secondary font-bold">FREE PRIORITY SHIPPING</span>
+<span class="block font-spec-code text-spec-code text-secondary font-bold">FREE US SHIPPING</span>
 </div>
 </div>
 </label>
@@ -345,8 +345,8 @@
 <div class="flex items-start gap-2">
 <span class="material-symbols-outlined text-secondary-container text-[20px] shrink-0">local_shipping</span>
 <div>
-<h4 class="font-label-md text-label-md text-primary font-bold">Fast US Shipping</h4>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Ships from OH &amp; NV</p>
+<h4 class="font-label-md text-label-md text-primary font-bold">US Delivery</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Within 7 days of payment confirmation</p>
 </div>
 </div>
 <div class="flex items-start gap-2">
@@ -507,7 +507,7 @@
 </tr>
 <tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
 <th class="py-3.5 px-space-md font-label-lg text-label-lg text-primary">Origin &amp; Fulfillment</th>
-<td class="py-3.5 px-space-md text-on-surface-variant">Stored and Dispatched Direct from Continental United States Warehouses</td>
+<td class="py-3.5 px-space-md text-on-surface-variant">Delivery to US addresses within 7 days of payment confirmation</td>
 </tr>
 </tbody>
 </table>
@@ -712,7 +712,7 @@
 <span class="faq-icon material-symbols-outlined text-secondary-container transition-transform duration-300">expand_more</span>
 </button>
 <div class="faq-content hidden p-space-md pt-0 text-on-surface-variant font-body-md text-body-md leading-relaxed border-t border-surface-container/50 mt-1">
-                All orders dispatch directly from our domestic fulfillment centers within 24 business hours. US shipping costs $4.99 for orders up to $40 that contain only single-bottle kits. The 2-Pack includes free standard US shipping (2 to 4 business days), and the 3-Pack includes free priority US shipping. Orders over $40 qualify for free 2-day priority US shipping. We back every order with a 30-day no-hassle money-back guarantee: if your windshield isn't noticeably clearer, return for a full refund.
+                Delivery to US addresses takes up to 7 days after payment confirmation. US shipping costs $4.99 for orders up to $40 that contain only single-bottle kits. The 2-Pack and 3-Pack include free US shipping, and orders over $40 also qualify for free US shipping. We back every order with a 30-day no-hassle money-back guarantee: if your windshield isn't noticeably clearer, return for a full refund.
               </div>
 </div>
 </div>
@@ -855,6 +855,7 @@
 <button class="sm:col-span-2 w-full rounded-lg bg-secondary-container py-3.5 px-4 font-bold uppercase text-on-secondary-container transition hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed" id="pix-generate" type="submit" disabled>Generate Pix QR code</button>
 </form>
 <div class="hidden text-center" id="pix-payment" aria-live="polite">
+<div id="pix-pending">
 <p class="font-bold text-primary text-lg">Your Pix charge is ready</p>
 <p class="text-on-surface-variant text-sm mb-3">Scan this QR code with your Brazilian banking app, or copy the Pix code below. Your bank will show the final amount in BRL before you authorize the payment.</p>
 <img alt="Pix payment QR code" class="w-56 h-56 mx-auto bg-white p-2 rounded-lg border border-outline-variant" id="pix-qr-image" width="224" height="224" />
@@ -864,6 +865,16 @@
 <p class="mt-3 text-sm font-bold" id="pix-order-status" role="status">Awaiting payment confirmation…</p>
 <button class="mt-2 rounded-lg border border-outline-variant/60 px-4 py-2 text-sm font-bold disabled:opacity-50" id="pix-check-status" type="button">Check payment status</button>
 <p class="mt-1 text-xs text-on-surface-variant">Keep this window open while we verify your payment with the payment provider.</p>
+</div>
+<div class="hidden rounded-xl border border-secondary-container/40 bg-surface-container-low p-5 text-center" id="pix-success" role="status">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary-container text-5xl">check_circle</span>
+<h4 class="mt-2 text-xl font-bold text-primary">Thank you for your order!</h4>
+<p class="mt-2 text-sm text-on-surface-variant">Payment confirmed! Your TorqueBox order has been received.</p>
+<p class="mt-4 text-sm font-bold text-primary">Estimated delivery: within 7 days of payment confirmation.</p>
+<p class="mt-3 text-xs text-on-surface-variant">Order number</p>
+<p class="mt-1 break-all font-spec-code text-sm font-bold text-primary" id="pix-success-order"></p>
+<p class="mt-3 text-xs text-on-surface-variant">Please save your order number and payment receipt for your records.</p>
+</div>
 </div>
 <p class="mt-3 text-sm text-error" id="pix-error" role="alert"></p>
 </div>
@@ -921,5 +932,5 @@
 </div>
 </div>
 </div>
-<script src="assets/torquebox.js?v=20261116-pix-usd-only"></script>
+<script src="assets/torquebox.js?v=20261116-pix-success-7days"></script>
 </body></html>
