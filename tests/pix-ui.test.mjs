@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-test('customer can see BRL conversion, create Pix and receive verified confirmation without leaving the site', async (t) => {
+test('customer sees USD only, generates Pix and receives confirmation without leaving the site', async (t) => {
   const server = createServer(async (req, res) => {
     const path = req.url === '/' ? 'index.html' : decodeURIComponent(req.url).replace(/^\//, '');
     if (!['index.html', 'assets/torquebox.js'].includes(path) && !/^assets\/images\/[\w.-]+$/.test(path)) {
@@ -63,7 +63,9 @@ test('customer can see BRL conversion, create Pix and receive verified confirmat
     await page.locator('#main-atc-btn').click();
     assert.equal(await page.locator('#cart-counter').textContent(), '1');
     await page.locator('#open-pix-checkout').click();
-    await page.waitForFunction(() => document.getElementById('pix-brl-total').textContent.includes('162,89'));
+    await page.waitForFunction(() => !document.getElementById('pix-generate').disabled);
+    assert.match(await page.locator('#pix-modal').innerText(), /\$29\.95/);
+    assert.doesNotMatch(await page.locator('#pix-modal').innerText(), /R\$\s*162,89|Estimated Pix total/);
     assert.deepEqual(requestedCart, { '2_bottles': 1 });
     await page.locator('input[name="name"]').fill('Alex Walker');
     await page.locator('input[name="email"]').fill('alex@example.com');
@@ -73,6 +75,7 @@ test('customer can see BRL conversion, create Pix and receive verified confirmat
     await page.locator('input[name="postalCode"]').fill('90001');
     await page.locator('#pix-generate').click();
     await page.waitForFunction(() => document.getElementById('pix-order-status').textContent.includes('Payment confirmed!'));
+    assert.doesNotMatch(await page.locator('#pix-modal').innerText(), /R\$\s*162,89/);
     assert.equal(await page.locator('#cart-counter').isVisible(), false);
     assert.equal(new URL(page.url()).host, `127.0.0.1:${server.address().port}`);
   } finally {
