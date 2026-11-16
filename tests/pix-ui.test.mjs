@@ -74,7 +74,11 @@ test('customer sees USD only, generates Pix and receives confirmation without le
     await page.locator('input[name="state"]').fill('CA');
     await page.locator('input[name="postalCode"]').fill('90001');
     await page.locator('#pix-generate').click();
-    await page.waitForFunction(() => document.getElementById('pix-order-status').textContent.includes('Payment confirmed!'));
+    await page.locator('#pix-success').waitFor({ state: 'visible' });
+    assert.match(await page.locator('#pix-success').innerText(), /Thank you for your order!/);
+    assert.match(await page.locator('#pix-success').innerText(), /within 7 days of payment confirmation/i);
+    assert.match(await page.locator('#pix-success-order').innerText(), /aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa/);
+    assert.equal(await page.locator('#pix-pending').isVisible(), false);
     assert.doesNotMatch(await page.locator('#pix-modal').innerText(), /R\$\s*162,89/);
     assert.equal(await page.locator('#cart-counter').isVisible(), false);
     assert.equal(new URL(page.url()).host, `127.0.0.1:${server.address().port}`);
