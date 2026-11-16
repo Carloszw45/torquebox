@@ -247,6 +247,7 @@
   async function loadPixEstimate() {
     pixSubmit.disabled = true;
     pixError.textContent = '';
+    byId('pix-usd-total').textContent = byId('drawer-total').textContent;
     byId('pix-brl-total').textContent = 'Checking current exchange rate…';
     byId('pix-rate-info').textContent = 'The final amount is calculated when the Pix charge is created.';
     // Do not allow a changed cart to use a stale quote.
