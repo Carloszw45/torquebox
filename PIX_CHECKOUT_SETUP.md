@@ -2,6 +2,14 @@
 
 O site **torque-box.com** mostra produtos QIFOR com preços em reais e cobra por meio da API da Pixou, sem redirecionamento. O Pix é criado e confirmado pelo servidor: o navegador nunca recebe a chave privada.
 
+## Restauração em 20/11/2026
+
+A versão anterior em português e BRL foi restaurada a partir do commit `50b1db37aba699ddc307c8bf51219a1c1f46da82`, incluindo o carrinho com quantidades e o checkout integrado da Pixou. O fluxo da BravoPay foi removido da versão ativa.
+
+Os seis testes de regras e API passaram. Na conferência em produção, o orçamento Pix retornou R$ 69,90 para o kit de dois frascos e habilitou o formulário. A tentativa de gerar uma cobrança com dados fictícios retornou HTTP 502, sem apresentar QR Code; nenhum pagamento foi efetuado. Uma requisição inválida confirmou que a validação da UF continua funcionando no servidor. O estado da eventual cobrança criada deve ser consultado na operadora antes de repetir esse teste.
+
+O acesso aos registros da Cloudflare ficou bloqueado por falha no login Google (`Unable to sign in`). A geração real do Pix continua pendente de diagnóstico; a restauração da interface não comprova o recebimento de pagamentos.
+
 ## Preços configurados (valores preliminares)
 - 1 frasco de 120 mL: R$ 39,90 + R$ 9,90 de frete = R$ 49,80.
 - Kit de 2: R$ 69,90 com frete grátis.
