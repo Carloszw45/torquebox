@@ -1,4 +1,8 @@
-// Public, merchant-configured offers. Card details are collected by BravoPay.
+// BravoPay is paused following the provider's support response. These public
+// offers are retained for reference; they must not receive customer traffic.
+export const CHECKOUT_ENABLED = false;
+export const CHECKOUT_UNAVAILABLE_MESSAGE = 'Checkout is temporarily unavailable. Please check back soon.';
+
 export const CHECKOUT_OFFERS = Object.freeze({
   '1_bottle': Object.freeze({
     bottles: 1, currency: 'USD', subtotalCents: 1995, shippingCents: 499, totalCents: 2494,

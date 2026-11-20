@@ -1,4 +1,4 @@
-import { CHECKOUT_OFFERS, getCheckoutOffer } from './checkout-offers.js?v=20261120';
+import { CHECKOUT_ENABLED, CHECKOUT_UNAVAILABLE_MESSAGE, CHECKOUT_OFFERS, getCheckoutOffer } from './checkout-offers.js?v=20261120-paused';
 
 (() => {
   const byId = (id) => document.getElementById(id);
@@ -102,7 +102,12 @@ import { CHECKOUT_OFFERS, getCheckoutOffer } from './checkout-offers.js?v=202611
     byId('drawer-subtotal').textContent = formatPrice(subtotal);
     byId('drawer-shipping').textContent = shipping.label;
     byId('drawer-total').textContent = formatPrice(subtotal + shipping.cost);
-    byId('checkout-button').disabled = !getCheckoutOffer(cart);
+    byId('checkout-button').disabled = !CHECKOUT_ENABLED || !getCheckoutOffer(cart);
+    byId('checkout-button').textContent = CHECKOUT_ENABLED ? 'Continue to secure payment' : 'Checkout temporarily unavailable';
+    byId('checkout-status').textContent = CHECKOUT_ENABLED
+      ? 'Continue to secure payment in this tab.' : CHECKOUT_UNAVAILABLE_MESSAGE;
+    byId('payment-availability').hidden = CHECKOUT_ENABLED;
+    byId('payment-availability').textContent = CHECKOUT_ENABLED ? '' : CHECKOUT_UNAVAILABLE_MESSAGE;
   }
 
   function setCartQuantity(id, newQuantity) {
@@ -202,6 +207,10 @@ import { CHECKOUT_OFFERS, getCheckoutOffer } from './checkout-offers.js?v=202611
   byId('main-atc-btn').addEventListener('click', addToCart);
   byId('sticky-atc-btn').addEventListener('click', addToCart);
   byId('checkout-button').addEventListener('click', () => {
+    if (!CHECKOUT_ENABLED) {
+      byId('checkout-status').textContent = CHECKOUT_UNAVAILABLE_MESSAGE;
+      return;
+    }
     const offer = getCheckoutOffer(cart);
     if (!offer) {
       byId('checkout-status').textContent = 'Choose one pack to continue.';
