@@ -5,17 +5,17 @@ import {
 import { saveVerifiedStatus, tokenMatches } from '../../_lib/orders.js';
 
 export async function onRequestPost({ request, env }) {
-  if (!checkoutIsConfigured(env)) return responseJson({ error: 'Checkout is unavailable.' }, 503);
+  if (!checkoutIsConfigured(env)) return responseJson({ error: 'O pagamento Pix está indisponível.' }, 503);
   try {
     requireSameOrigin(request);
     const { orderId, accessToken } = await readSmallJson(request);
     if (!/^[a-f0-9-]{36}$/i.test(orderId ?? '')) {
-      return responseJson({ error: 'Order not found.' }, 404);
+      return responseJson({ error: 'Pedido não encontrado.' }, 404);
     }
     const order = await env.TORQUEBOX_DB.prepare(`SELECT id, status, access_token_hash,
       pixou_tx_id, brl_total_cents FROM torque_orders WHERE id = ?`).bind(orderId).first();
     if (!order || !await tokenMatches(accessToken, order.access_token_hash)) {
-      return responseJson({ error: 'Order not found.' }, 404);
+      return responseJson({ error: 'Pedido não encontrado.' }, 404);
     }
 
     let status = order.status;
