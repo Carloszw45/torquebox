@@ -15,7 +15,9 @@ test('kits de 2 e 3 frascos têm frete grátis, cobrança em reais', () => {
   assert.equal(priceCart({ '2_bottles': 1 }).totalBrlCents, 6990);
   assert.equal(priceCart({ '3_bottles': 1 }).totalBrlCents, 9490);
   assert.equal(priceCart({ '1_bottle': 1, '2_bottles': 1 }).shippingBrlCents, 0);
-  assert.equal(priceCart({ '1_bottle': 2 }).shippingBrlCents, 0);
+  // R$ 79,80 is below the legacy free-shipping threshold of R$ 79,90.
+  assert.equal(priceCart({ '1_bottle': 2 }).shippingBrlCents, 990);
+  assert.equal(priceCart({ '1_bottle': 3 }).shippingBrlCents, 0);
 });
 
 test('servidor recusa valores inventados e quantidade irregular', () => {

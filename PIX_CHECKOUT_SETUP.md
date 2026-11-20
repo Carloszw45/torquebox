@@ -1,4 +1,10 @@
-# TORQUEBOX — checkout Pix em reais (Brasil)
+# TORQUEBOX — histórico do checkout Pix em reais
+
+**Estado atual (19/11/2026):** a vitrine voltou para inglês e USD: 1 frasco US$ 19,95, 2 frascos US$ 29,95 e 3 frascos US$ 38,95. O frete nos EUA custa US$ 4,99 para pedidos apenas com frascos avulsos; os kits de 2 ou 3 frascos e subtotais acima de US$ 40 têm frete grátis. O carrinho usa uma chave própria para USD.
+
+A interface Pix em BRL foi removida da vitrine. O botão de checkout permanece desabilitado até integrar e validar o novo gateway em USD. As Functions abaixo são legadas e mantêm as regras brasileiras para compatibilidade com pedidos anteriores. Não conecte a vitrine USD a essas rotas de criação de cobrança.
+
+## Configuração anterior (Brasil)
 
 O site **torque-box.com** mostra produtos QIFOR com preços em reais e cobra por meio da API da Pixou, sem redirecionamento. O Pix é criado e confirmado pelo servidor: o navegador nunca recebe a chave privada.
 
