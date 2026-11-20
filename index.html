@@ -318,17 +318,12 @@
 <!-- QUANTITY & ADD TO CART CTA -->
 <div class="flex flex-col gap-space-sm pt-space-xs">
 <div class="flex items-center gap-space-sm">
-<!-- Stepper -->
-<div class="flex items-center bg-surface-container-low rounded-lg p-1 shadow-inner border border-outline-variant/30">
-<button aria-label="Decrease quantity" class="w-10 h-10 flex items-center justify-center font-headline-sm text-headline-sm text-on-surface hover:bg-surface-container-lowest rounded transition-colors active:scale-95" id="qty-minus" type="button">-</button>
-<input aria-label="Pack quantity" class="w-12 text-center bg-transparent font-headline-sm text-headline-sm text-primary font-bold focus:outline-none" id="qty-input" readonly="" type="text" value="1">
-<button aria-label="Increase quantity" class="w-10 h-10 flex items-center justify-center font-headline-sm text-headline-sm text-on-surface hover:bg-surface-container-lowest rounded transition-colors active:scale-95" id="qty-plus" type="button">+</button>
-</div>
 <!-- Main Add To Cart Primary Trigger -->
 <button class="flex-1 bg-secondary-container hover:bg-secondary text-on-secondary font-label-lg text-label-lg uppercase tracking-wider py-4 px-space-md rounded-lg shadow-md hover:shadow-lg transition-all flex flex-col items-center justify-center text-center cursor-pointer active:scale-[0.99]" id="main-atc-btn" type="button">
 <span class="font-bold flex items-center gap-2"><span aria-hidden="true" class="material-symbols-outlined text-[20px]">shopping_cart</span><span id="atc-btn-text">ADD TO CART — $29.95</span></span>
 </button>
 </div>
+<p class="text-center font-body-sm text-body-sm text-on-surface-variant">One pack per order. Choose 1, 2 or 3 bottles.</p>
 <a class="flex items-center justify-center gap-1.5 text-on-surface-variant hover:text-primary font-spec-code text-spec-code" href="#faq">
 <span aria-hidden="true" class="material-symbols-outlined text-[16px] text-secondary-container">local_shipping</span>
 <span>US shipping and returns</span>
@@ -713,7 +708,7 @@
 <span class="faq-icon material-symbols-outlined text-secondary-container transition-transform duration-300">expand_more</span>
 </button>
 <div class="faq-content hidden p-space-md pt-0 text-on-surface-variant font-body-md text-body-md leading-relaxed border-t border-surface-container/50 mt-1">
-                Confirm shipping availability and delivery time for your ZIP code before ordering. US shipping is $4.99 for orders containing only single-bottle packs. The 2- and 3-bottle packs include free US shipping, as do orders with a product subtotal over $40. For returns, see TorqueBox’s return policy.
+Confirm shipping availability and delivery time for your ZIP code before ordering. US shipping is $4.99 for the 1-bottle pack. The 2- and 3-bottle packs include free US shipping. Each order contains one pack. For returns, see TorqueBox’s return policy.
               </div>
 </div>
 </div>
@@ -803,6 +798,7 @@
 </div>
 <div class="hidden bg-secondary-container/10 p-space-sm text-center border-b border-secondary-container/20" id="drawer-volume">
 <p class="font-spec-code text-spec-code text-secondary font-bold" id="drawer-bottle-summary"></p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">One pack per order. Adding another pack replaces your selection.</p>
 </div>
 <div class="flex-1 overflow-y-auto p-space-md">
 <p class="py-space-md text-center text-on-surface-variant" id="cart-empty">Your cart is empty.</p>
@@ -821,12 +817,12 @@
 <span>Total (USD)</span>
 <span id="drawer-total">$0.00</span>
 </div>
-<button class="mt-2 w-full rounded-lg bg-secondary-container px-4 py-3 text-on-secondary-container font-bold uppercase shadow-sm transition hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed" id="checkout-button" type="button" disabled aria-describedby="checkout-status">Checkout</button>
-<p class="text-center font-body-sm text-body-sm text-on-surface-variant" id="checkout-status" role="status">Checkout is temporarily unavailable. Please check back soon.</p>
+<button class="mt-2 w-full rounded-lg bg-secondary-container px-4 py-3 text-on-secondary-container font-bold uppercase shadow-sm transition hover:brightness-110 disabled:opacity-60 disabled:cursor-not-allowed" id="checkout-button" type="button" disabled aria-describedby="checkout-status">Continue to secure payment</button>
+<p class="text-center font-body-sm text-body-sm text-on-surface-variant" id="checkout-status" role="status">Pay securely by card with BravoPay. Continue in this tab.</p>
 </div>
 </div>
 </div>
-<!-- PIX CHECKOUT: payment form remains on torque-box.com; card details are never collected. -->
+<!-- Cart preview. Card payment is completed on the selected BravoPay offer. -->
 <template id="cart-item-template">
 <article class="hidden flex items-start gap-space-sm bg-surface-container-low p-space-sm rounded-lg border border-outline-variant/30">
 <div class="bundle-photo w-20 h-20 shrink-0 rounded bg-white overflow-hidden" data-item-photo role="img"></div>
@@ -842,10 +838,9 @@
 </div>
 <div class="flex flex-wrap items-center gap-2 justify-between mt-2">
 <span class="font-headline-sm text-headline-sm text-primary font-bold" data-item-price></span>
-<div class="flex items-center bg-surface-container rounded">
-<button class="w-8 h-8 hover:bg-surface-container-high disabled:opacity-40" data-cart-action="decrease" type="button">−</button>
+<div class="flex items-center gap-1 bg-surface-container rounded px-2 py-1">
 <span class="min-w-6 px-1 text-center font-spec-code text-spec-code" data-item-quantity></span>
-<button class="w-8 h-8 hover:bg-surface-container-high" data-cart-action="increase" type="button">+</button>
+<span class="font-spec-code text-spec-code">pack</span>
 </div>
 </div>
 </div>
@@ -879,5 +874,5 @@
 </div>
 </div>
 </div>
-<script src="assets/torquebox.js?v=20261119-usd-en"></script>
+<script type="module" src="assets/torquebox.js?v=20261120-bravopay"></script>
 </body></html>

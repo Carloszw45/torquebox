@@ -1,37 +1,32 @@
+import { CHECKOUT_OFFERS, getCheckoutOffer } from './checkout-offers.js?v=20261120';
+
 (() => {
   const byId = (id) => document.getElementById(id);
   const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
   const formatPrice = (cents) => money.format(cents / 100);
-  const cartKey = 'torquebox-cart-usd-v1';
+  const cartKey = 'torquebox-cart-usd-one-pack-v1';
   const bottlePhoto = 'assets/images/qifor-wind-shield-pro.jpg';
-  const shippingCharge = 499;
-  const priorityThreshold = 4000;
   const bundles = Array.from(document.querySelectorAll('.bundle-card'), (card) => {
     const radio = card.querySelector('input[name="bundle_selection"]');
     return {
       id: radio.value,
       title: card.dataset.title,
       bottles: Number(card.dataset.bottles),
-      price: Math.round(Number(card.dataset.price) * 100),
+      price: CHECKOUT_OFFERS[radio.value].subtotalCents,
       shipping: card.dataset.shipping,
       card,
       radio,
     };
   });
 
-  const quantityInput = byId('qty-input');
-  const quantityMinus = byId('qty-minus');
-  const quantityPlus = byId('qty-plus');
   let selectedBundle = bundles.find((bundle) => bundle.radio.checked) ?? bundles[0];
-  let quantity = Number(quantityInput.value);
 
   function readCart() {
     try {
       const saved = JSON.parse(localStorage.getItem(cartKey));
-      return Object.fromEntries(bundles.flatMap(({ id }) => {
-        const savedQuantity = saved?.[id];
-        return Number.isSafeInteger(savedQuantity) && savedQuantity > 0 ? [[id, savedQuantity]] : [];
-      }));
+      if (!getCheckoutOffer(saved)) return {};
+      const [id] = Object.keys(saved);
+      return { [id]: 1 };
     } catch {
       return {};
     }
@@ -41,14 +36,8 @@
 
   function shippingFor(subtotal, includedBundles) {
     if (subtotal === 0) return { cost: 0, label: '' };
-    if (subtotal > priorityThreshold) return { cost: 0, label: 'Free US shipping' };
-    if (includedBundles.some((bundle) => bundle.shipping === 'priority')) {
-      return { cost: 0, label: 'Free US shipping' };
-    }
-    if (includedBundles.some((bundle) => bundle.shipping === 'standard')) {
-      return { cost: 0, label: 'Free standard US shipping' };
-    }
-    return { cost: shippingCharge, label: formatPrice(shippingCharge) };
+    const shippingCents = CHECKOUT_OFFERS[includedBundles[0].id].shippingCents;
+    return { cost: shippingCents, label: shippingCents ? formatPrice(shippingCents) : 'Free US shipping' };
   }
 
   function showBottlePhoto(container, count) {
@@ -64,7 +53,7 @@
   }
 
   function updateSelection() {
-    const price = quantity * selectedBundle.price;
+    const price = selectedBundle.price;
     const shipping = shippingFor(price, [selectedBundle]);
     for (const bundle of bundles) {
       const active = bundle === selectedBundle;
@@ -74,9 +63,6 @@
       bundle.card.classList.toggle('shadow-sm', !active);
       bundle.card.classList.toggle('border-outline-variant/30', !active);
     }
-    quantityInput.value = quantity;
-    quantityMinus.disabled = quantity <= 1;
-    quantityPlus.disabled = quantity >= 20;
     byId('selection-volume').textContent = `${selectedBundle.bottles} × 120 mL (4.05 fl oz each)`;
     byId('atc-btn-text').textContent = `ADD TO CART — ${formatPrice(price)} USD`;
     byId('sticky-price').textContent = formatPrice(price);
@@ -101,7 +87,6 @@
       subtotal += linePrice;
       bundle.row.querySelector('[data-item-price]').textContent = formatPrice(linePrice);
       bundle.row.querySelector('[data-item-quantity]').textContent = kitQuantity;
-      bundle.row.querySelector('[data-cart-action="decrease"]').disabled = kitQuantity === 1;
     }
 
     const shipping = shippingFor(subtotal, includedBundles);
@@ -117,11 +102,11 @@
     byId('drawer-subtotal').textContent = formatPrice(subtotal);
     byId('drawer-shipping').textContent = shipping.label;
     byId('drawer-total').textContent = formatPrice(subtotal + shipping.cost);
+    byId('checkout-button').disabled = !getCheckoutOffer(cart);
   }
 
   function setCartQuantity(id, newQuantity) {
-    if (newQuantity > 0) cart[id] = newQuantity;
-    else delete cart[id];
+    cart = newQuantity > 0 ? { [id]: 1 } : {};
     try {
       localStorage.setItem(cartKey, JSON.stringify(cart));
     } catch {
@@ -143,29 +128,14 @@
     row.querySelector('[data-item-title]').textContent = bundle.title;
     showBottlePhoto(row.querySelector('[data-item-photo]'), bundle.bottles);
 
-    const increase = row.querySelector('[data-cart-action="increase"]');
-    const decrease = row.querySelector('[data-cart-action="decrease"]');
     const remove = row.querySelector('[data-cart-action="remove"]');
-    increase.setAttribute('aria-label', `Increase quantity for ${bundle.title}`);
-    decrease.setAttribute('aria-label', `Decrease quantity for ${bundle.title}`);
     remove.setAttribute('aria-label', `Remove ${bundle.title} from cart`);
-    increase.addEventListener('click', () => setCartQuantity(bundle.id, cart[bundle.id] + 1));
-    decrease.addEventListener('click', () => setCartQuantity(bundle.id, cart[bundle.id] - 1));
     remove.addEventListener('click', () => {
       setCartQuantity(bundle.id, 0);
       byId('cart-modal').querySelector('button[data-close-modal]').focus();
     });
     byId('cart-items').append(row);
   }
-
-  quantityMinus.addEventListener('click', () => {
-    quantity = Math.max(1, quantity - 1);
-    updateSelection();
-  });
-  quantityPlus.addEventListener('click', () => {
-    quantity = Math.min(20, quantity + 1);
-    updateSelection();
-  });
 
   const searchInput = byId('search-input');
   let activeModal;
@@ -220,9 +190,9 @@
   let toastTimer;
   function addToCart(event) {
     const { id, title } = selectedBundle;
-    setCartQuantity(id, (cart[id] ?? 0) + quantity);
+    setCartQuantity(id, 1);
     const toast = byId('toast');
-    byId('toast-msg').textContent = `${title} (${quantity}×)`;
+    byId('toast-msg').textContent = `${title} (1 pack)`;
     toast.classList.remove('opacity-0', 'translate-y-[-10px]');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.add('opacity-0', 'translate-y-[-10px]'), 3000);
@@ -231,6 +201,14 @@
 
   byId('main-atc-btn').addEventListener('click', addToCart);
   byId('sticky-atc-btn').addEventListener('click', addToCart);
+  byId('checkout-button').addEventListener('click', () => {
+    const offer = getCheckoutOffer(cart);
+    if (!offer) {
+      byId('checkout-status').textContent = 'Choose one pack to continue.';
+      return;
+    }
+    window.location.assign(offer.url);
+  });
   window.addEventListener('storage', (event) => {
     if (event.key === cartKey || event.key === null) {
       cart = readCart();
