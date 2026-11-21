@@ -403,6 +403,26 @@
     });
   });
 
+  // Compact feedback carousel beneath the purchase controls.
+  const feedbackSlides = Array.from(document.querySelectorAll('.checkout-feedback-slide'));
+  const feedbackCounter = byId('checkout-feedback-count');
+  if (feedbackSlides.length) {
+    let feedbackIndex = 0;
+    const showFeedback = (index) => {
+      feedbackIndex = (index + feedbackSlides.length) % feedbackSlides.length;
+      feedbackSlides.forEach((slide, slideIndex) => {
+        const selected = slideIndex === feedbackIndex;
+        slide.classList.toggle('hidden', !selected);
+        slide.classList.toggle('flex', selected);
+        slide.setAttribute('aria-hidden', String(!selected));
+      });
+      if (feedbackCounter) feedbackCounter.textContent = (feedbackIndex + 1) + ' / ' + feedbackSlides.length;
+    };
+    byId('checkout-feedback-prev')?.addEventListener('click', () => showFeedback(feedbackIndex - 1));
+    byId('checkout-feedback-next')?.addEventListener('click', () => showFeedback(feedbackIndex + 1));
+    showFeedback(0);
+  }
+
   const reviewFilters = document.querySelectorAll('.review-filter-btn');
   const reviewCards = document.querySelectorAll('.review-card');
   reviewFilters.forEach((button) => {
