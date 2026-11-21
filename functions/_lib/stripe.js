@@ -74,8 +74,16 @@ export async function stripeApi(env, path, options = {}) {
   });
   const result = await response.json().catch(() => ({}));
   if (!response.ok) {
-    console.error(JSON.stringify({ action: 'stripe_api_error', status: response.status, type: result.error?.type }));
-    throw new Error('Stripe is temporarily unavailable. Please try again.');
+    const diagnostic = {
+      status: response.status,
+      type: String(result.error?.type || 'unknown').slice(0, 80),
+      code: String(result.error?.code || '').slice(0, 80),
+      param: String(result.error?.param || '').slice(0, 120),
+    };
+    console.error(JSON.stringify({ action: 'stripe_api_error', ...diagnostic }));
+    const error = new Error('Stripe API request failed.');
+    error.stripeDiagnostic = diagnostic;
+    throw error;
   }
   return result;
 }

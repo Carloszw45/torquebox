@@ -5,6 +5,7 @@ import {
 export async function onRequestPost({ request, env }) {
   if (!configuredForTests(env)) return json({ error: 'Test checkout is not configured.' }, 503);
   let orderId;
+  let stage = 'validate_cart';
   try {
     const origin = sameOrigin(request);
     const input = await readCartRequest(request);
@@ -12,6 +13,7 @@ export async function onRequestPost({ request, env }) {
     orderId = crypto.randomUUID();
     const now = new Date().toISOString();
 
+    stage = 'insert_order';
     await env.TORQUEBOX_DB.prepare(`INSERT INTO stripe_orders
       (id, status, items_json, usd_subtotal_cents, usd_shipping_cents,
        usd_total_cents, created_at, updated_at)
@@ -46,13 +48,16 @@ export async function onRequestPost({ request, env }) {
     params.set('shipping_options[0][shipping_rate_data][delivery_estimate][maximum][unit]', 'business_day');
     params.set('shipping_options[0][shipping_rate_data][delivery_estimate][maximum][value]', '15');
 
+    stage = 'create_stripe_session';
     const session = await stripeApi(env, 'checkout/sessions', {
       body: params.toString(), idempotencyKey: `torquebox-${orderId}`,
     });
+    stage = 'validate_stripe_session';
     if (!/^cs_test_[A-Za-z0-9_]+$/.test(session.id || '')
       || !session.client_secret || session.currency !== 'usd' || session.livemode !== false) {
       throw new Error('Stripe returned an invalid test checkout session.');
     }
+    stage = 'save_stripe_session';
     await env.TORQUEBOX_DB.prepare(`UPDATE stripe_orders SET status = 'pending',
       stripe_session_id = ?, updated_at = ? WHERE id = ?`).bind(
       session.id, new Date().toISOString(), orderId,
@@ -68,7 +73,15 @@ export async function onRequestPost({ request, env }) {
     }
     const inputError = error instanceof SyntaxError
       || /^(Invalid|Select|Maximum|Expected|Request is too large)/.test(error.message);
-    return json({ error: inputError ? 'Please check your cart and try again.'
-      : 'Checkout is unavailable. Please try again later.' }, inputError ? 400 : 503);
+    // This extra detail is intentionally limited to the isolated Stripe test branch.
+    // It exposes only a safe failure stage and Stripe error classification, never credentials.
+    const stripeDetail = error?.stripeDiagnostic;
+    const stripeClass = stripeDetail
+      ? ` / Stripe ${stripeDetail.status} ${stripeDetail.code || stripeDetail.type}${stripeDetail.param ? ` (${stripeDetail.param})` : ''}`
+      : '';
+    const publicMessage = inputError ? 'Please check your cart and try again.'
+      : 'Checkout is unavailable. Please try again later.';
+    return json({ error: `${publicMessage} [Test diagnostic: ${stage}${stripeClass}]` },
+      inputError ? 400 : 503);
   }
 }
