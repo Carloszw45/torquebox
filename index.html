@@ -739,6 +739,63 @@
       <h2 class="font-headline-lg text-headline-lg uppercase text-primary tracking-tight mt-2">Reviews &amp; Experiences</h2>
       <p class="font-body-md text-body-md text-on-surface-variant mt-3">Hear from drivers who shared their experience with windshield care.</p>
     </div>
+    <!-- Verified customer feedback form -->
+    <section id="write-review-panel" class="scroll-mt-28 rounded-2xl bg-white border border-[#e7e7e9] shadow-[0_6px_22px_rgba(0,0,0,0.06)] p-4 sm:p-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-[#d35f00]">Your Experience Matters</span>
+          <h3 class="text-xl sm:text-2xl font-extrabold text-[#1b1b1b] mt-1">Bought QIFOR? Share Your Review.</h3>
+          <p class="text-sm sm:text-base text-[#59616e] mt-1">Verified customers can share feedback and up to two real photos.</p>
+        </div>
+        <button type="button" id="write-review-toggle" aria-expanded="false" aria-controls="customer-review-form" class="shrink-0 rounded-xl bg-[#fc7200] hover:bg-[#e66800] text-white px-5 py-3.5 font-extrabold shadow-[0_5px_14px_rgba(252,114,0,0.18)]">Write a Review</button>
+      </div>
+      <form id="customer-review-form" class="hidden mt-6 pt-5 border-t border-[#eeeeef] flex flex-col gap-4" enctype="multipart/form-data">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <label class="flex flex-col gap-2 text-sm font-bold text-[#1b1b1b]" for="review-name">Your name
+            <input id="review-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="50" placeholder="e.g. Alex M." class="w-full rounded-lg border border-[#d6d6d8] p-3 text-base font-normal text-[#1b1b1b] focus:border-[#fd7700] focus:ring-[#fd7700]">
+          </label>
+          <div class="flex flex-col gap-2">
+            <span class="text-sm font-bold text-[#1b1b1b]">Your rating</span>
+            <input id="review-rating" name="rating" type="hidden" value="5">
+            <div class="flex items-center gap-1" role="group" aria-label="Select your rating from 1 to 5 stars">
+              <button type="button" data-review-rating="1" aria-label="1 star" class="text-[30px] leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#fd7700] rounded">★</button>
+              <button type="button" data-review-rating="2" aria-label="2 stars" class="text-[30px] leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#fd7700] rounded">★</button>
+              <button type="button" data-review-rating="3" aria-label="3 stars" class="text-[30px] leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#fd7700] rounded">★</button>
+              <button type="button" data-review-rating="4" aria-label="4 stars" class="text-[30px] leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#fd7700] rounded">★</button>
+              <button type="button" data-review-rating="5" aria-label="5 stars" class="text-[30px] leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#fd7700] rounded">★</button>
+            </div>
+          </div>
+        </div>
+        <label class="flex flex-col gap-2 text-sm font-bold text-[#1b1b1b]" for="review-category">What would you like to highlight?
+          <select id="review-category" name="category" class="w-full rounded-lg border border-[#d6d6d8] p-3 text-base font-normal text-[#1b1b1b] focus:border-[#fd7700] focus:ring-[#fd7700]">
+            <option value="general">My overall experience</option>
+            <option value="oil">Oily film removal</option>
+            <option value="night">Night driving</option>
+            <option value="day">Daytime visibility</option>
+            <option value="cold">Cold-weather use</option>
+            <option value="bundle">Value pack</option>
+          </select>
+        </label>
+        <label class="flex flex-col gap-2 text-sm font-bold text-[#1b1b1b]" for="review-body">Your experience
+          <textarea id="review-body" name="body" rows="4" required minlength="20" maxlength="1200" placeholder="Tell other drivers how you used the product and what you noticed…" class="w-full rounded-lg border border-[#d6d6d8] p-3 text-base font-normal leading-relaxed text-[#1b1b1b] focus:border-[#fd7700] focus:ring-[#fd7700]"></textarea>
+        </label>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-bold text-[#1b1b1b]" for="review-photos">Add up to 2 photos (optional)</label>
+          <input id="review-photos" name="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple class="block w-full text-sm text-[#4d5158] file:mr-4 file:rounded-lg file:border-0 file:bg-[#fff1e5] file:px-4 file:py-2.5 file:font-bold file:text-[#ad5100] hover:file:bg-[#ffe4ca]">
+          <div id="review-photo-preview" class="flex gap-2 flex-wrap" aria-live="polite"></div>
+          <p class="text-xs text-[#68707c]">Photos are resized before upload. Do not include private information in pictures.</p>
+        </div>
+        <label class="flex gap-2 items-start text-sm text-[#46505c] leading-relaxed">
+          <input type="checkbox" name="publishConsent" value="yes" required class="mt-1 rounded border-[#a8abb0] text-[#fd7700] focus:ring-[#fd7700]">
+          <span>I confirm this is my own experience and agree that TorqueBox may publicly display my name, review and attached photos.</span>
+        </label>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+          <button type="submit" id="submit-customer-review" class="rounded-xl bg-[#fc7200] hover:bg-[#e66800] text-white font-extrabold px-6 py-3.5 disabled:opacity-50">Publish My Review</button>
+          <p id="review-form-status" class="text-sm text-[#59616e]" role="status" aria-live="polite"></p>
+        </div>
+        <p class="text-xs text-[#77808a]">To protect authentic feedback, a completed purchase in this browser is required. One review per order.</p>
+      </form>
+    </section>
     <div class="flex flex-wrap items-center gap-space-xs font-label-md text-label-md" id="review-filters">
 <button class="review-filter-btn bg-primary text-on-primary font-bold px-space-md py-1.5 rounded-full transition-all" data-tag="all" type="button">All Reviews (6)</button>
 <button class="review-filter-btn bg-surface-container text-on-surface hover:bg-surface-container-high px-space-md py-1.5 rounded-full transition-all" data-tag="night" type="button">Night Driving (2)</button>
@@ -815,9 +872,10 @@
   </div>
 </article>
     </div>
+    <button id="review-load-more" type="button" class="hidden self-center rounded-xl border border-[#d7d7da] px-6 py-3 text-sm font-bold text-[#202326] hover:bg-[#f6f6f7] disabled:opacity-50">Load More Customer Reviews</button>
     <div class="text-center border-t border-outline-variant/30 pt-space-md">
       <p class="font-body-md text-body-md text-on-surface-variant">Have your own experience with QIFOR Wind Shield Pro? We would love to hear it.</p>
-      <a href="mailto:suporte@torque-box.com?subject=TorqueBox%20product%20feedback" class="inline-flex mt-4 rounded-lg bg-primary text-on-primary font-bold px-space-md py-3 hover:opacity-90">Share Your Feedback</a>
+      <a href="#write-review-panel" class="inline-flex mt-4 rounded-lg bg-primary text-on-primary font-bold px-space-md py-3 hover:opacity-90">Write Your Review</a>
     </div>
   </div>
 </section>
@@ -1061,6 +1119,7 @@
 </div>
 <script src="https://js.stripe.com/v3/"></script>
 <script src="assets/torquebox.js?v=20261121-glass-compare-5"></script>
+<script src="assets/torquebox-reviews.js?v=20261121-live-reviews-1"></script>
 <script>
 (function () {
   const button = document.getElementById('mobile-menu-toggle');

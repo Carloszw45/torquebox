@@ -304,6 +304,10 @@
     try {
       const result = await stripeJson(`status?session_id=${encodeURIComponent(sessionId)}`);
       if (result.status === 'paid') {
+        // Keep this unguessable checkout session locally so only a confirmed buyer
+        // can publish one verified customer review on a later visit.
+        try { localStorage.setItem('torquebox:verified-checkout-session', sessionId); }
+        catch { /* Private browsing may disable local storage. */ }
         cart = {};
         try { localStorage.setItem(cartKey, '{}'); } catch { /* Storage is optional. */ }
         updateCart();
@@ -468,7 +472,7 @@
   });
 
   // Compact feedback carousel beneath the purchase controls.
-  const feedbackSlides = Array.from(document.querySelectorAll('.checkout-feedback-slide'));
+  let feedbackSlides = Array.from(document.querySelectorAll('.checkout-feedback-slide'));
   const feedbackCounter = byId('checkout-feedback-count');
   if (feedbackSlides.length) {
     let feedbackIndex = 0;
@@ -484,6 +488,11 @@
     };
     byId('checkout-feedback-prev')?.addEventListener('click', () => showFeedback(feedbackIndex - 1));
     byId('checkout-feedback-next')?.addEventListener('click', () => showFeedback(feedbackIndex + 1));
+    window.torqueBoxRefreshFeedback = () => {
+      feedbackSlides = Array.from(document.querySelectorAll('.checkout-feedback-slide'));
+      feedbackSlides.forEach((slide, i) => slide.setAttribute('aria-label', (i + 1) + ' of ' + feedbackSlides.length));
+      showFeedback(feedbackIndex);
+    };
     showFeedback(0);
   }
 
@@ -665,7 +674,7 @@
   }
 
   const reviewFilters = document.querySelectorAll('.review-filter-btn');
-  const reviewCards = document.querySelectorAll('.review-card');
+  // Cards are queried on each click because verified customer reviews arrive later.
   reviewFilters.forEach((button) => {
     button.addEventListener('click', () => {
       reviewFilters.forEach((filter) => {
@@ -675,7 +684,7 @@
       button.classList.add('bg-primary', 'text-on-primary', 'font-bold');
       button.classList.remove('bg-surface-container', 'text-on-surface');
       const tag = button.dataset.tag;
-      reviewCards.forEach((card) => {
+      document.querySelectorAll('.review-card').forEach((card) => {
         card.style.display = tag === 'all' || card.dataset.category === tag ? 'flex' : 'none';
       });
     });
