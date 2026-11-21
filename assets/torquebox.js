@@ -234,6 +234,8 @@
   const checkoutMessage = byId('stripe-message');
   const checkoutContainer = byId('stripe-checkout');
   const returnBanner = byId('stripe-return-banner');
+  const inAppBrowser = /Instagram|FBAN|FBAV|FB_IAB|TikTok|Snapchat|Twitter|;\s*wv\b/i.test(navigator.userAgent || '');
+  byId('checkout-browser-tip')?.classList.toggle('hidden', !inAppBrowser);
 
   function notice(message) {
     returnBanner.textContent = message;
@@ -261,8 +263,8 @@
       stripeClient = window.Stripe(config.publishableKey);
       stripeReady = true;
       checkoutStatus.textContent = config.mode === 'live'
-        ? 'Secure card checkout powered by Stripe'
-        : 'Secure card checkout • Stripe test mode • No real charges';
+        ? 'Secure checkout powered by Stripe'
+        : 'Secure checkout • Stripe test mode • No real charges';
     } catch {
       checkoutStatus.textContent = 'Secure checkout is not available yet. Please try again later.';
     }
