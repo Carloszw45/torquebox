@@ -102,20 +102,25 @@
 </div>
 </div>
 <div class="bg-surface-container-lowest">
-<div class="h-20 max-w-7xl mx-auto px-gutter-mobile lg:px-gutter flex items-center justify-between gap-space-md">
-<div class="flex items-center gap-space-md shrink-0">
-<a class="flex items-center gap-space-sm" href="#purchase-section">
-<img alt="TORQUEBOX Logo" class="h-8 w-auto object-contain" src="assets/images/imagem-01.png">
-<span class="font-headline-sm text-headline-sm uppercase tracking-tight text-primary font-bold hidden sm:inline-block">TORQUEBOX</span>
+<div class="relative h-20 max-w-7xl mx-auto px-gutter-mobile lg:px-gutter flex items-center justify-between gap-space-md">
+<div class="flex items-center shrink-0">
+<button type="button" id="mobile-menu-toggle" class="md:hidden w-10 h-10 inline-flex items-center justify-center rounded-lg text-[#202326] hover:bg-[#fff0e5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fd7700]" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-panel">
+<span class="material-symbols-outlined text-[30px]" aria-hidden="true" id="mobile-menu-icon">menu</span>
+</button>
+<a class="hidden md:flex items-center" href="#purchase-section" aria-label="TORQUEBOX home">
+<img alt="TORQUEBOX" class="h-7 w-auto object-contain" src="assets/branding/torquebox-wordmark.webp" width="1100" height="161">
 </a>
 </div>
-<nav class="hidden md:flex items-center gap-space-lg">
+<a class="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center" href="#purchase-section" aria-label="TORQUEBOX home">
+<img alt="TORQUEBOX" class="block w-[155px] max-w-[43vw] h-auto object-contain" src="assets/branding/torquebox-wordmark.webp" width="1100" height="161">
+</a>
+<nav class="hidden md:flex items-center gap-space-lg" aria-label="Main navigation">
 <a class="font-label-lg text-label-lg uppercase text-on-surface-variant hover:text-on-surface transition-colors" href="#purchase-section">Shop All</a>
 <a class="uppercase transition-colors text-secondary-container font-bold" href="#purchase-section">Glass Care</a>
 <a class="font-label-lg text-label-lg uppercase text-on-surface-variant hover:text-on-surface transition-colors" href="#product-gallery">Product Gallery</a>
 <a class="font-label-lg text-label-lg uppercase text-on-surface-variant hover:text-on-surface transition-colors" href="#purchase-section">Bundles</a>
 </nav>
-<div class="flex items-center gap-space-md shrink-0">
+<div class="flex items-center gap-space-sm md:gap-space-md shrink-0">
 <button aria-label="Search Products" class="p-space-xs text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center modal-trigger" data-modal="search-modal" type="button">
 <span aria-hidden="true" class="material-symbols-outlined text-[24px]">search</span>
 </button>
@@ -125,6 +130,17 @@
 </button>
 </div>
 </div>
+</div>
+<div id="mobile-nav-panel" class="absolute top-full left-0 right-0 z-50 hidden md:hidden border-t border-[#ececef] bg-white shadow-[0_18px_30px_rgba(20,20,20,0.16)]">
+<nav aria-label="Mobile navigation" class="mx-auto max-w-md px-4 py-3">
+<a href="#purchase-section" class="flex items-center justify-between rounded-xl px-3 py-3.5 font-semibold text-[15px] text-[#202326] hover:bg-[#fff2e7]"><span class="flex items-center gap-3"><span class="material-symbols-outlined text-[#ef7000]" aria-hidden="true">shopping_bag</span>Shop the Product</span><span class="material-symbols-outlined text-[#8a8a8a]" aria-hidden="true">chevron_right</span></a>
+<a href="#product-gallery" class="flex items-center justify-between rounded-xl px-3 py-3.5 font-semibold text-[15px] text-[#202326] hover:bg-[#fff2e7]"><span class="flex items-center gap-3"><span class="material-symbols-outlined text-[#ef7000]" aria-hidden="true">photo_library</span>Product Gallery</span><span class="material-symbols-outlined text-[#8a8a8a]" aria-hidden="true">chevron_right</span></a>
+<a href="#benefits-section" class="flex items-center justify-between rounded-xl px-3 py-3.5 font-semibold text-[15px] text-[#202326] hover:bg-[#fff2e7]"><span class="flex items-center gap-3"><span class="material-symbols-outlined text-[#ef7000]" aria-hidden="true">verified</span>Product Benefits</span><span class="material-symbols-outlined text-[#8a8a8a]" aria-hidden="true">chevron_right</span></a>
+<a href="#how-to-use" class="flex items-center justify-between rounded-xl px-3 py-3.5 font-semibold text-[15px] text-[#202326] hover:bg-[#fff2e7]"><span class="flex items-center gap-3"><span class="material-symbols-outlined text-[#ef7000]" aria-hidden="true">format_list_numbered</span>How to Use</span><span class="material-symbols-outlined text-[#8a8a8a]" aria-hidden="true">chevron_right</span></a>
+<a href="#reviews" class="flex items-center justify-between rounded-xl px-3 py-3.5 font-semibold text-[15px] text-[#202326] hover:bg-[#fff2e7]"><span class="flex items-center gap-3"><span class="material-symbols-outlined text-[#ef7000]" aria-hidden="true">reviews</span>Customer Reviews</span><span class="material-symbols-outlined text-[#8a8a8a]" aria-hidden="true">chevron_right</span></a>
+<a href="#faq" class="flex items-center justify-between rounded-xl px-3 py-3.5 font-semibold text-[15px] text-[#202326] hover:bg-[#fff2e7]"><span class="flex items-center gap-3"><span class="material-symbols-outlined text-[#ef7000]" aria-hidden="true">local_shipping</span>Shipping &amp; FAQ</span><span class="material-symbols-outlined text-[#8a8a8a]" aria-hidden="true">chevron_right</span></a>
+<div class="mt-2 border-t border-[#eeeeef] pt-3 px-3"><a href="support.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[#a84e00] hover:underline"><span class="material-symbols-outlined text-[19px]" aria-hidden="true">support_agent</span>Contact Support</a></div>
+</nav>
 </div>
 </header>
 <main class="w-full pt-28 bg-surface">
@@ -539,7 +555,7 @@
   </div>
 </section>
 <!-- VISUAL PROOF & BENEFITS -->
-<section class="w-full bg-surface-container-lowest py-space-xl">
+<section id="benefits-section" class="w-full bg-surface-container-lowest py-space-xl scroll-mt-28">
 <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter flex flex-col gap-space-xl">
 <div class="text-center max-w-2xl mx-auto flex flex-col gap-space-xs">
 <span class="font-spec-code text-spec-code text-secondary-container uppercase tracking-widest font-bold">Automotive Cleaning</span>
@@ -638,7 +654,7 @@
 </div>
 </section>
 <!-- 3-STEP APPLICATION -->
-<section class="w-full py-space-xl bg-surface">
+<section id="how-to-use" class="w-full py-space-xl bg-surface scroll-mt-28">
 <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter flex flex-col gap-space-xl">
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
 <div>
@@ -1045,4 +1061,32 @@
 </div>
 <script src="https://js.stripe.com/v3/"></script>
 <script src="assets/torquebox.js?v=20261121-glass-compare-5"></script>
+<script>
+(function () {
+  const button = document.getElementById('mobile-menu-toggle');
+  const panel = document.getElementById('mobile-nav-panel');
+  const icon = document.getElementById('mobile-menu-icon');
+  if (!button || !panel || !icon) return;
+  function setMenuOpen(open) {
+    panel.classList.toggle('hidden', !open);
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    icon.textContent = open ? 'close' : 'menu';
+  }
+  button.addEventListener('click', () => setMenuOpen(button.getAttribute('aria-expanded') !== 'true'));
+  panel.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuOpen(false)));
+  document.addEventListener('click', event => {
+    if (!button.contains(event.target) && !panel.contains(event.target)) setMenuOpen(false);
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+      setMenuOpen(false);
+      button.focus();
+    }
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) setMenuOpen(false);
+  });
+})();
+</script>
 </body></html>
