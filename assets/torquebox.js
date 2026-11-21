@@ -624,6 +624,46 @@
     startBenefitsAutoplay();
   }
 
+  // Interactive comparison: one aligned camera view, revealed with a draggable divider.
+  const glassComparison = byId('glass-comparison');
+  const glassComparisonRange = byId('glass-comparison-range');
+  if (glassComparison && glassComparisonRange) {
+    let activeComparisonPointer = null;
+    const updateComparison = (rawValue) => {
+      const position = Math.min(100, Math.max(0, Number(rawValue) || 0));
+      glassComparisonRange.value = String(position);
+      glassComparisonRange.setAttribute('aria-valuetext', Math.round(position) + '% before');
+      glassComparison.style.setProperty('--compare-position', position + '%');
+    };
+    const positionFromPointer = (clientX) => {
+      const bounds = glassComparison.getBoundingClientRect();
+      if (!bounds.width) return;
+      updateComparison(((clientX - bounds.left) / bounds.width) * 100);
+    };
+    glassComparisonRange.addEventListener('input', () => updateComparison(glassComparisonRange.value));
+    glassComparisonRange.addEventListener('focus', () => glassComparison.classList.add('ring-4', 'ring-secondary-container'));
+    glassComparisonRange.addEventListener('blur', () => glassComparison.classList.remove('ring-4', 'ring-secondary-container'));
+    glassComparison.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      activeComparisonPointer = event.pointerId;
+      glassComparison.setPointerCapture?.(event.pointerId);
+      positionFromPointer(event.clientX);
+    });
+    glassComparison.addEventListener('pointermove', (event) => {
+      if (activeComparisonPointer === event.pointerId) positionFromPointer(event.clientX);
+    });
+    const finishComparisonDrag = (event) => {
+      if (activeComparisonPointer !== event.pointerId) return;
+      activeComparisonPointer = null;
+      if (glassComparison.hasPointerCapture?.(event.pointerId)) {
+        glassComparison.releasePointerCapture(event.pointerId);
+      }
+    };
+    glassComparison.addEventListener('pointerup', finishComparisonDrag);
+    glassComparison.addEventListener('pointercancel', finishComparisonDrag);
+    updateComparison(50);
+  }
+
   const reviewFilters = document.querySelectorAll('.review-filter-btn');
   const reviewCards = document.querySelectorAll('.review-card');
   reviewFilters.forEach((button) => {
