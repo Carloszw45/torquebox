@@ -26,7 +26,6 @@ export async function onRequestPost({ request, env }) {
       mode: 'payment',
       ui_mode: 'embedded',
       locale: 'en',
-      customer_creation: 'always',
       'shipping_address_collection[allowed_countries][0]': 'US',
       'metadata[order_id]': orderId,
       'payment_intent_data[metadata][order_id]': orderId,

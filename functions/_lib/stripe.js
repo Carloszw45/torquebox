@@ -137,10 +137,13 @@ export async function updateVerifiedSession(db, session, state, mode) {
 
   const now = new Date().toISOString();
   if (state === 'paid' && session.payment_status === 'paid') {
+    // New Stripe APIs place delivery information under collected_information.
+    // Keep the old field as a fallback for existing webhook versions.
+    const shippingDetails = session.collected_information?.shipping_details || session.shipping_details;
     await db.prepare(`UPDATE stripe_orders SET status = 'paid', paid_at = COALESCE(paid_at, ?),
       customer_email = COALESCE(customer_email, ?), shipping_details_json = COALESCE(shipping_details_json, ?),
       updated_at = ? WHERE id = ?`).bind(now, session.customer_details?.email || null,
-      session.shipping_details ? JSON.stringify(session.shipping_details) : null, now, row.id).run();
+      shippingDetails ? JSON.stringify(shippingDetails) : null, now, row.id).run();
   } else if (state === 'failed') {
     await db.prepare(`UPDATE stripe_orders SET status = 'failed', updated_at = ?
       WHERE id = ? AND status != 'paid'`).bind(now, row.id).run();

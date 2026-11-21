@@ -76,6 +76,7 @@ test('test-only embedded checkout sessions, webhook signature, and verified paid
         const data = new URLSearchParams(options.body);
         createdOrderId = data.get('metadata[order_id]');
         assert.equal(data.get('ui_mode'), 'embedded');
+        assert.equal(data.get('customer_creation'), null);
         assert.equal(data.get('shipping_address_collection[allowed_countries][0]'), 'US');
         assert.equal(data.get('line_items[0][price_data][unit_amount]'), '1995');
         assert.equal(data.get('shipping_options[0][shipping_rate_data][fixed_amount][amount]'), '499');
@@ -110,10 +111,13 @@ test('test-only embedded checkout sessions, webhook signature, and verified paid
     const event = JSON.stringify({ livemode: false, id: 'evt_test_ok', type: 'checkout.session.completed',
       data: { object: { id: row.stripe_session_id, livemode: false, metadata: { order_id: row.id },
         amount_total: 2494, currency: 'usd', payment_status: 'paid',
-        customer_details: { email: 'buyer@example.com' }, shipping_details: { name: 'Buyer' } } } });
+        customer_details: { email: 'buyer@example.com' },
+        collected_information: { shipping_details: { name: 'Buyer', address: { country: 'US' } } } } } });
     assert.equal((await receiveWebhook({ request: post('webhook', JSON.parse(event)), env })).status, 400);
     assert.equal((await receiveWebhook({ request: await signedWebhook(event, env.STRIPE_WEBHOOK_SECRET), env })).status, 200);
     assert.equal(db.prepare('SELECT status FROM stripe_orders WHERE id = ?').get(row.id).status, 'paid');
+    assert.deepEqual(JSON.parse(db.prepare('SELECT shipping_details_json FROM stripe_orders WHERE id = ?')
+      .get(row.id).shipping_details_json), { name: 'Buyer', address: { country: 'US' } });
     assert.equal((await receiveWebhook({ request: await signedWebhook(event, env.STRIPE_WEBHOOK_SECRET), env })).status, 200);
     const status = await getStatus({ request: new Request(`${siteOrigin}/api/stripe/status?session_id=${row.stripe_session_id}`), env });
     assert.deepEqual(await status.json(), { status: 'paid' });
