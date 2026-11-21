@@ -366,27 +366,91 @@
   });
   searchResults.forEach((link) => link.addEventListener('click', () => closeModal(false)));
 
+  // Product gallery: thumbnails, arrows, touch swipes and gentle auto-advance.
   const mainImage = byId('main-product-img');
-  const thumbnails = document.querySelectorAll('.gallery-thumb-btn');
+  const gallery = byId('product-gallery');
+  const galleryStage = byId('gallery-stage');
+  const galleryCounter = byId('gallery-image-count');
+  const thumbnails = Array.from(document.querySelectorAll('.gallery-thumb-btn'));
+  let galleryIndex = 0;
   let imageTimer;
-  thumbnails.forEach((button) => {
+  let galleryAutoTimer;
+  let galleryTouchStart = null;
+  const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+
+  const selectGalleryImage = (index) => {
+    if (!mainImage || !thumbnails.length) return;
+    galleryIndex = (index + thumbnails.length) % thumbnails.length;
+    thumbnails.forEach((button, buttonIndex) => {
+      const selected = buttonIndex === galleryIndex;
+      button.classList.toggle('ring-2', selected);
+      button.classList.toggle('ring-secondary-container', selected);
+      button.classList.toggle('opacity-100', selected);
+      button.classList.toggle('opacity-70', !selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    const activeThumb = thumbnails[galleryIndex];
+    const source = activeThumb.dataset.src;
+    if (galleryCounter) galleryCounter.textContent = (galleryIndex + 1) + ' / ' + thumbnails.length;
+    if (!source) return;
+    clearTimeout(imageTimer);
+    if (mainImage.getAttribute('src') === source) {
+      mainImage.style.opacity = '1';
+      return;
+    }
+    mainImage.style.opacity = prefersReducedMotion ? '1' : '0.35';
+    imageTimer = setTimeout(() => {
+      mainImage.src = source;
+      mainImage.alt = activeThumb.querySelector('img')?.alt || 'QIFOR Wind Shield Pro product image';
+      mainImage.style.opacity = '1';
+    }, prefersReducedMotion ? 0 : 130);
+  };
+
+  const stopGalleryAutoplay = () => {
+    clearInterval(galleryAutoTimer);
+    galleryAutoTimer = undefined;
+  };
+  const startGalleryAutoplay = () => {
+    stopGalleryAutoplay();
+    if (prefersReducedMotion || thumbnails.length < 2 || document.hidden) return;
+    if (gallery?.matches(':hover') || gallery?.contains(document.activeElement)) return;
+    galleryAutoTimer = setInterval(() => selectGalleryImage(galleryIndex + 1), 6500);
+  };
+  const navigateGallery = (step) => {
+    selectGalleryImage(galleryIndex + step);
+    startGalleryAutoplay();
+  };
+
+  thumbnails.forEach((button, index) => {
     button.addEventListener('click', () => {
-      thumbnails.forEach((thumb) => {
-        thumb.classList.remove('ring-2', 'ring-secondary-container', 'opacity-100');
-        thumb.classList.add('opacity-70');
-      });
-      button.classList.add('ring-2', 'ring-secondary-container', 'opacity-100');
-      button.classList.remove('opacity-70');
-      const source = button.dataset.src;
-      mainImage.style.opacity = '0.3';
-      clearTimeout(imageTimer);
-      imageTimer = setTimeout(() => {
-        mainImage.src = source;
-        mainImage.alt = button.querySelector('img').alt;
-        mainImage.style.opacity = '1';
-      }, 120);
+      selectGalleryImage(index);
+      startGalleryAutoplay();
     });
   });
+  byId('gallery-prev')?.addEventListener('click', () => navigateGallery(-1));
+  byId('gallery-next')?.addEventListener('click', () => navigateGallery(1));
+
+  galleryStage?.addEventListener('touchstart', (event) => {
+    const touch = event.touches[0];
+    if (touch) galleryTouchStart = { x: touch.clientX, y: touch.clientY };
+  }, { passive: true });
+  galleryStage?.addEventListener('touchend', (event) => {
+    if (!galleryTouchStart || !event.changedTouches[0]) return;
+    const dx = event.changedTouches[0].clientX - galleryTouchStart.x;
+    const dy = event.changedTouches[0].clientY - galleryTouchStart.y;
+    galleryTouchStart = null;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+      navigateGallery(dx < 0 ? 1 : -1);
+    }
+  }, { passive: true });
+  galleryStage?.addEventListener('touchcancel', () => { galleryTouchStart = null; });
+  gallery?.addEventListener('mouseenter', stopGalleryAutoplay);
+  gallery?.addEventListener('mouseleave', startGalleryAutoplay);
+  gallery?.addEventListener('focusin', stopGalleryAutoplay);
+  gallery?.addEventListener('focusout', () => setTimeout(startGalleryAutoplay, 0));
+  document.addEventListener('visibilitychange', startGalleryAutoplay);
+  selectGalleryImage(0);
+  startGalleryAutoplay();
 
   const faqItems = document.querySelectorAll('.faq-item');
   faqItems.forEach((item) => {

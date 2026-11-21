@@ -154,13 +154,22 @@
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
 <!-- MEDIA GALLERY -->
 <div class="lg:col-span-7 flex flex-col gap-space-md lg:sticky lg:top-28 scroll-mt-28" id="product-gallery">
-<div class="relative w-full aspect-square bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden group">
+<div class="relative w-full aspect-square bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden group" id="gallery-stage" style="touch-action:pan-y">
 <div class="absolute top-4 left-4 z-10 flex flex-col gap-2">
 
 
 </div>
 
 <img alt="QIFOR Wind Shield Pro active formula removes oil film and reduces glare" class="w-full h-full object-cover object-center transition-all duration-300" id="main-product-img" src="assets/images/torquebox-active-formula.webp" style="opacity: 1;">
+<!-- Main image carousel controls -->
+<button aria-label="Previous product image" id="gallery-prev" class="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 text-on-surface shadow-lg border border-outline-variant/40 flex items-center justify-center hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors" type="button">
+  <span class="material-symbols-outlined text-[28px]" aria-hidden="true">chevron_left</span>
+</button>
+<button aria-label="Next product image" id="gallery-next" class="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 text-on-surface shadow-lg border border-outline-variant/40 flex items-center justify-center hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors" type="button">
+  <span class="material-symbols-outlined text-[28px]" aria-hidden="true">chevron_right</span>
+</button>
+<span class="absolute bottom-4 right-4 z-20 rounded-full bg-on-surface/75 text-white text-xs sm:text-sm font-semibold px-3 py-1.5 shadow-sm" id="gallery-image-count" aria-live="polite">1 / 7</span>
+
 <!-- Interactive Demo Video Bar Preview -->
 <div class="absolute bottom-4 left-4 right-4 z-10">
 
@@ -929,5 +938,5 @@
 </div>
 </div>
 <script src="https://js.stripe.com/v3/"></script>
-<script src="assets/torquebox.js?v=20261121-feedback-carousel-6"></script>
+<script src="assets/torquebox.js?v=20261121-product-carousel-7"></script>
 </body></html>
