@@ -108,7 +108,7 @@ test('test-only embedded checkout sessions, webhook signature, and verified paid
     assert.equal(row.status, 'pending');
 
     const event = JSON.stringify({ livemode: false, id: 'evt_test_ok', type: 'checkout.session.completed',
-      data: { object: { id: row.stripe_session_id, metadata: { order_id: row.id },
+      data: { object: { id: row.stripe_session_id, livemode: false, metadata: { order_id: row.id },
         amount_total: 2494, currency: 'usd', payment_status: 'paid',
         customer_details: { email: 'buyer@example.com' }, shipping_details: { name: 'Buyer' } } } });
     assert.equal((await receiveWebhook({ request: post('webhook', JSON.parse(event)), env })).status, 400);
@@ -118,6 +118,60 @@ test('test-only embedded checkout sessions, webhook signature, and verified paid
     const status = await getStatus({ request: new Request(`${siteOrigin}/api/stripe/status?session_id=${row.stripe_session_id}`), env });
     assert.deepEqual(await status.json(), { status: 'paid' });
     assert.equal(await verifyStripeSignature(event, 't=1000000000,v1=' + 'a'.repeat(64), env.STRIPE_WEBHOOK_SECRET), false);
+  } finally {
+    globalThis.fetch = originalFetch;
+    db.close();
+  }
+});
+
+test('production requires an explicit live opt-in, exact store host and matching live keys', async () => {
+  const db = new DatabaseSync(':memory:');
+  db.exec(await readFile(new URL('../migrations/0002_stripe_orders.sql', import.meta.url), 'utf8'));
+  const origin = 'https://torque-box.com';
+  const env = { STRIPE_MODE: 'live', STRIPE_SECRET_KEY: 'sk_live_fake_only',
+    STRIPE_PUBLISHABLE_KEY: 'pk_live_fake_only', STRIPE_WEBHOOK_SECRET: 'whsec_live_secret',
+    TORQUEBOX_DB: dbAdapter(db) };
+  const originalFetch = globalThis.fetch;
+  let createdOrderId;
+  try {
+    const liveRequest = () => new Request(`${origin}/api/stripe/create-session`, {
+      method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cart: { '1_bottle': 1 } }),
+    });
+    assert.equal((await createSession({ request: liveRequest(), env: { ...env, STRIPE_MODE: undefined } })).status, 503);
+    assert.equal((await createSession({ request: liveRequest(), env: { ...env, STRIPE_SECRET_KEY: 'sk_test_bad' } })).status, 503);
+    assert.equal((await createSession({ request: post('create-session', { cart: { '1_bottle': 1 } }), env })).status, 503);
+    globalThis.fetch = async (url, options) => {
+      assert.equal(options.headers.authorization, 'Bearer sk_live_fake_only');
+      if (String(url).endsWith('/checkout/sessions')) {
+        const form = new URLSearchParams(options.body);
+        createdOrderId = form.get('metadata[order_id]');
+        assert.equal(form.get('ui_mode'), 'embedded');
+        assert.equal(form.get('line_items[0][price_data][unit_amount]'), '1995');
+        return Response.json({ id: 'cs_live_abcdefghijklmnopqrstuvwxyz', client_secret: 'cs_live_secret_example',
+          currency: 'usd', livemode: true });
+      }
+      return Response.json({ id: 'cs_live_abcdefghijklmnopqrstuvwxyz', currency: 'usd',
+        amount_total: 2494, payment_status: 'paid', livemode: true, metadata: { order_id: createdOrderId } });
+    };
+    const created = await createSession({ request: liveRequest(), env });
+    assert.equal(created.status, 201);
+    const result = await created.json();
+    assert.equal(result.totalUsdCents, 2494);
+    const event = JSON.stringify({ livemode: true, id: 'evt_live_ok', type: 'checkout.session.completed',
+      data: { object: { id: 'cs_live_abcdefghijklmnopqrstuvwxyz', livemode: true, currency: 'usd',
+        amount_total: 2494, payment_status: 'paid', metadata: { order_id: createdOrderId } } } });
+    const signed = await signedWebhook(event, env.STRIPE_WEBHOOK_SECRET);
+    const liveSigned = new Request(`${origin}/api/stripe/webhook`, { method: 'POST',
+      headers: signed.headers, body: event });
+    assert.equal((await receiveWebhook({ request: liveSigned, env })).status, 200);
+    assert.equal((await getStatus({ request: new Request(`${origin}/api/stripe/status?session_id=cs_live_abcdefghijklmnopqrstuvwxyz`), env })).status, 200);
+    assert.equal(db.prepare('SELECT status FROM stripe_orders WHERE id = ?').get(createdOrderId).status, 'paid');
+    const testEvent = JSON.stringify({ ...JSON.parse(event), livemode: false });
+    const testSigned = await signedWebhook(testEvent, env.STRIPE_WEBHOOK_SECRET);
+    const liveTest = new Request(`${origin}/api/stripe/webhook`, { method: 'POST',
+      headers: testSigned.headers, body: testEvent });
+    assert.equal((await receiveWebhook({ request: liveTest, env })).status, 400);
   } finally {
     globalThis.fetch = originalFetch;
     db.close();

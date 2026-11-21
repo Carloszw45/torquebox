@@ -228,7 +228,7 @@
   });
 
 
-  // Preview-only Stripe Embedded Checkout. Card details never reach our server.
+  // Stripe Embedded Checkout. Card details never reach our server.
   const checkoutButton = byId('checkout-button');
   const checkoutStatus = byId('checkout-status');
   const checkoutMessage = byId('stripe-message');
@@ -247,21 +247,24 @@
       ...options,
     });
     const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.error || 'Stripe test checkout is unavailable.');
+    if (!response.ok) throw new Error(data.error || 'Stripe checkout is unavailable.');
     return data;
   }
 
   async function checkStripeAvailability() {
     try {
       const config = await stripeJson('config');
-      if (config.mode !== 'test' || !config.publishableKey?.startsWith('pk_test_') || !window.Stripe) {
-        throw new Error('Stripe test mode is not configured.');
+      if (!['test', 'live'].includes(config.mode)
+        || !config.publishableKey?.startsWith(`pk_${config.mode}_`) || !window.Stripe) {
+        throw new Error('Stripe checkout is not configured.');
       }
       stripeClient = window.Stripe(config.publishableKey);
       stripeReady = true;
-      checkoutStatus.textContent = 'Secure card checkout • Stripe test mode • No real charges';
+      checkoutStatus.textContent = config.mode === 'live'
+        ? 'Secure card checkout powered by Stripe'
+        : 'Secure card checkout • Stripe test mode • No real charges';
     } catch {
-      checkoutStatus.textContent = 'Stripe test checkout needs configuration in Cloudflare before it can be used.';
+      checkoutStatus.textContent = 'Secure checkout is not available yet. Please try again later.';
     }
     updateCart();
   }

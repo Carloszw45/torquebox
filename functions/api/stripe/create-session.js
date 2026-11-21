@@ -1,9 +1,10 @@
 import {
-  configuredForTests, json, priceUsdCart, readCartRequest, sameOrigin, stripeApi,
+  configuredStripeMode, json, priceUsdCart, readCartRequest, sameOrigin, stripeApi,
 } from '../../_lib/stripe.js';
 
 export async function onRequestPost({ request, env }) {
-  if (!configuredForTests(env)) return json({ error: 'Test checkout is not configured.' }, 503);
+  const mode = configuredStripeMode(env, request);
+  if (!mode) return json({ error: 'Checkout is not configured.' }, 503);
   let orderId;
   let stage = 'validate_cart';
   try {
@@ -53,9 +54,10 @@ export async function onRequestPost({ request, env }) {
       body: params.toString(), idempotencyKey: `torquebox-${orderId}`,
     });
     stage = 'validate_stripe_session';
-    if (!/^cs_test_[A-Za-z0-9_]+$/.test(session.id || '')
-      || !session.client_secret || session.currency !== 'usd' || session.livemode !== false) {
-      throw new Error('Stripe returned an invalid test checkout session.');
+    if (!new RegExp(`^cs_${mode}_[A-Za-z0-9_]+$`).test(session.id || '')
+      || !session.client_secret || session.currency !== 'usd'
+      || session.livemode !== (mode === 'live')) {
+      throw new Error('Stripe returned an invalid checkout session.');
     }
     stage = 'save_stripe_session';
     await env.TORQUEBOX_DB.prepare(`UPDATE stripe_orders SET status = 'pending',
@@ -73,15 +75,15 @@ export async function onRequestPost({ request, env }) {
     }
     const inputError = error instanceof SyntaxError
       || /^(Invalid|Select|Maximum|Expected|Request is too large)/.test(error.message);
-    // This extra detail is intentionally limited to the isolated Stripe test branch.
-    // It exposes only a safe failure stage and Stripe error classification, never credentials.
+    // Only test previews expose a safe failure stage; live errors remain generic.
     const stripeDetail = error?.stripeDiagnostic;
     const stripeClass = stripeDetail
       ? ` / Stripe ${stripeDetail.status} ${stripeDetail.code || stripeDetail.type}${stripeDetail.param ? ` (${stripeDetail.param})` : ''}`
       : '';
     const publicMessage = inputError ? 'Please check your cart and try again.'
       : 'Checkout is unavailable. Please try again later.';
-    return json({ error: `${publicMessage} [Test diagnostic: ${stage}${stripeClass}]` },
+    return json({ error: mode === 'test'
+      ? `${publicMessage} [Test diagnostic: ${stage}${stripeClass}]` : publicMessage },
       inputError ? 400 : 503);
   }
 }

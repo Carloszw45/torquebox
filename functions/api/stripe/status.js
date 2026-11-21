@@ -1,9 +1,10 @@
-import { configuredForTests, json, stripeApi, updateVerifiedSession } from '../../_lib/stripe.js';
+import { configuredStripeMode, json, stripeApi, updateVerifiedSession } from '../../_lib/stripe.js';
 
 export async function onRequestGet({ request, env }) {
-  if (!configuredForTests(env)) return json({ error: 'Test checkout is not configured.' }, 503);
+  const mode = configuredStripeMode(env, request);
+  if (!mode) return json({ error: 'Checkout is not configured.' }, 503);
   const sessionId = new URL(request.url).searchParams.get('session_id');
-  if (!/^cs_test_[A-Za-z0-9_]{10,200}$/.test(sessionId || '')) return json({ error: 'Invalid session.' }, 400);
+  if (!new RegExp(`^cs_${mode}_[A-Za-z0-9_]{10,200}$`).test(sessionId || '')) return json({ error: 'Invalid session.' }, 400);
 
   try {
     const order = await env.TORQUEBOX_DB.prepare(`SELECT status FROM stripe_orders
@@ -13,7 +14,7 @@ export async function onRequestGet({ request, env }) {
     // Webhooks are authoritative for fulfillment; this authenticated provider check handles delayed webhooks.
     const session = await stripeApi(env, `checkout/sessions/${encodeURIComponent(sessionId)}`);
     const matched = await updateVerifiedSession(env.TORQUEBOX_DB, session,
-      session.payment_status === 'paid' && session.livemode === false ? 'paid' : 'pending');
+      session.payment_status === 'paid' ? 'paid' : 'pending', mode);
     if (!matched) return json({ error: 'Payment verification failed.' }, 502);
     return json({ status: session.payment_status === 'paid' ? 'paid' : 'pending' });
   } catch (error) {

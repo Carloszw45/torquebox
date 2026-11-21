@@ -35,10 +35,24 @@ export function json(data, status = 200) {
   });
 }
 
-export function configuredForTests(env) {
-  return env?.STRIPE_SECRET_KEY?.startsWith('sk_test_')
-    && env?.STRIPE_PUBLISHABLE_KEY?.startsWith('pk_test_')
-    && Boolean(env?.TORQUEBOX_DB);
+// Live payments require explicit opt-in and may run only on the production domain.
+// A Preview deployment cannot charge real cards, even if given live credentials by mistake.
+export function configuredStripeMode(env, request) {
+  if (!request) return null;
+  const url = new URL(request.url);
+  const isStoreDomain = ['torque-box.com', 'www.torque-box.com'].includes(url.hostname);
+  if (url.protocol !== 'https:') return null;
+  const mode = env?.STRIPE_MODE === 'live' ? 'live'
+    : (!env?.STRIPE_MODE || env.STRIPE_MODE === 'test') ? 'test' : null;
+  if (!mode || (mode === 'live' && !isStoreDomain) || (mode === 'test' && isStoreDomain)) return null;
+  if (typeof env?.STRIPE_SECRET_KEY !== 'string'
+    || typeof env?.STRIPE_PUBLISHABLE_KEY !== 'string') return null;
+  if (!env.STRIPE_SECRET_KEY.startsWith(`sk_${mode}_`)
+    || !env.STRIPE_PUBLISHABLE_KEY.startsWith(`pk_${mode}_`)
+    || /\s/.test(env.STRIPE_SECRET_KEY)
+    || /\s/.test(env.STRIPE_PUBLISHABLE_KEY)
+    || !env.TORQUEBOX_DB) return null;
+  return mode;
 }
 
 export function sameOrigin(request) {
@@ -110,8 +124,10 @@ export async function verifyStripeSignature(body, header, secret, nowSeconds = D
   });
 }
 
-export async function updateVerifiedSession(db, session, state) {
-  if (!/^cs_test_[A-Za-z0-9_]+$/.test(session?.id || '') || session.currency !== 'usd'
+export async function updateVerifiedSession(db, session, state, mode) {
+  if (!['test', 'live'].includes(mode)
+    || !new RegExp(`^cs_${mode}_[A-Za-z0-9_]+$`).test(session?.id || '')
+    || session.livemode !== (mode === 'live') || session.currency !== 'usd'
     || !Number.isSafeInteger(session.amount_total) || !session.metadata?.order_id) return false;
   const row = await db.prepare(`SELECT id, usd_total_cents, status FROM stripe_orders
     WHERE id = ? AND stripe_session_id = ?`).bind(session.metadata.order_id, session.id).first();
