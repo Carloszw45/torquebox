@@ -3,8 +3,14 @@ import { configuredForTests, json } from '../../_lib/stripe.js';
 export function onRequestGet({ env, request }) {
   if (!configuredForTests(env)) {
     // Preview-only diagnostics: report boolean configuration checks, never credentials.
+    const publishableKey = env?.STRIPE_PUBLISHABLE_KEY;
+    const hasPublishableKey = typeof publishableKey === 'string' && publishableKey.length > 0;
     const checks = {
-      publishableTestKey: env?.STRIPE_PUBLISHABLE_KEY?.startsWith('pk_test_') === true,
+      publishableTestKey: publishableKey?.startsWith('pk_test_') === true,
+      publishableKeyPresent: hasPublishableKey,
+      publishableKeyValidAfterTrim: hasPublishableKey && publishableKey.trim().startsWith('pk_test_'),
+      publishableKeyStartsWithWhitespace: hasPublishableKey && /^\s/.test(publishableKey),
+      publishableKeyContainsLineBreak: hasPublishableKey && /[\r\n]/.test(publishableKey),
       secretTestKey: env?.STRIPE_SECRET_KEY?.startsWith('sk_test_') === true,
       testDatabase: Boolean(env?.TORQUEBOX_DB),
     };
