@@ -75,7 +75,7 @@ test('test-only embedded checkout sessions, webhook signature, and verified paid
       if (String(url).endsWith('/checkout/sessions')) {
         const data = new URLSearchParams(options.body);
         createdOrderId = data.get('metadata[order_id]');
-        assert.equal(data.get('ui_mode'), 'embedded_page');
+        assert.equal(data.get('ui_mode'), 'embedded');
         assert.equal(data.get('shipping_address_collection[allowed_countries][0]'), 'US');
         assert.equal(data.get('line_items[0][price_data][unit_amount]'), '1995');
         assert.equal(data.get('shipping_options[0][shipping_rate_data][fixed_amount][amount]'), '499');
