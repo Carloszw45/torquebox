@@ -128,7 +128,7 @@ test('production requires an explicit live opt-in, exact store host and matching
   const db = new DatabaseSync(':memory:');
   db.exec(await readFile(new URL('../migrations/0002_stripe_orders.sql', import.meta.url), 'utf8'));
   const origin = 'https://torque-box.com';
-  const env = { STRIPE_MODE: 'live', STRIPE_SECRET_KEY: 'sk_live_fake_only',
+  const env = { STRIPE_MODE: 'live', STRIPE_SECRET_KEY: 'rk_live_fake_only',
     STRIPE_PUBLISHABLE_KEY: 'pk_live_fake_only', STRIPE_WEBHOOK_SECRET: 'whsec_live_secret',
     TORQUEBOX_DB: dbAdapter(db) };
   const originalFetch = globalThis.fetch;
@@ -142,7 +142,7 @@ test('production requires an explicit live opt-in, exact store host and matching
     assert.equal((await createSession({ request: liveRequest(), env: { ...env, STRIPE_SECRET_KEY: 'sk_test_bad' } })).status, 503);
     assert.equal((await createSession({ request: post('create-session', { cart: { '1_bottle': 1 } }), env })).status, 503);
     globalThis.fetch = async (url, options) => {
-      assert.equal(options.headers.authorization, 'Bearer sk_live_fake_only');
+      assert.equal(options.headers.authorization, 'Bearer rk_live_fake_only');
       if (String(url).endsWith('/checkout/sessions')) {
         const form = new URLSearchParams(options.body);
         createdOrderId = form.get('metadata[order_id]');

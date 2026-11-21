@@ -8,6 +8,7 @@ Não faça merge/promoção nem use chaves reais no Preview.
 
 - Checkout Stripe embutido em inglês, em USD, envio apenas para endereços dos Estados Unidos.
 - Preços definidos no servidor, mantidos: 1 frasco $19.95 + $4.99 de frete; 2 $29.95 frete grátis; 3 $38.95 frete grátis. Prazo informado de 10–15 **dias úteis**.
+- Chaves restritas `rk_live_...` com **Checkout Sessions → Escrever**, somente na conta principal, são aceitas e recomendadas (também aceita `sk_live_...`).
 - `STRIPE_MODE=live` é obrigatório para pagamentos reais e só funciona em `https://torque-box.com` e `https://www.torque-box.com`; em Preview, `sk_live_` não é aceito.
 - `STRIPE_MODE=test` ou variável ausente só aceita chaves `pk_test_` / `sk_test_` fora do domínio público.
 - Sessões e eventos são rejeitados se o modo `test/live` não corresponder; webhook verifica assinatura, ID da sessão e valor do pedido antes de marcar como pago.
@@ -20,7 +21,7 @@ Não faça merge/promoção nem use chaves reais no Preview.
 3. Configurar *somente no ambiente Production* do Cloudflare Pages:
    - `STRIPE_MODE` = `live` (Text).
    - `STRIPE_PUBLISHABLE_KEY` = chave pública `pk_live_...` (Text).
-   - `STRIPE_SECRET_KEY` = chave secreta `sk_live_...` (**Secret**).
+   - `STRIPE_SECRET_KEY` = chave restrita `rk_live_...` com **Checkout Sessions → Escrever** (recomendado), ou chave `sk_live_...` (**Secret**).
    - `STRIPE_WEBHOOK_SECRET` = segredo `whsec_...` do webhook do **modo real** (**Secret**).
    - `TORQUEBOX_DB` = banco D1 **de produção** com a tabela `stripe_orders` da migração `migrations/0002_stripe_orders.sql`. Pode ser um D1 separado; não apontar para banco de testes.
 4. Criar destino webhook no **modo real** da Stripe com a URL `https://torque-box.com/api/stripe/webhook` para:

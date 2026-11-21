@@ -47,7 +47,9 @@ export function configuredStripeMode(env, request) {
   if (!mode || (mode === 'live' && !isStoreDomain) || (mode === 'test' && isStoreDomain)) return null;
   if (typeof env?.STRIPE_SECRET_KEY !== 'string'
     || typeof env?.STRIPE_PUBLISHABLE_KEY !== 'string') return null;
-  if (!env.STRIPE_SECRET_KEY.startsWith(`sk_${mode}_`)
+  // Checkout Sessions: Write on a restricted key limits server API permissions.
+  const secretPrefixes = [`sk_${mode}_`, `rk_${mode}_`];
+  if (!secretPrefixes.some((prefix) => env.STRIPE_SECRET_KEY.startsWith(prefix))
     || !env.STRIPE_PUBLISHABLE_KEY.startsWith(`pk_${mode}_`)
     || /\s/.test(env.STRIPE_SECRET_KEY)
     || /\s/.test(env.STRIPE_PUBLISHABLE_KEY)
