@@ -1,11 +1,11 @@
 (() => {
   const byId = (id) => document.getElementById(id);
-  const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
   const formatPrice = (cents) => money.format(cents / 100);
-  const cartKey = 'torquebox-cart';
+  const cartKey = 'torquebox-cart-usd-v1';
   const bottlePhoto = 'assets/images/qifor-wind-shield-pro.jpg';
-  const shippingCharge = 990;
-  const priorityThreshold = 7990;
+  const shippingCharge = 499;
+  const priorityThreshold = 4000;
   const bundles = Array.from(document.querySelectorAll('.bundle-card'), (card) => {
     const radio = card.querySelector('input[name="bundle_selection"]');
     return {
@@ -41,19 +41,19 @@
 
   function shippingFor(subtotal, includedBundles) {
     if (subtotal === 0) return { cost: 0, label: '' };
-    if (subtotal > priorityThreshold) return { cost: 0, label: 'Frete grátis' };
+    if (subtotal > priorityThreshold) return { cost: 0, label: 'Free US shipping' };
     if (includedBundles.some((bundle) => bundle.shipping === 'priority')) {
-      return { cost: 0, label: 'Frete grátis' };
+      return { cost: 0, label: 'Free US shipping' };
     }
     if (includedBundles.some((bundle) => bundle.shipping === 'standard')) {
-      return { cost: 0, label: 'Frete grátis' };
+      return { cost: 0, label: 'Free standard US shipping' };
     }
     return { cost: shippingCharge, label: formatPrice(shippingCharge) };
   }
 
   function showBottlePhoto(container, count) {
     if (container.childElementCount === count) return;
-    container.setAttribute('aria-label', `${count} ${count === 1 ? 'frasco' : 'frascos'} QIFOR`);
+    container.setAttribute('aria-label', `${count} QIFOR ${count === 1 ? 'bottle' : 'bottles'}`);
     const photos = Array.from({ length: count }, () => {
       const photo = document.createElement('img');
       photo.src = bottlePhoto;
@@ -77,11 +77,11 @@
     quantityInput.value = quantity;
     quantityMinus.disabled = quantity <= 1;
     quantityPlus.disabled = quantity >= 20;
-    byId('selection-volume').textContent = `${selectedBundle.bottles} × 120 mL cada`;
-    byId('atc-btn-text').textContent = `ADICIONAR AO CARRINHO — ${formatPrice(price)}`;
+    byId('selection-volume').textContent = `${selectedBundle.bottles} × 120 mL (4.05 fl oz each)`;
+    byId('atc-btn-text').textContent = `ADD TO CART — ${formatPrice(price)} USD`;
     byId('sticky-price').textContent = formatPrice(price);
     byId('sticky-bundle-label').textContent = selectedBundle.title;
-    byId('sticky-shipping').textContent = shipping.cost ? `${shipping.label} de frete` : shipping.label;
+    byId('sticky-shipping').textContent = shipping.cost ? `${shipping.label} US shipping` : shipping.label;
     showBottlePhoto(byId('sticky-product-photo'), selectedBundle.bottles);
   }
 
@@ -108,15 +108,16 @@
     const counter = byId('cart-counter');
     counter.textContent = kits;
     counter.classList.toggle('hidden', kits === 0);
-    byId('open-cart-btn').setAttribute('aria-label', `Carrinho (${kits} ${kits === 1 ? 'kit' : 'kits'})`);
+    byId('open-cart-btn').setAttribute('aria-label', `Shopping Cart (${kits} ${kits === 1 ? 'kit' : 'kits'})`);
     byId('drawer-cart-count').textContent = kits;
-    byId('drawer-bottle-summary').textContent = `${bottles} ${bottles === 1 ? 'frasco' : 'frascos'} no total`;
+    byId('drawer-bottle-summary').textContent = `${bottles} ${bottles === 1 ? 'bottle' : 'bottles'} total`;
     byId('drawer-volume').classList.toggle('hidden', kits === 0);
     byId('cart-empty').classList.toggle('hidden', kits > 0);
     byId('cart-totals').classList.toggle('hidden', kits === 0);
     byId('drawer-subtotal').textContent = formatPrice(subtotal);
     byId('drawer-shipping').textContent = shipping.label;
     byId('drawer-total').textContent = formatPrice(subtotal + shipping.cost);
+    byId('checkout-button').disabled = !kits || !stripeReady || stripeLoading;
   }
 
   function setCartQuantity(id, newQuantity) {
@@ -146,9 +147,9 @@
     const increase = row.querySelector('[data-cart-action="increase"]');
     const decrease = row.querySelector('[data-cart-action="decrease"]');
     const remove = row.querySelector('[data-cart-action="remove"]');
-    increase.setAttribute('aria-label', `Aumentar quantidade de ${bundle.title}`);
-    decrease.setAttribute('aria-label', `Diminuir quantidade de ${bundle.title}`);
-    remove.setAttribute('aria-label', `Remover ${bundle.title} do carrinho`);
+    increase.setAttribute('aria-label', `Increase quantity for ${bundle.title}`);
+    decrease.setAttribute('aria-label', `Decrease quantity for ${bundle.title}`);
+    remove.setAttribute('aria-label', `Remove ${bundle.title} from cart`);
     increase.addEventListener('click', () => setCartQuantity(bundle.id, cart[bundle.id] + 1));
     decrease.addEventListener('click', () => setCartQuantity(bundle.id, cart[bundle.id] - 1));
     remove.addEventListener('click', () => {
@@ -170,9 +171,18 @@
   const searchInput = byId('search-input');
   let activeModal;
   let modalTrigger;
+  let stripeCheckout = null;
+  let stripeReady = false;
+  let stripeLoading = false;
+  let stripeClient = null;
 
   function closeModal(restoreFocus = true) {
     if (!activeModal) return;
+    if (activeModal.id === 'stripe-modal' && stripeCheckout) {
+      stripeCheckout.destroy();
+      stripeCheckout = null;
+      byId('stripe-checkout').replaceChildren();
+    }
     activeModal.classList.add('hidden');
     document.body.classList.remove('overflow-hidden');
     if (restoreFocus) modalTrigger?.focus({ preventScroll: true });
@@ -187,8 +197,7 @@
     activeModal.classList.remove('hidden');
     document.body.classList.add('overflow-hidden');
     const initialFocus = id === 'search-modal' ? searchInput
-      : id === 'pix-modal' ? byId('pix-customer-form').elements.namedItem('name')
-        : activeModal.querySelector('button[data-close-modal]');
+      : activeModal.querySelector('button[data-close-modal]');
     initialFocus.focus({ preventScroll: true });
   }
 
@@ -218,163 +227,98 @@
     }
   });
 
-  // Pix payments are issued and verified by server-side Cloudflare Pages Functions.
-  // Neither an API key nor an exchange rate chosen by the browser can create a charge.
-  const pixForm = byId('pix-customer-form');
-  const pixSubmit = byId('pix-generate');
-  const pixError = byId('pix-error');
-  const pixStatus = byId('pix-order-status');
-  let pixCharge = null;
-  let pixPollTimeout;
-  let pixPolling = false;
-  let pixPollUntil = 0;
 
-  async function pixApi(path, payload) {
-    const response = await fetch(`/api/pix/${path}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(payload),
-      cache: 'no-store',
-      credentials: 'same-origin',
+  // Preview-only Stripe Embedded Checkout. Card details never reach our server.
+  const checkoutButton = byId('checkout-button');
+  const checkoutStatus = byId('checkout-status');
+  const checkoutMessage = byId('stripe-message');
+  const checkoutContainer = byId('stripe-checkout');
+  const returnBanner = byId('stripe-return-banner');
+
+  function notice(message) {
+    returnBanner.textContent = message;
+    returnBanner.classList.remove('hidden');
+  }
+
+  async function stripeJson(path, options) {
+    const response = await fetch(`/api/stripe/${path}`, {
+      cache: 'no-store', credentials: 'same-origin',
+      headers: options?.body ? { 'Content-Type': 'application/json', Accept: 'application/json' } : { Accept: 'application/json' },
+      ...options,
     });
     const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.error || 'Pagamento Pix temporariamente indisponível.');
+    if (!response.ok) throw new Error(data.error || 'Stripe test checkout is unavailable.');
     return data;
   }
 
-  async function checkPixCheckoutAvailability() {
-    pixSubmit.disabled = true;
-    pixError.textContent = '';
-    byId('pix-usd-total').textContent = byId('drawer-total').textContent;
-    byId('pix-availability').textContent = 'Verificando disponibilidade do Pix…';
-    // Do not allow a changed cart to use a stale quote.
-    const cartSnapshot = JSON.stringify(cart);
+  async function checkStripeAvailability() {
     try {
-      const quote = await pixApi('quote', { cart });
-      if (cartSnapshot !== JSON.stringify(cart)) {
-        byId('pix-availability').textContent = 'O carrinho foi alterado.';
-        pixError.textContent = 'Feche o checkout e abra novamente para atualizar o total.';
+      const config = await stripeJson('config');
+      if (config.mode !== 'test' || !config.publishableKey?.startsWith('pk_test_') || !window.Stripe) {
+        throw new Error('Stripe test mode is not configured.');
+      }
+      stripeClient = window.Stripe(config.publishableKey);
+      stripeReady = true;
+      checkoutStatus.textContent = 'Secure card checkout • Stripe test mode • No real charges';
+    } catch {
+      checkoutStatus.textContent = 'Stripe test checkout needs configuration in Cloudflare before it can be used.';
+    }
+    updateCart();
+  }
+
+  checkoutButton.addEventListener('click', async (event) => {
+    if (!stripeReady || stripeLoading || !Object.keys(cart).length) return;
+    stripeLoading = true;
+    updateCart();
+    openModal('stripe-modal', event.currentTarget);
+    checkoutMessage.textContent = 'Preparing your secure payment form…';
+    byId('stripe-order-total').textContent = `Total: ${byId('drawer-total').textContent} USD`;
+    checkoutContainer.replaceChildren();
+    try {
+      const snapshot = JSON.stringify(cart);
+      const session = await stripeJson('create-session', {
+        method: 'POST', body: JSON.stringify({ cart }),
+      });
+      if (snapshot !== JSON.stringify(cart)) throw new Error('Your cart changed. Close checkout and start again.');
+      if (!session.clientSecret || !stripeClient) throw new Error('Could not open the payment form.');
+      const embedded = await stripeClient.initEmbeddedCheckout({ clientSecret: session.clientSecret });
+      if (activeModal?.id !== 'stripe-modal') {
+        embedded.destroy();
         return;
       }
-      byId('pix-usd-total').textContent = formatPrice(quote.totalBrlCents);
-      byId('pix-availability').textContent = 'Você verá o valor exato em reais antes de confirmar o Pix no seu banco.';
-      pixSubmit.disabled = false;
+      stripeCheckout = embedded;
+      embedded.mount('#stripe-checkout');
+      checkoutMessage.textContent = 'Enter your name, email, US shipping address, and payment details below.';
     } catch (error) {
-      byId('pix-availability').textContent = 'O Pix está indisponível no momento.';
-      pixError.textContent = error.message;
+      if (activeModal?.id === 'stripe-modal') checkoutMessage.textContent = error.message;
+    } finally {
+      stripeLoading = false;
+      updateCart();
     }
-  }
+  });
 
-  function displayPixCharge(charge) {
-    pixForm.classList.add('hidden');
-    byId('pix-payment').classList.remove('hidden');
-    byId('pix-pending').classList.remove('hidden');
-    byId('pix-success').classList.add('hidden');
-    pixError.textContent = '';
-    byId('pix-usd-total').textContent = formatPrice(charge.totalBrlCents);
-    byId('pix-availability').textContent = 'O código Pix contém o valor do pedido em reais. Confira no seu aplicativo bancário.';
-    const rawImage = String(charge.qrCodeBase64).replace(/^data:image\/png;base64,/i, '').replace(/\s+/g, '');
-    if (!/^[a-zA-Z0-9+/]+={0,2}$/.test(rawImage)) throw new Error('Não foi possível gerar a imagem do QR Code.');
-    byId('pix-qr-image').src = `data:image/png;base64,${rawImage}`;
-    byId('pix-copy-code').value = charge.pixCode;
-    pixStatus.textContent = 'Aguardando confirmação da operadora Pix…';
-    byId('pix-check-status').disabled = false;
-  }
-
-  async function checkPixPayment() {
-    if (!pixCharge || pixPolling) return;
-    pixPolling = true;
-    byId('pix-check-status').disabled = true;
+  async function checkReturnedPayment(sessionId) {
     try {
-      const result = await pixApi('status', {
-        orderId: pixCharge.orderId,
-        accessToken: pixCharge.accessToken,
-      });
+      const result = await stripeJson(`status?session_id=${encodeURIComponent(sessionId)}`);
       if (result.status === 'paid') {
-        byId('pix-success-order').textContent = pixCharge.orderId;
-        byId('pix-pending').classList.add('hidden');
-        byId('pix-success').classList.remove('hidden');
-        clearTimeout(pixPollTimeout);
-        pixCharge = null;
         cart = {};
-        try { localStorage.removeItem(cartKey); } catch { /* Storage can be disabled. */ }
+        try { localStorage.setItem(cartKey, '{}'); } catch { /* Storage is optional. */ }
         updateCart();
-      } else if (['expired', 'cancelled'].includes(result.status)) {
-        pixStatus.textContent = `Cobrança Pix encerrada (${result.status}). Nenhum pagamento foi confirmado. Entre em contato com o suporte antes de tentar novamente.`;
-        clearTimeout(pixPollTimeout);
-        pixCharge = null;
+        notice('Payment confirmed! Thank you for your TorqueBox order. For shipping updates, contact suporte@torque-box.com.');
+        const url = new URL(window.location.href);
+        url.searchParams.delete('session_id');
+        window.history.replaceState({}, '', url.pathname + url.search + url.hash);
       } else {
-        pixStatus.textContent = 'Aguardando confirmação segura do pagamento…';
+        notice('Your payment is being confirmed. Please do not pay again. Contact suporte@torque-box.com if this notice persists.');
       }
     } catch {
-      pixStatus.textContent = 'Ainda não conseguimos confirmar o pagamento. Vamos tentar novamente. Não pague duas vezes.';
-    } finally {
-      pixPolling = false;
-      byId('pix-check-status').disabled = !pixCharge;
-      if (pixCharge && Date.now() < pixPollUntil) {
-        clearTimeout(pixPollTimeout);
-        pixPollTimeout = setTimeout(checkPixPayment, 12_000);
-      }
+      notice('We could not check your payment right now. Please contact suporte@torque-box.com before trying again.');
     }
   }
 
-  byId('open-pix-checkout').addEventListener('click', (event) => {
-    if (!Object.keys(cart).length) return;
-    openModal('pix-modal', event.currentTarget);
-    if (pixCharge) {
-      displayPixCharge(pixCharge);
-      return;
-    }
-    byId('pix-payment').classList.add('hidden');
-    byId('pix-check-status').classList.remove('hidden');
-    pixForm.classList.remove('hidden');
-    checkPixCheckoutAvailability();
-  });
-
-  pixForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    if (pixSubmit.disabled || pixCharge) return;
-    pixSubmit.disabled = true;
-    pixSubmit.textContent = 'Gerando Pix seguro…';
-    pixError.textContent = '';
-    const fields = Object.fromEntries(new FormData(pixForm).entries());
-    const customer = {
-      name: fields.name,
-      email: fields.email,
-      phone: fields.phone,
-      address: {
-        line1: fields.line1, line2: fields.line2, city: fields.city,
-        state: fields.state, postalCode: fields.postalCode, country: 'BR',
-      },
-    };
-    try {
-      const charge = await pixApi('charge', { cart, customer });
-      if (!charge.orderId || !charge.accessToken || !charge.pixCode || !charge.qrCodeBase64) {
-        throw new Error('A resposta da operadora Pix veio incompleta. Procure o suporte antes de pagar novamente.');
-      }
-      pixCharge = charge;
-      displayPixCharge(charge);
-      pixPollUntil = Date.now() + 30 * 60_000;
-      checkPixPayment();
-    } catch (error) {
-      pixError.textContent = `${error.message} Se uma cobrança Pix já foi gerada, procure o suporte antes de tentar novamente.`;
-    } finally {
-      pixSubmit.textContent = 'Gerar QR Code Pix';
-      pixSubmit.disabled = Boolean(pixCharge);
-    }
-  });
-
-  byId('pix-copy-button').addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(byId('pix-copy-code').value);
-      byId('pix-copy-button').textContent = 'Copiado!';
-    } catch {
-      byId('pix-copy-code').focus();
-      byId('pix-copy-code').select();
-      byId('pix-copy-button').textContent = 'Selecione e copie o código';
-    }
-  });
-  byId('pix-check-status').addEventListener('click', checkPixPayment);
+  const returnSession = new URL(window.location.href).searchParams.get('session_id');
+  if (returnSession) checkReturnedPayment(returnSession);
+  checkStripeAvailability();
 
   let toastTimer;
   function addToCart(event) {
@@ -406,7 +350,7 @@
       link.classList.toggle('hidden', !matchesQuery);
       return matchesQuery;
     });
-    byId('search-results-title').textContent = words.length ? 'Resultados da busca' : 'Buscas populares';
+    byId('search-results-title').textContent = words.length ? 'Search results' : 'Popular searches';
     byId('search-status').classList.toggle('hidden', matches.length > 0);
     return matches;
   }
