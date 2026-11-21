@@ -112,7 +112,7 @@
 <nav class="hidden md:flex items-center gap-space-lg">
 <a class="font-label-lg text-label-lg uppercase text-on-surface-variant hover:text-on-surface transition-colors" href="#purchase-section">Shop All</a>
 <a class="uppercase transition-colors text-secondary-container font-bold" href="#purchase-section">Glass Care</a>
-<a class="font-label-lg text-label-lg uppercase text-on-surface-variant hover:text-on-surface transition-colors" href="#product-artwork">Product Guide</a>
+<a class="font-label-lg text-label-lg uppercase text-on-surface-variant hover:text-on-surface transition-colors" href="#product-gallery">Product Gallery</a>
 <a class="font-label-lg text-label-lg uppercase text-on-surface-variant hover:text-on-surface transition-colors" href="#purchase-section">Bundles</a>
 </nav>
 <div class="flex items-center gap-space-md shrink-0">
@@ -153,37 +153,44 @@
 <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
 <!-- MEDIA GALLERY -->
-<div class="lg:col-span-7 flex flex-col gap-space-md lg:sticky lg:top-28">
+<div class="lg:col-span-7 flex flex-col gap-space-md lg:sticky lg:top-28 scroll-mt-28" id="product-gallery">
 <div class="relative w-full aspect-square bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden group">
 <div class="absolute top-4 left-4 z-10 flex flex-col gap-2">
 
 
 </div>
 
-<img alt="Filling the windshield washer reservoir with QIFOR" class="w-full h-full object-cover object-center transition-all duration-300" id="main-product-img" src="assets/images/imagem-02.png" style="opacity: 1;">
+<img alt="QIFOR Wind Shield Pro active formula removes oil film and reduces glare" class="w-full h-full object-cover object-center transition-all duration-300" id="main-product-img" src="assets/images/torquebox-active-formula.webp" style="opacity: 1;">
 <!-- Interactive Demo Video Bar Preview -->
 <div class="absolute bottom-4 left-4 right-4 z-10">
 
 </div>
 </div>
 <!-- Thumbnails -->
-<div class="grid grid-cols-5 gap-space-xs sm:gap-space-sm">
-<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 transition-all opacity-70" data-src="assets/images/imagem-03.png" type="button">
-<img alt="Two QIFOR bottles with orange caps" class="w-full h-full object-cover rounded" src="assets/images/imagem-03.png">
+<div class="grid grid-cols-4 sm:grid-cols-7 gap-space-xs sm:gap-space-sm">
+<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 hover:opacity-100 transition-all ring-2 ring-secondary-container opacity-100" data-src="assets/images/torquebox-active-formula.webp" type="button" aria-label="Show image 1: QIFOR Wind Shield Pro active formula removes oil film and reduces glare">
+  <img alt="QIFOR Wind Shield Pro active formula removes oil film and reduces glare" class="w-full h-full object-cover rounded" src="assets/images/torquebox-active-formula.webp" loading="eager" decoding="async">
 </button>
-<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 hover:opacity-100 transition-all opacity-70" data-src="assets/images/imagem-04.png" type="button">
-<img alt="Hydrophobic clarity test" class="w-full h-full object-cover rounded" src="assets/images/imagem-04.png">
+<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 hover:opacity-100 transition-all opacity-70" data-src="assets/images/torquebox-comparison.webp" type="button" aria-label="Show image 2: QIFOR versus regular windshield washer fluid benefits comparison">
+  <img alt="QIFOR versus regular windshield washer fluid benefits comparison" class="w-full h-full object-cover rounded" src="assets/images/torquebox-comparison.webp" loading="lazy" decoding="async">
 </button>
-<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 hover:opacity-100 transition-all opacity-70" data-src="assets/images/imagem-05.png" type="button">
-<img alt="Sub-zero freeze lab" class="w-full h-full object-cover rounded" src="assets/images/imagem-05.png">
+<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 hover:opacity-100 transition-all opacity-70" data-src="assets/images/torquebox-oil-film-removal.webp" type="button" aria-label="Show image 3: QIFOR oily windshield before and after comparison">
+  <img alt="QIFOR oily windshield before and after comparison" class="w-full h-full object-cover rounded" src="assets/images/torquebox-oil-film-removal.webp" loading="lazy" decoding="async">
 </button>
-<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 hover:opacity-100 transition-all opacity-70" data-src="assets/images/imagem-06.png" type="button">
-<img alt="Filling the windshield washer reservoir with QIFOR" class="w-full h-full object-cover rounded" src="assets/images/imagem-06.png">
+<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 hover:opacity-100 transition-all opacity-70" data-src="assets/images/torquebox-how-to-use.webp" type="button" aria-label="Show image 4: Three illustrated steps for using QIFOR windshield cleaner concentrate">
+  <img alt="Three illustrated steps for using QIFOR windshield cleaner concentrate" class="w-full h-full object-cover rounded" src="assets/images/torquebox-how-to-use.webp" loading="lazy" decoding="async">
 </button>
-<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 hover:opacity-100 transition-all ring-2 ring-secondary-container opacity-100" data-src="assets/images/imagem-02.png" type="button">
-<img alt="Cockpit POV night vision" class="w-full h-full object-cover rounded" src="assets/images/imagem-02.png">
+<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 hover:opacity-100 transition-all opacity-70" data-src="assets/images/torquebox-before-after.webp" type="button" aria-label="Show image 5: QIFOR before-and-after glass visibility in mirrors and on roads">
+  <img alt="QIFOR before-and-after glass visibility in mirrors and on roads" class="w-full h-full object-cover rounded" src="assets/images/torquebox-before-after.webp" loading="lazy" decoding="async">
+</button>
+<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 hover:opacity-100 transition-all opacity-70" data-src="assets/images/torquebox-visibility-problems.webp" type="button" aria-label="Show image 6: Examples of oil film glare, streaks and rain obscuring visibility">
+  <img alt="Examples of oil film glare, streaks and rain obscuring visibility" class="w-full h-full object-cover rounded" src="assets/images/torquebox-visibility-problems.webp" loading="lazy" decoding="async">
+</button>
+<button class="gallery-thumb-btn aspect-square rounded-lg overflow-hidden shadow-sm bg-surface-container-lowest p-1 hover:opacity-100 transition-all opacity-70" data-src="assets/images/torquebox-cold-weather.webp" type="button" aria-label="Show image 7: QIFOR cold-weather performance with the label statement minus 22 Fahrenheit">
+  <img alt="QIFOR cold-weather performance with the label statement minus 22 Fahrenheit" class="w-full h-full object-cover rounded" src="assets/images/torquebox-cold-weather.webp" loading="lazy" decoding="async">
 </button>
 </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Select a photo to explore the product. Before-and-after images are illustrative; results vary with use and conditions. Follow the label and vehicle manufacturer's instructions.</p>
 <!-- Micro Metrics -->
 <div class="grid grid-cols-3 gap-space-sm pt-space-xs">
 <div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-0.5">
@@ -427,82 +434,6 @@
 </div>
 </div>
 </div>
-</section>
-<!-- QIFOR PRODUCT BENEFITS IMAGE GALLERY -->
-<section class="w-full py-space-xl bg-surface-container-low scroll-mt-24" id="product-artwork">
-  <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter flex flex-col gap-space-lg">
-    <div class="text-center max-w-3xl mx-auto">
-      <span class="font-spec-code text-spec-code text-secondary-container uppercase tracking-widest font-bold">Product Guide &amp; Benefits</span>
-      <h2 class="font-headline-lg text-headline-lg uppercase text-primary tracking-tight mt-2">Discover QIFOR Wind Shield Pro</h2>
-      <p class="font-body-md text-body-md text-on-surface-variant mt-3">Explore the cleaning benefits, comparisons and illustrated application of the QIFOR 120 mL concentrate. Tap any image to view it in full size.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
-<figure class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30 flex flex-col">
-  <a href="assets/images/torquebox-active-formula.webp" target="_blank" rel="noopener noreferrer" aria-label="View full-size image: Active Formula">
-    <img src="assets/images/torquebox-active-formula.webp" alt="QIFOR Wind Shield Pro bottle beside a car, with three cleaning benefits: removes oil film, reduces glare and wipes without residue." loading="lazy" decoding="async" width="1254" height="1254" class="w-full aspect-square object-cover hover:opacity-95 transition-opacity">
-  </a>
-  <figcaption class="p-space-md flex-1">
-    <h3 class="font-headline-sm text-headline-sm text-primary">Active Formula</h3>
-    <p class="font-body-md text-body-md text-on-surface-variant mt-2">Oil-film removal, glare reduction and a clearer finish.</p>
-  </figcaption>
-</figure>
-<figure class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30 flex flex-col">
-  <a href="assets/images/torquebox-comparison.webp" target="_blank" rel="noopener noreferrer" aria-label="View full-size image: Why Choose TorqueBox?">
-    <img src="assets/images/torquebox-comparison.webp" alt="QIFOR Wind Shield Pro compared with regular washer fluid: concentrated formula, powerful cleaning, wiper care and oil-film removal." loading="lazy" decoding="async" width="1254" height="1254" class="w-full aspect-square object-cover hover:opacity-95 transition-opacity">
-  </a>
-  <figcaption class="p-space-md flex-1">
-    <h3 class="font-headline-sm text-headline-sm text-primary">Why Choose TorqueBox?</h3>
-    <p class="font-body-md text-body-md text-on-surface-variant mt-2">Concentrated cleaning compared with ordinary washer fluid.</p>
-  </figcaption>
-</figure>
-<figure class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30 flex flex-col">
-  <a href="assets/images/torquebox-oil-film-removal.webp" target="_blank" rel="noopener noreferrer" aria-label="View full-size image: Before & After">
-    <img src="assets/images/torquebox-oil-film-removal.webp" alt="Before-and-after car windshield comparison showing oily film and clearer visibility, with the QIFOR Wind Shield Pro bottle." loading="lazy" decoding="async" width="1254" height="1254" class="w-full aspect-square object-cover hover:opacity-95 transition-opacity">
-  </a>
-  <figcaption class="p-space-md flex-1">
-    <h3 class="font-headline-sm text-headline-sm text-primary">Before &amp; After</h3>
-    <p class="font-body-md text-body-md text-on-surface-variant mt-2">A visual look at oily film versus clearer glass.</p>
-  </figcaption>
-</figure>
-<figure class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30 flex flex-col">
-  <a href="assets/images/torquebox-how-to-use.webp" target="_blank" rel="noopener noreferrer" aria-label="View full-size image: How It Works">
-    <img src="assets/images/torquebox-how-to-use.webp" alt="Three-step washer-fluid illustration showing QIFOR concentrate, filling with water and using windshield wipers." loading="lazy" decoding="async" width="1254" height="1254" class="w-full aspect-square object-cover hover:opacity-95 transition-opacity">
-  </a>
-  <figcaption class="p-space-md flex-1">
-    <h3 class="font-headline-sm text-headline-sm text-primary">How It Works</h3>
-    <p class="font-body-md text-body-md text-on-surface-variant mt-2">An illustrative sequence; follow the mixing directions below.</p>
-  </figcaption>
-</figure>
-<figure class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30 flex flex-col">
-  <a href="assets/images/torquebox-before-after.webp" target="_blank" rel="noopener noreferrer" aria-label="View full-size image: See the Difference">
-    <img src="assets/images/torquebox-before-after.webp" alt="Three pairs of before-and-after scenes demonstrating visibility through side mirrors, in daytime traffic and at night." loading="lazy" decoding="async" width="1254" height="1254" class="w-full aspect-square object-cover hover:opacity-95 transition-opacity">
-  </a>
-  <figcaption class="p-space-md flex-1">
-    <h3 class="font-headline-sm text-headline-sm text-primary">See the Difference</h3>
-    <p class="font-body-md text-body-md text-on-surface-variant mt-2">Side mirrors, daytime roads and nighttime driving.</p>
-  </figcaption>
-</figure>
-<figure class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30 flex flex-col">
-  <a href="assets/images/torquebox-visibility-problems.webp" target="_blank" rel="noopener noreferrer" aria-label="View full-size image: Why Remove Oil Film?">
-    <img src="assets/images/torquebox-visibility-problems.webp" alt="Four panels illustrate blurry night vision, wiper streaks, rain-related visibility issues and headlight glare, beside QIFOR." loading="lazy" decoding="async" width="1254" height="1254" class="w-full aspect-square object-cover hover:opacity-95 transition-opacity">
-  </a>
-  <figcaption class="p-space-md flex-1">
-    <h3 class="font-headline-sm text-headline-sm text-primary">Why Remove Oil Film?</h3>
-    <p class="font-body-md text-body-md text-on-surface-variant mt-2">Glare, streaks and impaired visibility on dirty glass.</p>
-  </figcaption>
-</figure>
-<figure class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/30 flex flex-col">
-  <a href="assets/images/torquebox-cold-weather.webp" target="_blank" rel="noopener noreferrer" aria-label="View full-size image: Cold-Weather Performance">
-    <img src="assets/images/torquebox-cold-weather.webp" alt="QIFOR Wind Shield Pro bottle in snowy mountain scene with label claim of anti-freeze down to minus 22 degrees Fahrenheit." loading="lazy" decoding="async" width="1254" height="1254" class="w-full aspect-square object-cover hover:opacity-95 transition-opacity">
-  </a>
-  <figcaption class="p-space-md flex-1">
-    <h3 class="font-headline-sm text-headline-sm text-primary">Cold-Weather Performance</h3>
-    <p class="font-body-md text-body-md text-on-surface-variant mt-2">The bottle label states protection down to −22°F (−30°C).</p>
-  </figcaption>
-</figure>
-    </div>
-    <p class="font-body-sm text-body-sm text-on-surface-variant text-center max-w-4xl mx-auto">Before-and-after images are illustrations of intended results; actual performance depends on use and conditions. For dilution and cold-weather suitability, follow the product label and your vehicle manufacturer’s instructions.</p>
-  </div>
 </section>
 <!-- 3-STEP APPLICATION -->
 <section class="w-full py-space-xl bg-surface">
