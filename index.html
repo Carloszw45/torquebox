@@ -467,8 +467,9 @@
 <section id="photo-testimonials" class="w-full bg-white py-12 sm:py-16 scroll-mt-24" aria-labelledby="photo-testimonials-heading">
   <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
     <h2 id="photo-testimonials-heading" class="text-[#1b1b1b] text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10">Testimonials</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 items-stretch">
-  <article class="flex flex-col bg-white border border-[#e6e6e6] rounded-md overflow-hidden shadow-sm min-w-0">
+    <div id="photo-testimonials-viewport" class="max-w-lg mx-auto overflow-hidden rounded-lg" style="touch-action:pan-y">
+      <div id="photo-testimonials-track" class="flex items-stretch transition-transform duration-500 ease-out" style="transform:translateX(0%)">
+  <article class="photo-testimonial-slide w-full shrink-0 flex flex-col bg-white border border-[#e6e6e6] rounded-md overflow-hidden shadow-sm min-w-0" role="group" aria-roledescription="slide" aria-label="1 of 3" aria-hidden="false">
     <div class="relative">
       <img src="assets/images/torquebox-testimonial-hamilton.webp" alt="Windshield viewed from outside with a beige car seat inside" class="w-full aspect-square object-cover" loading="lazy" decoding="async">
       <span class="absolute bottom-0 right-5 translate-y-1/2 z-10 rounded-full bg-[#1b1b1b] text-white w-12 h-12 flex items-center justify-center shadow-md" aria-hidden="true"><span class="font-serif text-[42px] font-bold leading-none" aria-hidden="true">&ldquo;</span></span>
@@ -480,7 +481,7 @@
       <div class="border-t border-[#d8d5ce] mt-2 pt-3 text-[#404040] text-sm font-semibold italic">Hamilton M. (Florida, USA)</div>
     </div>
   </article>
-  <article class="flex flex-col bg-white border border-[#e6e6e6] rounded-md overflow-hidden shadow-sm min-w-0">
+  <article class="photo-testimonial-slide w-full shrink-0 flex flex-col bg-white border border-[#e6e6e6] rounded-md overflow-hidden shadow-sm min-w-0" role="group" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true">
     <div class="relative">
       <img src="assets/images/torquebox-testimonial-arthur.webp" alt="Rain droplets and streaks on automotive glass" class="w-full aspect-square object-cover" loading="lazy" decoding="async">
       <span class="absolute bottom-0 right-5 translate-y-1/2 z-10 rounded-full bg-[#1b1b1b] text-white w-12 h-12 flex items-center justify-center shadow-md" aria-hidden="true"><span class="font-serif text-[42px] font-bold leading-none" aria-hidden="true">&ldquo;</span></span>
@@ -492,7 +493,7 @@
       <div class="border-t border-[#d8d5ce] mt-2 pt-3 text-[#404040] text-sm font-semibold italic">Arthur Josephian (New York, USA)</div>
     </div>
   </article>
-  <article class="flex flex-col bg-white border border-[#e6e6e6] rounded-md overflow-hidden shadow-sm min-w-0">
+  <article class="photo-testimonial-slide w-full shrink-0 flex flex-col bg-white border border-[#e6e6e6] rounded-md overflow-hidden shadow-sm min-w-0" role="group" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true">
     <div class="relative">
       <img src="assets/images/torquebox-testimonial-james.webp" alt="Car side window with visible water droplets and clean streaks" class="w-full aspect-square object-cover" loading="lazy" decoding="async">
       <span class="absolute bottom-0 right-5 translate-y-1/2 z-10 rounded-full bg-[#1b1b1b] text-white w-12 h-12 flex items-center justify-center shadow-md" aria-hidden="true"><span class="font-serif text-[42px] font-bold leading-none" aria-hidden="true">&ldquo;</span></span>
@@ -505,6 +506,21 @@
     </div>
   </article>
     </div>
+    </div>
+    <div class="flex items-center justify-center gap-4 mt-6" aria-label="Testimonial carousel controls">
+      <button id="photo-testimonials-prev" type="button" aria-label="Previous testimonial" class="w-11 h-11 flex items-center justify-center rounded-full bg-[#1b1b1b] text-white hover:bg-[#333] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b1b1b] transition-colors">
+        <span class="material-symbols-outlined text-[26px]" aria-hidden="true">chevron_left</span>
+      </button>
+      <div class="flex items-center justify-center gap-1" aria-label="Choose a testimonial">
+        <button class="photo-testimonial-dot w-9 h-9 flex items-center justify-center" type="button" aria-label="Show testimonial 1" aria-current="true" data-index="0"><span class="w-2.5 h-2.5 rounded-full bg-[#1b1b1b] transition-all"></span></button>
+        <button class="photo-testimonial-dot w-9 h-9 flex items-center justify-center" type="button" aria-label="Show testimonial 2" aria-current="false" data-index="1"><span class="w-2.5 h-2.5 rounded-full bg-[#d1d5db] transition-all"></span></button>
+        <button class="photo-testimonial-dot w-9 h-9 flex items-center justify-center" type="button" aria-label="Show testimonial 3" aria-current="false" data-index="2"><span class="w-2.5 h-2.5 rounded-full bg-[#d1d5db] transition-all"></span></button>
+      </div>
+      <button id="photo-testimonials-next" type="button" aria-label="Next testimonial" class="w-11 h-11 flex items-center justify-center rounded-full bg-[#1b1b1b] text-white hover:bg-[#333] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1b1b1b] transition-colors">
+        <span class="material-symbols-outlined text-[26px]" aria-hidden="true">chevron_right</span>
+      </button>
+    </div>
+    <p id="photo-testimonials-count" class="text-center text-sm text-[#666] mt-1" aria-live="polite">1 / 3</p>
   </div>
 </section>
 <!-- VISUAL PROOF & BENEFITS -->
@@ -983,5 +999,5 @@
 </div>
 </div>
 <script src="https://js.stripe.com/v3/"></script>
-<script src="assets/torquebox.js?v=20261121-product-carousel-7"></script>
+<script src="assets/torquebox.js?v=20261121-testimonials-carousel-3"></script>
 </body></html>

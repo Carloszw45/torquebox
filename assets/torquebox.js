@@ -487,6 +487,74 @@
     showFeedback(0);
   }
 
+  // Image testimonial carousel: three original photo reviews, swipe, dots and arrows.
+  const testimonialSection = byId('photo-testimonials');
+  const testimonialViewport = byId('photo-testimonials-viewport');
+  const testimonialTrack = byId('photo-testimonials-track');
+  const testimonialSlides = Array.from(document.querySelectorAll('.photo-testimonial-slide'));
+  const testimonialDots = Array.from(document.querySelectorAll('.photo-testimonial-dot'));
+  const testimonialCount = byId('photo-testimonials-count');
+  if (testimonialTrack && testimonialSlides.length) {
+    let testimonialIndex = 0;
+    let testimonialTimer;
+    let testimonialTouchStart = null;
+    const showTestimonial = (index) => {
+      testimonialIndex = (index + testimonialSlides.length) % testimonialSlides.length;
+      testimonialTrack.style.transform = 'translateX(-' + (testimonialIndex * 100) + '%)';
+      testimonialSlides.forEach((slide, slideIndex) => {
+        slide.setAttribute('aria-hidden', String(slideIndex !== testimonialIndex));
+      });
+      testimonialDots.forEach((dot, dotIndex) => {
+        const current = dotIndex === testimonialIndex;
+        dot.setAttribute('aria-current', String(current));
+        const circle = dot.querySelector('span');
+        circle?.classList.toggle('bg-[#1b1b1b]', current);
+        circle?.classList.toggle('bg-[#d1d5db]', !current);
+        circle?.classList.toggle('scale-125', current);
+      });
+      if (testimonialCount) testimonialCount.textContent = (testimonialIndex + 1) + ' / ' + testimonialSlides.length;
+    };
+    const stopTestimonialAutoplay = () => {
+      clearInterval(testimonialTimer);
+      testimonialTimer = undefined;
+    };
+    const startTestimonialAutoplay = () => {
+      stopTestimonialAutoplay();
+      if (prefersReducedMotion || document.hidden) return;
+      if (testimonialSection?.matches(':hover') || testimonialSection?.contains(document.activeElement)) return;
+      testimonialTimer = setInterval(() => showTestimonial(testimonialIndex + 1), 7000);
+    };
+    const moveTestimonial = (step) => {
+      showTestimonial(testimonialIndex + step);
+      startTestimonialAutoplay();
+    };
+    byId('photo-testimonials-prev')?.addEventListener('click', () => moveTestimonial(-1));
+    byId('photo-testimonials-next')?.addEventListener('click', () => moveTestimonial(1));
+    testimonialDots.forEach((dot, index) => dot.addEventListener('click', () => {
+      showTestimonial(index);
+      startTestimonialAutoplay();
+    }));
+    testimonialViewport?.addEventListener('touchstart', (event) => {
+      const touch = event.touches[0];
+      if (touch) testimonialTouchStart = { x: touch.clientX, y: touch.clientY };
+    }, { passive: true });
+    testimonialViewport?.addEventListener('touchend', (event) => {
+      if (!testimonialTouchStart || !event.changedTouches[0]) return;
+      const dx = event.changedTouches[0].clientX - testimonialTouchStart.x;
+      const dy = event.changedTouches[0].clientY - testimonialTouchStart.y;
+      testimonialTouchStart = null;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) moveTestimonial(dx < 0 ? 1 : -1);
+    }, { passive: true });
+    testimonialViewport?.addEventListener('touchcancel', () => { testimonialTouchStart = null; });
+    testimonialSection?.addEventListener('mouseenter', stopTestimonialAutoplay);
+    testimonialSection?.addEventListener('mouseleave', startTestimonialAutoplay);
+    testimonialSection?.addEventListener('focusin', stopTestimonialAutoplay);
+    testimonialSection?.addEventListener('focusout', () => setTimeout(startTestimonialAutoplay, 0));
+    document.addEventListener('visibilitychange', startTestimonialAutoplay);
+    showTestimonial(0);
+    startTestimonialAutoplay();
+  }
+
   const reviewFilters = document.querySelectorAll('.review-filter-btn');
   const reviewCards = document.querySelectorAll('.review-card');
   reviewFilters.forEach((button) => {
