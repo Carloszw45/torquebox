@@ -555,6 +555,75 @@
     startTestimonialAutoplay();
   }
 
+  // Mobile benefit cards: one complete card per slide, never a clipped horizontal strip.
+  const benefitsCarousel = byId('benefits-carousel');
+  const benefitsViewport = byId('benefits-viewport');
+  const benefitsTrack = byId('benefits-cards');
+  const benefitCards = Array.from(document.querySelectorAll('.benefit-card'));
+  const benefitDots = Array.from(document.querySelectorAll('.benefits-dot'));
+  const benefitsCount = byId('benefits-count');
+  if (benefitsTrack && benefitCards.length) {
+    let benefitIndex = 0;
+    let benefitsTimer;
+    let benefitsTouchStart = null;
+    const benefitsAreMobile = () => window.innerWidth < 1024;
+    const showBenefit = (index) => {
+      benefitIndex = (index + benefitCards.length) % benefitCards.length;
+      const mobile = benefitsAreMobile();
+      benefitsTrack.style.transform = mobile ? 'translateX(-' + (benefitIndex * 100) + '%)' : 'none';
+      benefitCards.forEach((card, cardIndex) => card.setAttribute('aria-hidden', String(mobile && cardIndex !== benefitIndex)));
+      benefitDots.forEach((dot, dotIndex) => {
+        const selected = dotIndex === benefitIndex;
+        dot.setAttribute('aria-current', String(selected));
+        const marker = dot.querySelector('span');
+        marker?.classList.toggle('bg-secondary-container', selected);
+        marker?.classList.toggle('bg-outline-variant', !selected);
+        marker?.classList.toggle('scale-125', selected);
+      });
+      if (benefitsCount) benefitsCount.textContent = (benefitIndex + 1) + ' / ' + benefitCards.length;
+    };
+    const stopBenefitsAutoplay = () => {
+      clearInterval(benefitsTimer);
+      benefitsTimer = undefined;
+    };
+    const startBenefitsAutoplay = () => {
+      stopBenefitsAutoplay();
+      if (!benefitsAreMobile() || prefersReducedMotion || document.hidden) return;
+      if (benefitsCarousel?.matches(':hover') || benefitsCarousel?.contains(document.activeElement)) return;
+      benefitsTimer = setInterval(() => showBenefit(benefitIndex + 1), 6500);
+    };
+    const moveBenefit = (step) => {
+      showBenefit(benefitIndex + step);
+      startBenefitsAutoplay();
+    };
+    byId('benefits-prev')?.addEventListener('click', () => moveBenefit(-1));
+    byId('benefits-next')?.addEventListener('click', () => moveBenefit(1));
+    benefitDots.forEach((dot, dotIndex) => dot.addEventListener('click', () => {
+      showBenefit(dotIndex);
+      startBenefitsAutoplay();
+    }));
+    benefitsViewport?.addEventListener('touchstart', (event) => {
+      const touch = event.touches[0];
+      if (touch) benefitsTouchStart = { x: touch.clientX, y: touch.clientY };
+    }, { passive: true });
+    benefitsViewport?.addEventListener('touchend', (event) => {
+      if (!benefitsTouchStart || !event.changedTouches[0]) return;
+      const dx = event.changedTouches[0].clientX - benefitsTouchStart.x;
+      const dy = event.changedTouches[0].clientY - benefitsTouchStart.y;
+      benefitsTouchStart = null;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) moveBenefit(dx < 0 ? 1 : -1);
+    }, { passive: true });
+    benefitsViewport?.addEventListener('touchcancel', () => { benefitsTouchStart = null; });
+    benefitsCarousel?.addEventListener('mouseenter', stopBenefitsAutoplay);
+    benefitsCarousel?.addEventListener('mouseleave', startBenefitsAutoplay);
+    benefitsCarousel?.addEventListener('focusin', stopBenefitsAutoplay);
+    benefitsCarousel?.addEventListener('focusout', () => setTimeout(startBenefitsAutoplay, 0));
+    document.addEventListener('visibilitychange', startBenefitsAutoplay);
+    window.addEventListener('resize', () => { showBenefit(benefitIndex); startBenefitsAutoplay(); });
+    showBenefit(0);
+    startBenefitsAutoplay();
+  }
+
   const reviewFilters = document.querySelectorAll('.review-filter-btn');
   const reviewCards = document.querySelectorAll('.review-card');
   reviewFilters.forEach((button) => {
