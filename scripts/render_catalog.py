@@ -1,5 +1,7 @@
-"""Render the photographic collection without modifying QIFOR."""
-from render_catalog_photo import main
+"""Render the TorqueBox storefront without modifying QIFOR."""
+import sys
+sys.dont_write_bytecode = True
+from render_catalog_store import main
 
 if __name__ == "__main__":
     main()
