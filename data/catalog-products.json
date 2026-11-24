@@ -1,0 +1,1506 @@
+[
+  {
+    "slug": "drying-towel",
+    "title": "Twisted Loop Drying Towel",
+    "brand": "MCX reference model",
+    "category": "dry",
+    "promise": "Lift away rinse water with less wiping.",
+    "intro": "Twisted-loop microfiber gathers that water into the towel. Work gently across a freshly washed surface instead of repeatedly wiping the same wet area.",
+    "features": [
+      "Twisted-loop microfiber for water pickup",
+      "Large drying surface for body panels",
+      "Soft edges and a hanging loop"
+    ],
+    "specs": [
+      [
+        "Reference size",
+        "90 × 60 cm"
+      ],
+      [
+        "Reference options",
+        "1000 GSM single-sided / 1200 GSM double-sided"
+      ],
+      [
+        "Material",
+        "Twisted-loop microfiber"
+      ],
+      [
+        "Use",
+        "Drying clean, rinsed paintwork"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Rinse the dirt away",
+        "text": "Start with a washed and thoroughly rinsed car. A drying towel should pick up water, not road grit.",
+        "scene": "rinse"
+      },
+      {
+        "title": "Lay it flat and lift",
+        "text": "Place the towel on a panel, then pat or draw it gently towards you. Wring it out when needed.",
+        "scene": "towel"
+      },
+      {
+        "title": "Care for the fibers",
+        "text": "Wash with a suitable microfiber detergent and air-dry. Avoid fabric softener and high heat.",
+        "scene": "laundry"
+      }
+    ],
+    "faq": [
+      [
+        "Can I use it on a dirty car?",
+        "No. Wash and rinse first. Trapped grit can mark the finish."
+      ],
+      [
+        "Which version will be available?",
+        "The model, size and density offered by TorqueBox will be confirmed before launch."
+      ]
+    ],
+    "headline": "Less wiping. More time admiring.",
+    "problem": "You finish the rinse, but there is still water sitting on every panel.",
+    "how": "Twisted-loop microfiber gathers that water into the towel. Work gently across a freshly washed surface instead of repeatedly wiping the same wet area.",
+    "payoff": "A simpler finish to the wash, with less water left to dry on the paint.",
+    "stage": "After the final rinse",
+    "surface": "Clean exterior panels",
+    "format": "Reusable microfiber",
+    "suited": "Freshly washed, rinsed paintwork and compatible exterior surfaces.",
+    "avoid": "Dirty paint, trapped grit and scrubbing pressure.",
+    "tip": "Use a dedicated clean towel. Skip fabric softener when washing microfiber.",
+    "story": "drying-towel-story.webp",
+    "story_alt": "MCX microfiber towel being used to dry the body of a black car",
+    "primary": "https://mcdetailing.shop/products/mcx-microfibre-drying-towel",
+    "reasons": [
+      {
+        "title": "Water pickup",
+        "text": "Twisted loops give rinse water somewhere to go."
+      },
+      {
+        "title": "A larger working area",
+        "text": "The 90 × 60 cm reference towel covers broad panels."
+      },
+      {
+        "title": "Gentle handling",
+        "text": "Clean fibers and light pressure matter more than force."
+      }
+    ],
+    "related": [
+      "air-blower",
+      "v-floc-shampoo",
+      "blend-spray-wax"
+    ],
+    "reviews": [
+      {
+        "name": "Liam Wood",
+        "initials": "LW",
+        "quote": "Fantastic towel with great water retention.",
+        "rating": 5,
+        "source": "MC Detailing",
+        "date": "May 2026",
+        "url": "https://mcdetailing.shop/products/mcx-microfibre-drying-towel"
+      }
+    ],
+    "stepImages": [
+      "drying-towel-1.webp",
+      "drying-towel-story.webp",
+      "drying-towel-story.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "pressure-washer-gun",
+    "title": "Pressure Washer Spray Gun",
+    "brand": "YISHI G25 reference model",
+    "category": "wash",
+    "promise": "Put the rinse exactly where you need it.",
+    "intro": "The short trigger-gun format puts the nozzle closer to your grip. The reference G25 includes a swivel connection and a holder for compatible nozzle tips.",
+    "features": [
+      "Compact grip for controlled rinsing",
+      "Quick-connect nozzle fitting on the reference model",
+      "On-body holder keeps compatible tips together"
+    ],
+    "specs": [
+      [
+        "Reference model",
+        "YISHI G25"
+      ],
+      [
+        "Reference inlet",
+        "M22-14"
+      ],
+      [
+        "Reference outlet",
+        "1/4-inch quick connect"
+      ],
+      [
+        "Required equipment",
+        "Compatible pressure washer and hose; sold separately"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Match the fittings",
+        "text": "Check your washer hose connection, working pressure and required adapters before assembly.",
+        "scene": "connect"
+      },
+      {
+        "title": "Connect with power off",
+        "text": "Attach the hose and a suitable nozzle securely. Follow the pressure-washer instructions.",
+        "scene": "nozzle"
+      },
+      {
+        "title": "Rinse with control",
+        "text": "Use an appropriate spray pattern and distance for paint, trim and seals. Never aim at people.",
+        "scene": "rinse"
+      }
+    ],
+    "faq": [
+      [
+        "Does it work with a garden hose?",
+        "This is a pressure-washer accessory. A garden hose alone cannot power it."
+      ],
+      [
+        "Will it fit every pressure washer?",
+        "No. Check fittings and pressure ratings; some machines need an adapter. The final offered model will be confirmed before launch."
+      ]
+    ],
+    "headline": "A better grip on every rinse.",
+    "problem": "A long pressure-washer lance can be awkward around wheels, mirrors and closer details.",
+    "how": "The short trigger-gun format puts the nozzle closer to your grip. The reference G25 includes a swivel connection and a holder for compatible nozzle tips.",
+    "payoff": "More deliberate rinsing as you move around the car.",
+    "stage": "Rinse and foam application",
+    "surface": "Vehicle exterior",
+    "format": "Pressure-washer accessory",
+    "suited": "A pressure washer, hose and nozzle set with matching fittings and ratings.",
+    "avoid": "Assuming a garden hose can power it or that every washer connection is identical.",
+    "tip": "This gun does not increase your machine’s pressure. Confirm the inlet, adapter and nozzle before ordering.",
+    "story": "pressure-washer-gun-story.webp",
+    "story_alt": "A compact YISHI G25 spray gun rinsing a car exterior",
+    "primary": "https://mcdetailing.shop/products/yishi-g25-short-spray-gun-trigger-lock-built-in-nozzle-holder-4000-psi",
+    "reasons": [
+      {
+        "title": "Shorter setup",
+        "text": "Position a compact gun around tighter areas."
+      },
+      {
+        "title": "Tips close at hand",
+        "text": "The reference model has an integrated nozzle holder."
+      },
+      {
+        "title": "Check before you connect",
+        "text": "Matching fittings are essential to a usable setup."
+      }
+    ],
+    "related": [
+      "foam-cannon",
+      "v-floc-shampoo",
+      "drying-towel"
+    ],
+    "reviews": [
+      {
+        "name": "freshwhipzdetailing0",
+        "initials": "F",
+        "quote": "Much faster and easier to use when working on cars",
+        "rating": 5,
+        "source": "MC Detailing",
+        "date": "",
+        "url": "https://mcdetailing.shop/products/yishi-g25-short-spray-gun-trigger-lock-built-in-nozzle-holder-4000-psi"
+      }
+    ],
+    "stepImages": [
+      "pressure-washer-gun-1.webp",
+      "pressure-washer-gun-story.webp",
+      "pressure-washer-gun-story.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "foam-cannon",
+    "title": "Snow Foam Cannon",
+    "brand": "Easy Lock reference model",
+    "category": "wash",
+    "promise": "Loosen surface dirt before the contact wash.",
+    "intro": "A foam cannon spreads a compatible pre-wash solution across the exterior. Give it the label-specified dwell time, rinse, then continue with the contact wash.",
+    "features": [
+      "Adjustable foam coverage",
+      "Quick-release fitting on the reference model",
+      "Removable bottle for mixing and refilling"
+    ],
+    "specs": [
+      [
+        "Reference model",
+        "Easy Lock Snow Foam Cannon"
+      ],
+      [
+        "Reference bottle",
+        "1 L"
+      ],
+      [
+        "Reference connector",
+        "1/4-inch quick connect"
+      ],
+      [
+        "Required equipment",
+        "Compatible pressure washer and foaming shampoo"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Prepare the mixture",
+        "text": "Add water and a compatible foaming product using its bottle directions. Do not choose a ratio by eye.",
+        "scene": "mix"
+      },
+      {
+        "title": "Cover the cool panels",
+        "text": "Connect to a compatible pressure washer and spread the foam evenly, away from direct sun.",
+        "scene": "foam"
+      },
+      {
+        "title": "Rinse before it dries",
+        "text": "Respect the product dwell time. Rinse thoroughly, then wash by hand when needed.",
+        "scene": "rinse"
+      }
+    ],
+    "faq": [
+      [
+        "Is it a complete car wash by itself?",
+        "Foam is a pre-wash step. A contact wash may still be needed for remaining dirt."
+      ],
+      [
+        "Is the pressure washer included?",
+        "No. This is an accessory for a compatible washer. Final fittings and included items will be confirmed at launch."
+      ]
+    ],
+    "headline": "Let the foam do the first pass.",
+    "problem": "Loose dirt and road film are sitting on the paint before the wash mitt reaches it.",
+    "how": "A foam cannon spreads a compatible pre-wash solution across the exterior. Give it the label-specified dwell time, rinse, then continue with the contact wash.",
+    "payoff": "A more considered start to the wash, before you touch the paint.",
+    "stage": "Before the contact wash",
+    "surface": "Cool exterior panels",
+    "format": "Pressure-washer accessory",
+    "suited": "A compatible pressure washer and a shampoo or pre-wash formulated for foaming.",
+    "avoid": "Letting the mixture dry or expecting foam to replace every contact wash.",
+    "tip": "Follow the shampoo dilution. Adjust the foam pattern to the product and washer, not appearance alone.",
+    "story": "foam-cannon-2.webp",
+    "story_alt": "A foam cannon applying foam over a car during a pre-wash",
+    "primary": "https://mcdetailing.shop/products/easy-lock-snowfoam-cannon-pink-blue",
+    "reasons": [
+      {
+        "title": "Even coverage",
+        "text": "Reach broad exterior areas with a foaming mixture."
+      },
+      {
+        "title": "Adjustable pattern",
+        "text": "Tune the fan and mix for your equipment."
+      },
+      {
+        "title": "A useful first step",
+        "text": "Pre-wash first; remove remaining dirt with the right wash method."
+      }
+    ],
+    "related": [
+      "pressure-washer-gun",
+      "v-floc-shampoo",
+      "v-mol-prewash"
+    ],
+    "reviews": [
+      {
+        "name": "Kelly Angel461",
+        "initials": "KA",
+        "quote": "it performs better than my more expensive one.",
+        "rating": 5,
+        "source": "MC Detailing",
+        "date": "November 2026",
+        "url": "https://mcdetailing.shop/products/easy-lock-snowfoam-cannon-pink-blue"
+      }
+    ],
+    "stepImages": [
+      "foam-cannon-1.webp",
+      "foam-cannon-2.webp",
+      "foam-cannon-2.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "air-blower",
+    "title": "Car Drying Air Blower",
+    "brand": "BLO AIR-S reference model",
+    "category": "dry",
+    "promise": "Clear trapped water from the gaps a towel cannot reach.",
+    "intro": "A directed stream of air helps move rinse water out of mirrors, grilles and panel gaps. The reference BLO AIR-S uses a corded motor and adjustable airflow.",
+    "features": [
+      "Directs air into mirrors, trim and panel gaps",
+      "Helps reduce drips after you finish drying",
+      "Handheld format on the reference model"
+    ],
+    "specs": [
+      [
+        "Reference model shown",
+        "BLO AIR-S"
+      ],
+      [
+        "Method",
+        "Forced-air drying"
+      ],
+      [
+        "Reference power supply",
+        "Corded electric; not a cordless blower"
+      ],
+      [
+        "Before ordering",
+        "Confirm voltage, plug, airflow and included nozzles"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Set up the dryer",
+        "text": "Follow the manual, fit the suitable nozzle and keep the unit and electrical connections in a dry working area.",
+        "scene": "electrical"
+      },
+      {
+        "title": "Work through the gaps",
+        "text": "Guide airflow through mirrors, badges and grilles from the top down. Keep the nozzle off the surface.",
+        "scene": "blower"
+      },
+      {
+        "title": "Finish the panels",
+        "text": "Use a clean microfiber drying towel where water remains, then check for late drips.",
+        "scene": "towel"
+      }
+    ],
+    "faq": [
+      [
+        "Does this spray water?",
+        "No. It blows air to move water off the vehicle after rinsing."
+      ],
+      [
+        "Is this the final model?",
+        "The photo shows a BLO AIR-S as a reference. TorqueBox will confirm the final model, electrical compatibility and accessories before opening sales."
+      ]
+    ],
+    "headline": "Find the water hiding in the details.",
+    "problem": "Your panels look dry, then a mirror or badge releases another line of water.",
+    "how": "A directed stream of air helps move rinse water out of mirrors, grilles and panel gaps. The reference BLO AIR-S uses a corded motor and adjustable airflow.",
+    "payoff": "Fewer overlooked wet spots when you finish the drying stage.",
+    "stage": "After rinsing, before finishing",
+    "surface": "Mirrors, grilles and trim gaps",
+    "format": "Corded reference model",
+    "suited": "Rinsed vehicles and hard-to-reach exterior recesses.",
+    "avoid": "Contact between the nozzle and paint, and electrical connections in standing water.",
+    "tip": "Use a clean towel for water left on larger panels. Confirm voltage and plug before choosing a final model.",
+    "story": "air-blower-story.webp",
+    "story_alt": "BLO handheld dryer directing air into a vehicle detail to move trapped water",
+    "primary": "https://blocardryer.com/products/air-s-dryer",
+    "reasons": [
+      {
+        "title": "Air reaches recesses",
+        "text": "Move water where a flat towel cannot sit."
+      },
+      {
+        "title": "Touch-free in tight spots",
+        "text": "Keep the nozzle clear while directing the airflow."
+      },
+      {
+        "title": "Works with a towel",
+        "text": "Use both tools for different parts of the drying job."
+      }
+    ],
+    "related": [
+      "drying-towel",
+      "hydrox-fast-sealant",
+      "v-floc-shampoo"
+    ],
+    "reviews": [
+      {
+        "name": "Michael",
+        "initials": "M",
+        "quote": "Lightweight easy to handle",
+        "rating": 5,
+        "source": "BLO Car Dryer",
+        "date": "November 2026",
+        "url": "https://blocardryer.com/products/air-s-dryer"
+      },
+      {
+        "name": "Gene Shooter",
+        "initials": "GS",
+        "quote": "but will still need a towel for the panels.",
+        "rating": null,
+        "source": "BLO Car Dryer",
+        "date": "",
+        "url": "https://blocardryer.com/products/air-s-dryer"
+      }
+    ],
+    "stepImages": [
+      "air-blower-1.webp",
+      "air-blower-story.webp",
+      "air-blower-story.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "v-floc-shampoo",
+    "title": "Vonixx V-Floc Shampoo",
+    "brand": "VONIXX",
+    "category": "wash",
+    "promise": "Help dirt glide away during your regular wash.",
+    "intro": "V-Floc is a pH-neutral, lubricating shampoo for the contact-wash stage. Mix it as directed, work from the top down with a clean mitt and rinse away the solution.",
+    "features": [
+      "pH-neutral formula",
+      "Concentrated shampoo",
+      "Suitable for a regular contact-wash routine"
+    ],
+    "specs": [
+      [
+        "Product type",
+        "Concentrated car wash shampoo"
+      ],
+      [
+        "Surface",
+        "Vehicle exterior"
+      ],
+      [
+        "Reference sizes",
+        "500 mL / 5 L"
+      ],
+      [
+        "Dilution",
+        "Follow the label for your application"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Rinse and mix",
+        "text": "Pre-rinse loose contamination. The manufacturer’s bucket example is about 10 mL in 4 L of water.",
+        "scene": "mix"
+      },
+      {
+        "title": "Wash from the top",
+        "text": "Use a clean microfiber mitt and light, controlled passes. Keep the mitt clean as you work.",
+        "scene": "wash"
+      },
+      {
+        "title": "Rinse, then dry",
+        "text": "Remove all shampoo with water, then dry with an appropriate towel or blower.",
+        "scene": "rinse"
+      }
+    ],
+    "faq": [
+      [
+        "Can I pour it into my washer-fluid tank?",
+        "No. This is an exterior wash shampoo, not windshield washer fluid."
+      ],
+      [
+        "Can I use it in a foam cannon?",
+        "The reference product supports foam-cannon use. Follow the bottle dilution and equipment instructions."
+      ]
+    ],
+    "headline": "Let your wash mitt glide.",
+    "problem": "A regular wash needs more than foam: the mitt should move smoothly as it lifts dirt.",
+    "how": "V-Floc is a pH-neutral, lubricating shampoo for the contact-wash stage. Mix it as directed, work from the top down with a clean mitt and rinse away the solution.",
+    "payoff": "An easier-to-follow maintenance wash with the right product between the mitt and paint.",
+    "stage": "Contact wash",
+    "surface": "Compatible exterior paint",
+    "format": "Dilute before use",
+    "suited": "Regular exterior washing with a microfiber wash mitt.",
+    "avoid": "Adding it to a windshield washer tank or washing over loose grit.",
+    "tip": "Manufacturer bucket example: approximately 10 mL in 4 L of water. Adjust only as the label directs.",
+    "story": "v-floc-shampoo-2.webp",
+    "story_alt": "A foaming shampoo being applied to a car before washing",
+    "primary": "https://www.vonixx.com.br/produto/v-floc/",
+    "reasons": [
+      {
+        "title": "pH-neutral wash",
+        "text": "A maintenance shampoo rather than a heavy degreasing step."
+      },
+      {
+        "title": "Lubricated contact",
+        "text": "Helps the mitt move across the washed surface."
+      },
+      {
+        "title": "Concentrated format",
+        "text": "Measure the solution instead of using shampoo undiluted."
+      }
+    ],
+    "related": [
+      "foam-cannon",
+      "drying-towel",
+      "hydrox-fast-sealant"
+    ],
+    "reviews": [],
+    "stepImages": [
+      "v-floc-shampoo-1.webp",
+      "v-floc-shampoo-2.webp",
+      "v-floc-shampoo-2.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "v-mol-prewash",
+    "title": "Vonixx V-Mol Pre-Wash",
+    "brand": "VONIXX",
+    "category": "wash",
+    "promise": "Start lifting stubborn road film before hand washing.",
+    "intro": "V-Mol is a mildly alkaline, concentrated vehicle wash for tougher exterior soil. Choose a label-approved dilution for the level of dirt, wash gently and rinse fully.",
+    "features": [
+      "For heavier exterior soil",
+      "Used before the contact wash",
+      "Concentrated reference formula"
+    ],
+    "specs": [
+      [
+        "Product type",
+        "Descaler wash soap"
+      ],
+      [
+        "Stage",
+        "Pre-wash / exterior cleaning"
+      ],
+      [
+        "Reference sizes",
+        "500 mL / 5 L"
+      ],
+      [
+        "Dilution",
+        "Use the label ratio for the surface and dirt level"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Choose and measure",
+        "text": "Match the label dilution to the dirt: reference guidance ranges from 1:100 to 1:10.",
+        "scene": "mix"
+      },
+      {
+        "title": "Wash from the top",
+        "text": "Work on cool surfaces with a suitable microfiber mitt and light passes.",
+        "scene": "wash"
+      },
+      {
+        "title": "Rinse and dry fully",
+        "text": "Remove all product, then dry the vehicle to limit water left on the exterior.",
+        "scene": "rinse"
+      }
+    ],
+    "faq": [
+      [
+        "Should I use this for every wash?",
+        "Use the product appropriate to the level of dirt. A pH-neutral shampoo is an alternative for regular maintenance."
+      ],
+      [
+        "Is it ready to use?",
+        "The reference product is a concentrate. Check the specific bottle instructions before application."
+      ]
+    ],
+    "headline": "Meet the mess with the right wash.",
+    "problem": "Mud and oily exterior dirt can need a different wash approach from light weekly dust.",
+    "how": "V-Mol is a mildly alkaline, concentrated vehicle wash for tougher exterior soil. Choose a label-approved dilution for the level of dirt, wash gently and rinse fully.",
+    "payoff": "A clear next step when a light maintenance wash is not the right fit.",
+    "stage": "Heavier exterior washing",
+    "surface": "Compatible vehicle exterior",
+    "format": "Concentrated wash soap",
+    "suited": "Mud, oil-related soil and more demanding exterior wash jobs.",
+    "avoid": "Using the strongest dilution automatically on every wash.",
+    "tip": "Manufacturer reference ratios: 1:100 for light soil, 1:50 for medium soil and 1:10 for heavy soil. Follow your bottle.",
+    "story": "v-mol-prewash-story.webp",
+    "story_alt": "Exterior cleaning of a muddy vehicle as a heavier wash application example",
+    "primary": "https://www.vonixx.com.br/produto/v-mol/",
+    "reasons": [
+      {
+        "title": "A heavier wash option",
+        "text": "Designed for more stubborn exterior soil."
+      },
+      {
+        "title": "Task-based dilution",
+        "text": "Use the product strength appropriate to the job."
+      },
+      {
+        "title": "A complete wash stage",
+        "text": "Rinse and dry after cleaning; do not stop at foam."
+      }
+    ],
+    "related": [
+      "pressure-washer-gun",
+      "foam-cannon",
+      "drying-towel"
+    ],
+    "reviews": [],
+    "stepImages": [
+      "v-mol-prewash-1.webp",
+      "v-mol-prewash-story.webp",
+      "v-mol-prewash-story.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "sintra-interior-cleaner",
+    "title": "Vonixx Sintra Interior Cleaner",
+    "brand": "VONIXX",
+    "category": "interior",
+    "promise": "Lift everyday cabin grime from the surfaces you touch.",
+    "intro": "The reference Sintra Fast is a ready-to-use cleaner for compatible cabin trim, leather, carpet and upholstery. Agitate gently, remove residue and allow the surface to dry.",
+    "features": [
+      "For multiple compatible interior surfaces",
+      "Helps remove dirt and greasy marks",
+      "Ready-to-use and concentrate reference versions"
+    ],
+    "specs": [
+      [
+        "Reference version",
+        "Sintra Fast"
+      ],
+      [
+        "Reference size",
+        "500 mL"
+      ],
+      [
+        "Preparation",
+        "Ready to use"
+      ],
+      [
+        "Surfaces",
+        "Label-approved trim, leather and fabrics"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Check and test",
+        "text": "Confirm compatibility and test an inconspicuous area. Use the Fast version as supplied.",
+        "scene": "spot"
+      },
+      {
+        "title": "Apply and loosen",
+        "text": "Use the label method and a suitable soft brush or applicator to lift the dirt.",
+        "scene": "brush"
+      },
+      {
+        "title": "Remove the residue",
+        "text": "For trim, the manufacturer directs a damp microfiber followed by a dry one. Let fabrics dry completely.",
+        "scene": "cloth"
+      }
+    ],
+    "faq": [
+      [
+        "Can I use it on the windshield?",
+        "Use a dedicated glass cleaner instead."
+      ],
+      [
+        "Do all versions need dilution?",
+        "No. Sintra Fast is ready to use; Sintra Pro is concentrated. Follow the exact bottle label."
+      ]
+    ],
+    "headline": "Give the cabin a fresh start.",
+    "problem": "Finger marks, greasy patches and daily use build up on the interior surfaces around you.",
+    "how": "The reference Sintra Fast is a ready-to-use cleaner for compatible cabin trim, leather, carpet and upholstery. Agitate gently, remove residue and allow the surface to dry.",
+    "payoff": "A more cared-for cabin, with a method matched to the material.",
+    "stage": "Interior cleaning",
+    "surface": "Compatible trim, leather and fabric",
+    "format": "Sintra Fast: ready to use",
+    "suited": "Label-approved dashboards, door panels, leather, carpets and upholstery.",
+    "avoid": "Automotive glass, untested sensitive finishes and soaking electrical controls.",
+    "tip": "Sintra Fast is ready to use. Do not confuse it with Sintra Pro concentrate. Cleaning directions do not imply instant disinfection.",
+    "story": "sintra-interior-cleaner-2.webp",
+    "story_alt": "A car interior being cleaned with a dedicated interior cleaner",
+    "primary": "https://www.vonixx.com.br/produto/sintra-fast/",
+    "reasons": [
+      {
+        "title": "A cabin-specific job",
+        "text": "Clean the surfaces used every day."
+      },
+      {
+        "title": "One version, clear method",
+        "text": "The Fast reference is supplied ready to use."
+      },
+      {
+        "title": "Finish by removing residue",
+        "text": "A clean cloth is part of the process."
+      }
+    ],
+    "related": [
+      "glazy-glass-cleaner",
+      "impact-all-purpose-cleaner",
+      "drying-towel"
+    ],
+    "reviews": [],
+    "stepImages": [
+      "sintra-interior-cleaner-1.webp",
+      "sintra-interior-cleaner-2.webp",
+      "sintra-interior-cleaner-2.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "glazy-glass-cleaner",
+    "title": "Vonixx Glazy Glass Cleaner",
+    "brand": "VONIXX",
+    "category": "glass",
+    "promise": "Clear everyday haze from automotive glass.",
+    "intro": "Glazy is a ready-to-use automotive glass cleaner. Apply a small amount, spread with a dedicated glass microfiber and finish with a clean, dry side.",
+    "features": [
+      "Dedicated automotive glass cleaner",
+      "Helps lift greasy marks and haze",
+      "Ready-to-use reference formula"
+    ],
+    "specs": [
+      [
+        "Product type",
+        "Glazy 4-in-1 glass cleaner"
+      ],
+      [
+        "Application",
+        "Compatible interior and exterior automotive glass"
+      ],
+      [
+        "Reference sizes",
+        "500 mL / 5 L"
+      ],
+      [
+        "Format",
+        "Ready to use; the 5 L is a refill"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Apply a small amount",
+        "text": "Work on cool, compatible glass and use only the amount directed on the bottle.",
+        "scene": "glass-spray"
+      },
+      {
+        "title": "Spread with a glass cloth",
+        "text": "Use a dedicated microfiber to work the cleaner across the glass promptly.",
+        "scene": "glass-wipe"
+      },
+      {
+        "title": "Turn to a clean side",
+        "text": "Finish with the dry side or a second cloth. Repeat locally if residue remains.",
+        "scene": "glass-finish"
+      }
+    ],
+    "faq": [
+      [
+        "Does it replace windshield washer fluid?",
+        "No. It is applied directly when cleaning glass, not added to the washer reservoir."
+      ],
+      [
+        "Can I use it on aftermarket tint?",
+        "Check the tint manufacturer guidance and the product label before using any glass cleaner."
+      ]
+    ],
+    "headline": "A clearer view starts with clean glass.",
+    "problem": "Fingerprints and a thin interior haze can make freshly washed glass still look unfinished.",
+    "how": "Glazy is a ready-to-use automotive glass cleaner. Apply a small amount, spread with a dedicated glass microfiber and finish with a clean, dry side.",
+    "payoff": "A straightforward way to finish the glass as carefully as the rest of the car.",
+    "stage": "Interior or exterior glass cleaning",
+    "surface": "Compatible automotive glass",
+    "format": "Ready to use",
+    "suited": "Compatible glass and mirrors; follow the glass or tint manufacturer guidance.",
+    "avoid": "Pouring it into the washer reservoir or using a dirty, wax-contaminated cloth.",
+    "tip": "Use a dedicated glass cloth. The manufacturer advises a second cloth or a clean side for the finishing pass.",
+    "story": "glazy-glass-cleaner-story.webp",
+    "story_alt": "Microfiber cleaning on automotive glass as an application example",
+    "primary": "https://www.vonixx.com.br/produto/glazy/",
+    "reasons": [
+      {
+        "title": "Dedicated to glass",
+        "text": "Treat glass separately from interior trim and paint."
+      },
+      {
+        "title": "Ready for application",
+        "text": "No dilution is specified for the reference formula."
+      },
+      {
+        "title": "A deliberate finishing pass",
+        "text": "A clean, dry cloth helps remove remaining residue."
+      }
+    ],
+    "related": [
+      "sintra-interior-cleaner",
+      "drying-towel",
+      "hydrox-fast-sealant"
+    ],
+    "reviews": [],
+    "stepImages": [
+      "glazy-glass-cleaner-1.webp",
+      "glazy-glass-cleaner-story.webp",
+      "glazy-glass-cleaner-story.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "hydrox-fast-sealant",
+    "title": "Vonixx Hydrox Fast",
+    "brand": "VONIXX",
+    "category": "finish",
+    "promise": "Add water-repellent protection during the final rinse.",
+    "intro": "Hydrox Fast is a ready-to-use, water-activated ceramic product for paint and glass. Apply to a clean, still-wet, cool vehicle and pressure-rinse immediately as directed.",
+    "features": [
+      "Ready-to-use Fast formula",
+      "Water-activated application",
+      "For compatible paint and glass"
+    ],
+    "specs": [
+      [
+        "Product type",
+        "Water-activated ceramic product"
+      ],
+      [
+        "Reference size",
+        "500 mL"
+      ],
+      [
+        "Application",
+        "Clean, wet, cool paint and glass"
+      ],
+      [
+        "Rinse",
+        "Pressure-rinse immediately as directed"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Wash and leave it wet",
+        "text": "Clean the vehicle thoroughly. Keep the surface cool and wet.",
+        "scene": "rinse"
+      },
+      {
+        "title": "Spray as directed",
+        "text": "Apply the Fast version to compatible wet panels. Work so the product cannot dry.",
+        "scene": "spray"
+      },
+      {
+        "title": "Pressure-rinse immediately",
+        "text": "Activate and remove excess using the manufacturer’s specified rinse, then dry the car.",
+        "scene": "rinse"
+      }
+    ],
+    "faq": [
+      [
+        "Is this a dirt remover?",
+        "No. Clean the surface before applying this finishing product."
+      ],
+      [
+        "How long does it last?",
+        "Durability depends on preparation, use and conditions. Refer to the label; no fixed protection period is promised here."
+      ]
+    ],
+    "headline": "Protection in your final rinse.",
+    "problem": "You want a protective finishing step without adding a long buffing stage to the wash.",
+    "how": "Hydrox Fast is a ready-to-use, water-activated ceramic product for paint and glass. Apply to a clean, still-wet, cool vehicle and pressure-rinse immediately as directed.",
+    "payoff": "Add a protective step before you dry, using the rinse as part of the application.",
+    "stage": "After washing, before drying",
+    "surface": "Compatible paint and glass",
+    "format": "Ready-to-use Fast version",
+    "suited": "Clean, wet paint and compatible glass, following the bottle directions.",
+    "avoid": "Dry or hot application, leaving it to dry, or substituting Hydrox Pro dilution instructions.",
+    "tip": "The manufacturer specifies an immediate pressure rinse. The Fast version is ready to use, unlike Hydrox Pro.",
+    "story": "hydrox-fast-sealant-2.webp",
+    "story_alt": "A ceramic spray product being applied to a clean wet car",
+    "primary": "https://www.vonixx.com.br/produto/hydrox-fast/",
+    "reasons": [
+      {
+        "title": "Rinse-activated step",
+        "text": "Water is part of the application method."
+      },
+      {
+        "title": "No concentrate mixing",
+        "text": "The Fast reference is ready to use."
+      },
+      {
+        "title": "Finish before drying",
+        "text": "Place it between the wash and drying stages."
+      }
+    ],
+    "related": [
+      "air-blower",
+      "drying-towel",
+      "v-floc-shampoo"
+    ],
+    "reviews": [],
+    "stepImages": [
+      "hydrox-fast-sealant-1.webp",
+      "hydrox-fast-sealant-2.webp",
+      "hydrox-fast-sealant-2.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "blend-spray-wax",
+    "title": "Vonixx Blend Spray Wax",
+    "brand": "VONIXX",
+    "category": "finish",
+    "promise": "Refresh the gloss between full detailing sessions.",
+    "intro": "Blend Spray Wax combines carnauba and SiO₂ in a ready-to-use spray. Apply a small amount to a clean section, then finish with a clean microfiber before it dries.",
+    "features": [
+      "Carnauba and SiO₂ reference formula",
+      "Spray application",
+      "For a finishing step after cleaning"
+    ],
+    "specs": [
+      [
+        "Product type",
+        "Ceramic & carnauba spray wax"
+      ],
+      [
+        "Reference size",
+        "500 mL"
+      ],
+      [
+        "Surface",
+        "Clean, compatible paintwork"
+      ],
+      [
+        "Tools",
+        "Clean microfiber applicator / buffing cloth"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Wash, dry and shake",
+        "text": "Start with a clean, cool panel. Shake the bottle before use.",
+        "scene": "towel"
+      },
+      {
+        "title": "Use a small working area",
+        "text": "Apply a little from about 20 cm, working within roughly 60 × 60 cm at a time.",
+        "scene": "spray"
+      },
+      {
+        "title": "Buff before it dries",
+        "text": "Use a clean, dry microfiber to finish. Repeat section by section; reapply locally if needed.",
+        "scene": "buff"
+      }
+    ],
+    "faq": [
+      [
+        "Will it remove scratches?",
+        "No. A spray wax is a finishing product, not a scratch-removal treatment."
+      ],
+      [
+        "Can I apply it over dirt?",
+        "Clean the surface first so you do not drag contamination across the paint."
+      ]
+    ],
+    "headline": "Make the final wipe count.",
+    "problem": "The car is clean, but you want to give the paint an extra finishing touch.",
+    "how": "Blend Spray Wax combines carnauba and SiO₂ in a ready-to-use spray. Apply a small amount to a clean section, then finish with a clean microfiber before it dries.",
+    "payoff": "A practical gloss-and-protection step after the wash.",
+    "stage": "After washing and drying",
+    "surface": "Compatible paintwork",
+    "format": "Ready-to-use spray wax",
+    "suited": "Clean paint and label-approved finishes.",
+    "avoid": "Dirty paint, excessive product and unsupported plastic surfaces.",
+    "tip": "Manufacturer application example: spray from about 20 cm and work areas no larger than 60 × 60 cm.",
+    "story": "blend-spray-wax-2.webp",
+    "story_alt": "Spray wax application and finishing on a clean car exterior",
+    "primary": "https://www.vonixx.com.br/produto/blend-spray-wax/",
+    "reasons": [
+      {
+        "title": "Spray application",
+        "text": "Work in small areas with a measured amount."
+      },
+      {
+        "title": "Carnauba and SiO₂",
+        "text": "The reference formula combines both technologies."
+      },
+      {
+        "title": "A finishing product",
+        "text": "It adds a post-wash step; it does not repair scratches."
+      }
+    ],
+    "related": [
+      "drying-towel",
+      "v-floc-shampoo",
+      "shiny-tire-dressing"
+    ],
+    "reviews": [],
+    "stepImages": [
+      "blend-spray-wax-1.webp",
+      "blend-spray-wax-2.webp",
+      "blend-spray-wax-2.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "delet-tire-cleaner",
+    "title": "Vonixx Delet Tire Cleaner",
+    "brand": "VONIXX",
+    "category": "wheels",
+    "promise": "Give your tire dressing a cleaner starting point.",
+    "intro": "Delet cleans tires and compatible rubber. The manufacturer starts with a dry tire, allows a short dwell, then uses a tire brush and a full rinse.",
+    "features": [
+      "Designed for tires and exterior rubber",
+      "Helps remove old dressing and grime",
+      "Prepares sidewalls for a finishing product"
+    ],
+    "specs": [
+      [
+        "Product type",
+        "Tire and rubber cleaner"
+      ],
+      [
+        "Reference sizes",
+        "500 mL / 5 L"
+      ],
+      [
+        "Surface",
+        "Compatible tire sidewalls and exterior rubber"
+      ],
+      [
+        "Not intended for",
+        "Glass"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Apply to a dry tire",
+        "text": "Start with a cool, dry sidewall. Apply the foaming cleaner as directed.",
+        "scene": "tire-spray"
+      },
+      {
+        "title": "Dwell, then scrub",
+        "text": "The manufacturer specifies 30–60 seconds before brushing thoroughly with a suitable tire brush.",
+        "scene": "wheel-brush"
+      },
+      {
+        "title": "Rinse and let it dry",
+        "text": "Remove all product with water. Dry the sidewall before applying dressing.",
+        "scene": "wheel-rinse"
+      }
+    ],
+    "faq": [
+      [
+        "Is this tire shine?",
+        "No. It cleans the rubber before a dressing is applied."
+      ],
+      [
+        "Why does the foam change color?",
+        "Lifted contamination can darken the foam. Follow the label and rinse the surface thoroughly."
+      ]
+    ],
+    "headline": "A better finish starts with cleaner rubber.",
+    "problem": "Brown grime and old dressing can hide the sidewall before you apply tire shine.",
+    "how": "Delet cleans tires and compatible rubber. The manufacturer starts with a dry tire, allows a short dwell, then uses a tire brush and a full rinse.",
+    "payoff": "A cleaner starting surface for the dressing you choose next.",
+    "stage": "Before tire dressing",
+    "surface": "Tires and compatible rubber",
+    "format": "Apply according to the label",
+    "suited": "Tire sidewalls and compatible rubber with built-up grime or old dressing.",
+    "avoid": "Automotive glass and allowing the cleaner to dry on the surface.",
+    "tip": "Manufacturer dwell guidance is 30–60 seconds. Foam can darken as dirt is lifted; it is not a tire dressing.",
+    "story": "delet-tire-cleaner-story.webp",
+    "story_alt": "Tire sidewall cleaning with a brush and foaming rubber cleaner",
+    "primary": "https://www.vonixx.com.br/produto/delet/",
+    "reasons": [
+      {
+        "title": "Remove built-up grime",
+        "text": "Use a rubber-specific cleaner for the sidewall."
+      },
+      {
+        "title": "Brush the texture",
+        "text": "Agitation helps clean the tire’s detailed surface."
+      },
+      {
+        "title": "Prepare for dressing",
+        "text": "Clean first, dress after the sidewall dries."
+      }
+    ],
+    "related": [
+      "shiny-tire-dressing",
+      "vexus-wheel-cleaner",
+      "pressure-washer-gun"
+    ],
+    "reviews": [],
+    "stepImages": [
+      "delet-tire-cleaner-1.webp",
+      "delet-tire-cleaner-story.webp",
+      "delet-tire-cleaner-story.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "vexus-wheel-cleaner",
+    "title": "Vonixx Vexus Wheel Cleaner",
+    "brand": "VONIXX",
+    "category": "wheels",
+    "promise": "Lift the road grime that hides your wheels.",
+    "intro": "Vexus is designed for compatible wheels and engine-bay surfaces. Spray a small amount on a cool surface, loosen dirt with a suitable brush, rinse fully and dry.",
+    "features": [
+      "Acid-free reference formula",
+      "For compatible wheels and engine-bay surfaces",
+      "Targeted cleaning before rinsing"
+    ],
+    "specs": [
+      [
+        "Product type",
+        "Wheel & engine-bay cleaner"
+      ],
+      [
+        "Reference sizes",
+        "500 mL / 5 L"
+      ],
+      [
+        "Application",
+        "Follow label compatibility and dilution instructions"
+      ],
+      [
+        "Not intended for",
+        "Glass"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Start with a cool surface",
+        "text": "Check the finish and label. Apply a small quantity only where appropriate.",
+        "scene": "wheel-spray"
+      },
+      {
+        "title": "Loosen with a brush",
+        "text": "Use a suitable wheel brush or detailing brush until the dirt releases.",
+        "scene": "wheel-brush"
+      },
+      {
+        "title": "Rinse and dry",
+        "text": "Rinse fully with suitable water control, then dry. Follow the vehicle guidance for engine bays.",
+        "scene": "wheel-rinse"
+      }
+    ],
+    "faq": [
+      [
+        "Will it remove every bonded contaminant?",
+        "Not necessarily. Bonded iron or tar may require a suitable dedicated product."
+      ],
+      [
+        "Can I use it on hot wheels?",
+        "Allow the surface to cool and follow the product directions first."
+      ]
+    ],
+    "headline": "Bring the details out of the dirt.",
+    "problem": "Wheels and engine-bay surfaces collect grime in places a quick exterior wash can miss.",
+    "how": "Vexus is designed for compatible wheels and engine-bay surfaces. Spray a small amount on a cool surface, loosen dirt with a suitable brush, rinse fully and dry.",
+    "payoff": "A targeted cleaning step for the harder-working details of the vehicle.",
+    "stage": "Targeted exterior cleaning",
+    "surface": "Compatible wheels and engine bays",
+    "format": "Follow the supplied label",
+    "suited": "Label-approved wheel finishes and engine-bay materials.",
+    "avoid": "Hot surfaces, automotive glass and uncontrolled water around sensitive electrical components.",
+    "tip": "Confirm compatibility with your wheel finish and engine-bay components before cleaning.",
+    "story": "vexus-wheel-cleaner-2.webp",
+    "story_alt": "Controlled cleaning of a car engine bay with a dedicated cleaner",
+    "primary": "https://www.vonixx.com.br/produto/vexus/",
+    "reasons": [
+      {
+        "title": "Targeted application",
+        "text": "Put the cleaner where the grime has collected."
+      },
+      {
+        "title": "Brush-assisted cleaning",
+        "text": "Use suitable tools to reach the details."
+      },
+      {
+        "title": "Different from tire shine",
+        "text": "Clean the wheel or engine bay; use a separate dressing where appropriate."
+      }
+    ],
+    "related": [
+      "izer-iron-remover",
+      "delet-tire-cleaner",
+      "shiny-tire-dressing"
+    ],
+    "reviews": [],
+    "stepImages": [
+      "vexus-wheel-cleaner-1.webp",
+      "vexus-wheel-cleaner-2.webp",
+      "vexus-wheel-cleaner-2.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "shiny-tire-dressing",
+    "title": "Vonixx Shiny Tire Dressing",
+    "brand": "VONIXX",
+    "category": "wheels",
+    "promise": "Bring back a deep, glossy sidewall finish.",
+    "intro": "Shiny is a ready-to-use tire dressing with a glossy finish. Clean and dry the rubber first, then spread a controlled amount with a foam applicator.",
+    "features": [
+      "Wet-look gloss finish",
+      "For compatible tire sidewalls",
+      "Use after cleaning and drying"
+    ],
+    "specs": [
+      [
+        "Product type",
+        "High-gloss tire dressing"
+      ],
+      [
+        "Reference size",
+        "500 mL"
+      ],
+      [
+        "Surface",
+        "Compatible sidewalls and exterior rubber"
+      ],
+      [
+        "Keep clear of",
+        "Tire tread and braking surfaces"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Clean and dry the rubber",
+        "text": "Remove grime and old dressing, rinse and let the sidewall dry.",
+        "scene": "wheel-rinse"
+      },
+      {
+        "title": "Apply with control",
+        "text": "Use a foam applicator to spread a small amount evenly over the sidewall.",
+        "scene": "tire-finish"
+      },
+      {
+        "title": "Check the final coverage",
+        "text": "Remove excess as directed and respect the bottle’s drying instructions before driving.",
+        "scene": "tire-check"
+      }
+    ],
+    "faq": [
+      [
+        "Can I apply it to the tread?",
+        "No. Keep dressing away from tread and braking surfaces."
+      ],
+      [
+        "Can I skip cleaning first?",
+        "Old dressing and dirt can cause a patchy finish. Clean and dry before applying."
+      ]
+    ],
+    "headline": "Finish the wash at the sidewalls.",
+    "problem": "Clean wheels still look unfinished when the tire sidewalls appear dull and uneven.",
+    "how": "Shiny is a ready-to-use tire dressing with a glossy finish. Clean and dry the rubber first, then spread a controlled amount with a foam applicator.",
+    "payoff": "A deeper, more even-looking sidewall to complete the exterior routine.",
+    "stage": "After tire cleaning and drying",
+    "surface": "Compatible tire sidewalls",
+    "format": "Ready-to-use tire dressing",
+    "suited": "Clean, dry tire sidewalls and label-approved rubber.",
+    "avoid": "Tread, brakes and applying over dirt or old, uneven dressing.",
+    "tip": "Apply with a foam applicator for control. Keep the product off the tread and braking surfaces.",
+    "story": "shiny-tire-dressing-story.webp",
+    "story_alt": "Applying tire dressing to a clean tire sidewall with an applicator",
+    "primary": "https://www.vonixx.com.br/produto/shiny/",
+    "reasons": [
+      {
+        "title": "Glossy appearance",
+        "text": "Choose it when you want a wet-look sidewall."
+      },
+      {
+        "title": "Controlled application",
+        "text": "A foam applicator keeps the work on the intended area."
+      },
+      {
+        "title": "Last step for the tire",
+        "text": "It dresses clean rubber rather than cleaning it."
+      }
+    ],
+    "related": [
+      "delet-tire-cleaner",
+      "vexus-wheel-cleaner",
+      "blend-spray-wax"
+    ],
+    "reviews": [],
+    "stepImages": [
+      "shiny-tire-dressing-1.webp",
+      "shiny-tire-dressing-story.webp",
+      "shiny-tire-dressing-story.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "izer-iron-remover",
+    "title": "Vonixx Izer Iron Remover",
+    "brand": "VONIXX",
+    "category": "wheels",
+    "promise": "Target iron contamination a regular wash can leave behind.",
+    "intro": "Izer targets ferrous contamination on compatible surfaces. Apply to a cool surface, allow the specified reaction time, agitate appropriately and rinse thoroughly.",
+    "features": [
+      "Dedicated iron and fallout removal",
+      "For compatible surfaces specified on the label",
+      "A decontamination step after cleaning"
+    ],
+    "specs": [
+      [
+        "Product type",
+        "Iron & fallout remover"
+      ],
+      [
+        "Reference size",
+        "500 mL"
+      ],
+      [
+        "Stage",
+        "Decontamination"
+      ],
+      [
+        "Compatibility",
+        "Check the bottle and surface manufacturer guidance"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Confirm and cool the surface",
+        "text": "Check material compatibility. Do not use on zinc-coated or hot surfaces.",
+        "scene": "wheel-check"
+      },
+      {
+        "title": "Apply and allow the reaction",
+        "text": "The manufacturer specifies 2–3 minutes. Keep the product from drying.",
+        "scene": "iron"
+      },
+      {
+        "title": "Agitate and rinse fully",
+        "text": "Use a suitable tool gently as directed, then rinse with an appropriate pressure washer.",
+        "scene": "wheel-rinse"
+      }
+    ],
+    "faq": [
+      [
+        "Do I need it in every wash?",
+        "Use a decontamination product when needed and as directed, rather than automatically at every wash."
+      ],
+      [
+        "Does it replace shampoo?",
+        "No. It targets iron contamination and does not replace the normal wash stage."
+      ]
+    ],
+    "headline": "Go after what the wash leaves behind.",
+    "problem": "Some particles bonded to wheels and paint are not ordinary loose road dirt.",
+    "how": "Izer targets ferrous contamination on compatible surfaces. Apply to a cool surface, allow the specified reaction time, agitate appropriately and rinse thoroughly.",
+    "payoff": "A focused decontamination step when the condition of the surface calls for it.",
+    "stage": "Chemical decontamination",
+    "surface": "Label-approved wheels and exterior areas",
+    "format": "Ready to use; check paint guidance",
+    "suited": "Compatible wheels and label-approved surfaces with ferrous contamination.",
+    "avoid": "Zinc-coated surfaces, hot panels and direct-sun application.",
+    "tip": "Manufacturer dwell guidance is 2–3 minutes. A purple/darker reaction can indicate iron contamination; do not let the product dry.",
+    "story": "izer-iron-remover-2.webp",
+    "story_alt": "Iron-remover application on a wheel as a decontamination example",
+    "primary": "https://www.vonixx.com.br/produto/izer/",
+    "reasons": [
+      {
+        "title": "A specific contaminant",
+        "text": "Targets ferrous deposits rather than every kind of dirt."
+      },
+      {
+        "title": "Reaction you can observe",
+        "text": "Color may change when ferrous material is present."
+      },
+      {
+        "title": "Used when needed",
+        "text": "A separate step after routine cleaning, not a replacement for shampoo."
+      }
+    ],
+    "related": [
+      "vexus-wheel-cleaner",
+      "delet-tire-cleaner",
+      "hydrox-fast-sealant"
+    ],
+    "reviews": [],
+    "stepImages": [
+      "izer-iron-remover-1.webp",
+      "izer-iron-remover-2.webp",
+      "izer-iron-remover-2.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  },
+  {
+    "slug": "impact-all-purpose-cleaner",
+    "title": "Vonixx Impact All-Purpose Cleaner",
+    "brand": "VONIXX",
+    "category": "interior",
+    "promise": "Tackle stubborn grime with the right dilution.",
+    "intro": "Impact is a concentrated cleaner and degreaser for label-approved materials. Measure the correct dilution, loosen the soil, then rinse or extract according to the job.",
+    "features": [
+      "Concentrated cleaner and degreaser",
+      "Dilution matched to the cleaning task",
+      "For label-approved surfaces"
+    ],
+    "specs": [
+      [
+        "Product type",
+        "Concentrated cleaner & degreaser"
+      ],
+      [
+        "Reference bottle shown",
+        "1.5 L"
+      ],
+      [
+        "Preparation",
+        "Dilute for the specific task"
+      ],
+      [
+        "Not recommended",
+        "Plastics or leather seats"
+      ]
+    ],
+    "steps": [
+      {
+        "title": "Select the surface and ratio",
+        "text": "Check compatibility, test an inconspicuous area and measure the label-approved dilution.",
+        "scene": "mix"
+      },
+      {
+        "title": "Apply and loosen the soil",
+        "text": "Use a suitable sprayer and soft brush or applicator. For fabrics, avoid unnecessary saturation.",
+        "scene": "carpet"
+      },
+      {
+        "title": "Remove and let it dry",
+        "text": "Rinse appropriate exterior areas, or wet-extract approved fabrics. Let fabrics dry completely.",
+        "scene": "extract"
+      }
+    ],
+    "faq": [
+      [
+        "Can I use it on leather seats or plastic trim?",
+        "The manufacturer does not recommend Impact for leather seats or interior/exterior plastics. Choose a suitable dedicated cleaner instead."
+      ],
+      [
+        "Can I use the same dilution everywhere?",
+        "No. The concentration and removal method depend on the surface, dirt level and equipment. Follow the exact bottle directions."
+      ]
+    ],
+    "headline": "Match the cleaner to the mess.",
+    "problem": "Carpets, stubborn exterior grime and greasy areas need a method matched to the surface.",
+    "how": "Impact is a concentrated cleaner and degreaser for label-approved materials. Measure the correct dilution, loosen the soil, then rinse or extract according to the job.",
+    "payoff": "A more deliberate approach to heavy cleaning instead of one strength used everywhere.",
+    "stage": "Targeted heavier cleaning",
+    "surface": "Label-approved fabrics and exterior areas",
+    "format": "Concentrate: dilute first",
+    "suited": "Label-approved carpets, upholstery, wheels, engines and exterior areas.",
+    "avoid": "Interior or exterior plastics and leather seats: the manufacturer does not recommend those applications.",
+    "tip": "Manufacturer ratios vary by job, including 1:10 heavy, 1:30 medium and 1:50 maintenance. Use the exact label and equipment guidance.",
+    "story": "impact-all-purpose-cleaner-2.webp",
+    "story_alt": "Carpet cleaning inside a car as a concentrated cleaner application example",
+    "primary": "https://www.vonixx.com.br/produto/impact/",
+    "reasons": [
+      {
+        "title": "Task-based concentration",
+        "text": "Match the dilution to the job."
+      },
+      {
+        "title": "Different removal methods",
+        "text": "Rinse suitable exterior areas; extract approved fabrics."
+      },
+      {
+        "title": "Clear material limits",
+        "text": "Choose a different cleaner for plastics or leather seats."
+      }
+    ],
+    "related": [
+      "sintra-interior-cleaner",
+      "vexus-wheel-cleaner",
+      "glazy-glass-cleaner"
+    ],
+    "reviews": [],
+    "stepImages": [
+      "impact-all-purpose-cleaner-1.webp",
+      "impact-all-purpose-cleaner-2.webp",
+      "impact-all-purpose-cleaner-2.webp"
+    ],
+    "sourceChecked": "2026-11-24"
+  }
+]
