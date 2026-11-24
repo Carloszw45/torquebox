@@ -1,0 +1,235 @@
+{
+  "method": "Built-in image generation, background-extraction edit",
+  "notes": "Generated alpha preserved. Only transparent-margin trimming and proportional resizing/re-encoding are applied for web delivery. Original gallery assets and QIFOR landing page remain unchanged.",
+  "products": [
+    {
+      "name": "drying-towel",
+      "source": "assets/catalog/drying-towel-1.webp",
+      "prompt": "Use case: background-extraction. Edit target: this exact existing product photograph of the navy MCX microfiber towel, retaining its folded corner, woven texture, black border and exact MCX print. Remove ONLY the white or gray photographic background and its floor/contact shadow. Keep the product identical to the reference: same silhouette, camera angle, proportions, colors, texture, printed branding, letters, fittings, and all visible parts. Preserve white parts of the actual product. Do not redesign, retype labels, add details, add accessories, or invent any text. Create an ecommerce product cutout on genuine transparent alpha, including transparent empty spaces inside handles. For clear plastic retain natural translucent reflections rather than a white rectangular background. Show the complete original product with a little transparent margin and clean antialiased edges. No scene, no surface, no shadow, no border, no checkerboard pattern baked into the image.",
+      "output": "assets/cutouts/drying-towel.webp",
+      "size": [
+        900,
+        530
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "pressure-washer-gun",
+      "source": "assets/catalog/pressure-washer-gun-1.webp",
+      "prompt": "Use case: background-extraction. Edit target: this exact existing product photograph of the white and pink pressure washer gun, preserving the white body, pink trigger, metal connections and four red, green, yellow and white nozzle tips. Remove ONLY the white or gray photographic background and its floor/contact shadow. Keep the product identical to the reference: same silhouette, camera angle, proportions, colors, texture, printed branding, letters, fittings, and all visible parts. Preserve white parts of the actual product. Do not redesign, retype labels, add details, add accessories, or invent any text. Create an ecommerce product cutout on genuine transparent alpha, including transparent empty spaces inside handles. For clear plastic retain natural translucent reflections rather than a white rectangular background. Show the complete original product with a little transparent margin and clean antialiased edges. No scene, no surface, no shadow, no border, no checkerboard pattern baked into the image.",
+      "output": "assets/cutouts/pressure-washer-gun.webp",
+      "size": [
+        765,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "foam-cannon",
+      "source": "assets/catalog/foam-cannon-1.webp",
+      "prompt": "Use case: background-extraction. Edit target: this exact existing product photograph of the blue-and-white foam cannon with its clear bottle, blue pickup tube, metal connector and measurement markings. Remove ONLY the white or gray photographic background and its floor/contact shadow. Keep the product identical to the reference: same silhouette, camera angle, proportions, colors, texture, printed branding, letters, fittings, and all visible parts. Preserve white parts of the actual product. Do not redesign, retype labels, add details, add accessories, or invent any text. Create an ecommerce product cutout on genuine transparent alpha, including transparent empty spaces inside handles. For clear plastic retain natural translucent reflections rather than a white rectangular background. Show the complete original product with a little transparent margin and clean antialiased edges. No scene, no surface, no shadow, no border, no checkerboard pattern baked into the image.",
+      "output": "assets/cutouts/foam-cannon.webp",
+      "size": [
+        635,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "air-blower",
+      "source": "assets/catalog/air-blower-1.webp",
+      "prompt": "Use case: background-extraction. Edit target: this exact existing product photograph of the blue BLO car dryer, retaining the BLO branding, black nozzle, handle, rear vent and visible power cable. Remove ONLY the white or gray photographic background and its floor/contact shadow. Keep the product identical to the reference: same silhouette, camera angle, proportions, colors, texture, printed branding, letters, fittings, and all visible parts. Preserve white parts of the actual product. Do not redesign, retype labels, add details, add accessories, or invent any text. Create an ecommerce product cutout on genuine transparent alpha, including transparent empty spaces inside handles. For clear plastic retain natural translucent reflections rather than a white rectangular background. Show the complete original product with a little transparent margin and clean antialiased edges. No scene, no surface, no shadow, no border, no checkerboard pattern baked into the image.",
+      "output": "assets/cutouts/air-blower.webp",
+      "size": [
+        900,
+        502
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "v-floc-shampoo",
+      "source": "assets/catalog/v-floc-shampoo-1.webp",
+      "prompt": "Use case: background-extraction. Remove only the white background from this exact photograph of the Vonixx V-FLOC bottle. Make a clean ecommerce cutout with genuine transparent alpha. Keep the existing product, label, all printed letters and markings, liquid color, cap or trigger, shape, camera view and proportions unchanged. Do not redraw or retype the label or invent any text. Preserve the product's white plastic parts. Only the bottle itself remains, with a small clear transparent margin; no floor, no drop shadow, no reflection beneath it, no glow, no colored haze, no white halo, no additional objects, no baked checkerboard. Transparent pixels must reach exactly to the outside silhouette; maintain antialiased product edges.",
+      "output": "assets/cutouts/v-floc-shampoo.webp",
+      "size": [
+        250,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "v-mol-prewash",
+      "source": "assets/catalog/v-mol-prewash-1.webp",
+      "prompt": "Use case: background-extraction. Remove only the white background from this exact photograph of the Vonixx V-MOL bottle. Make a clean ecommerce cutout with genuine transparent alpha. Keep the existing product, label, all printed letters and markings, liquid color, cap or trigger, shape, camera view and proportions unchanged. Do not redraw or retype the label or invent any text. Preserve the product's white plastic parts. Only the bottle itself remains, with a small clear transparent margin; no floor, no drop shadow, no reflection beneath it, no glow, no colored haze, no white halo, no additional objects, no baked checkerboard. Transparent pixels must reach exactly to the outside silhouette; maintain antialiased product edges.",
+      "output": "assets/cutouts/v-mol-prewash.webp",
+      "size": [
+        255,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "sintra-interior-cleaner",
+      "source": "assets/catalog/sintra-interior-cleaner-1.webp",
+      "prompt": "Use case: background-extraction. Remove only the white background from this exact photograph of the Vonixx SINTRA FAST bottle. Make a clean ecommerce cutout with genuine transparent alpha. Keep the existing product, label, all printed letters and markings, liquid color, cap or trigger, shape, camera view and proportions unchanged. Do not redraw or retype the label or invent any text. Preserve the product's white plastic parts. Only the bottle itself remains, with a small clear transparent margin; no floor, no drop shadow, no reflection beneath it, no glow, no colored haze, no white halo, no additional objects, no baked checkerboard. Transparent pixels must reach exactly to the outside silhouette; maintain antialiased product edges.",
+      "output": "assets/cutouts/sintra-interior-cleaner.webp",
+      "size": [
+        322,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "glazy-glass-cleaner",
+      "source": "assets/catalog/glazy-glass-cleaner-1.webp",
+      "prompt": "Use case: background-extraction. Remove only the white background from this exact photograph of the Vonixx GLAZY bottle. Make a clean ecommerce cutout with genuine transparent alpha. Keep the existing product, label, all printed letters and markings, liquid color, cap or trigger, shape, camera view and proportions unchanged. Do not redraw or retype the label or invent any text. Preserve the product's white plastic parts. Only the bottle itself remains, with a small clear transparent margin; no floor, no drop shadow, no reflection beneath it, no glow, no colored haze, no white halo, no additional objects, no baked checkerboard. Transparent pixels must reach exactly to the outside silhouette; maintain antialiased product edges.",
+      "output": "assets/cutouts/glazy-glass-cleaner.webp",
+      "size": [
+        289,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "hydrox-fast-sealant",
+      "source": "assets/catalog/hydrox-fast-sealant-1.webp",
+      "prompt": "Use case: background-extraction. Remove only the white background from this exact photograph of the Vonixx HYDROX FAST bottle. Make a clean ecommerce cutout with genuine transparent alpha. Keep the existing product, label, all printed letters and markings, liquid color, cap or trigger, shape, camera view and proportions unchanged. Do not redraw or retype the label or invent any text. Preserve the product's white plastic parts. Only the bottle itself remains, with a small clear transparent margin; no floor, no drop shadow, no reflection beneath it, no glow, no colored haze, no white halo, no additional objects, no baked checkerboard. Transparent pixels must reach exactly to the outside silhouette; maintain antialiased product edges.",
+      "output": "assets/cutouts/hydrox-fast-sealant.webp",
+      "size": [
+        300,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "blend-spray-wax",
+      "source": "assets/catalog/blend-spray-wax-1.webp",
+      "prompt": "Use case: background-extraction. Remove only the white background from this exact photograph of the Vonixx BLEND bottle. Make a clean ecommerce cutout with genuine transparent alpha. Keep the existing product, label, all printed letters and markings, liquid color, cap or trigger, shape, camera view and proportions unchanged. Do not redraw or retype the label or invent any text. Preserve the product's white plastic parts. Only the bottle itself remains, with a small clear transparent margin; no floor, no drop shadow, no reflection beneath it, no glow, no colored haze, no white halo, no additional objects, no baked checkerboard. Transparent pixels must reach exactly to the outside silhouette; maintain antialiased product edges.",
+      "output": "assets/cutouts/blend-spray-wax.webp",
+      "size": [
+        317,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "delet-tire-cleaner",
+      "source": "assets/catalog/delet-tire-cleaner-1.webp",
+      "prompt": "Use case: background-extraction. Remove only the white background from this exact photograph of the Vonixx DELET bottle. Make a clean ecommerce cutout with genuine transparent alpha. Keep the existing product, label, all printed letters and markings, liquid color, cap or trigger, shape, camera view and proportions unchanged. Do not redraw or retype the label or invent any text. Preserve the product's white plastic parts. Only the bottle itself remains, with a small clear transparent margin; no floor, no drop shadow, no reflection beneath it, no glow, no colored haze, no white halo, no additional objects, no baked checkerboard. Transparent pixels must reach exactly to the outside silhouette; maintain antialiased product edges.",
+      "output": "assets/cutouts/delet-tire-cleaner.webp",
+      "size": [
+        331,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "vexus-wheel-cleaner",
+      "source": "assets/catalog/vexus-wheel-cleaner-1.webp",
+      "prompt": "Use case: background-extraction. Remove only the white background from this exact photograph of the Vonixx VEXUS bottle. Make a clean ecommerce cutout with genuine transparent alpha. Keep the existing product, label, all printed letters and markings, liquid color, cap or trigger, shape, camera view and proportions unchanged. Do not redraw or retype the label or invent any text. Preserve the product's white plastic parts. Only the bottle itself remains, with a small clear transparent margin; no floor, no drop shadow, no reflection beneath it, no glow, no colored haze, no white halo, no additional objects, no baked checkerboard. Transparent pixels must reach exactly to the outside silhouette; maintain antialiased product edges.",
+      "output": "assets/cutouts/vexus-wheel-cleaner.webp",
+      "size": [
+        332,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "shiny-tire-dressing",
+      "source": "assets/catalog/shiny-tire-dressing-1.webp",
+      "prompt": "Use case: background-extraction. Remove only the white background from this exact photograph of the Vonixx SHINY bottle. Make a clean ecommerce cutout with genuine transparent alpha. Keep the existing product, label, all printed letters and markings, liquid color, cap or trigger, shape, camera view and proportions unchanged. Do not redraw or retype the label or invent any text. Preserve the product's white plastic parts. Only the bottle itself remains, with a small clear transparent margin; no floor, no drop shadow, no reflection beneath it, no glow, no colored haze, no white halo, no additional objects, no baked checkerboard. Transparent pixels must reach exactly to the outside silhouette; maintain antialiased product edges.",
+      "output": "assets/cutouts/shiny-tire-dressing.webp",
+      "size": [
+        248,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "izer-iron-remover",
+      "source": "assets/catalog/izer-iron-remover-1.webp",
+      "prompt": "Use case: background-extraction. Remove only the white background from this exact photograph of the Vonixx IZER bottle. Make a clean ecommerce cutout with genuine transparent alpha. Keep the existing product, label, all printed letters and markings, liquid color, cap or trigger, shape, camera view and proportions unchanged. Do not redraw or retype the label or invent any text. Preserve the product's white plastic parts. Only the bottle itself remains, with a small clear transparent margin; no floor, no drop shadow, no reflection beneath it, no glow, no colored haze, no white halo, no additional objects, no baked checkerboard. Transparent pixels must reach exactly to the outside silhouette; maintain antialiased product edges.",
+      "output": "assets/cutouts/izer-iron-remover.webp",
+      "size": [
+        335,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "impact-all-purpose-cleaner",
+      "source": "assets/catalog/impact-all-purpose-cleaner-1.webp",
+      "prompt": "Use case: background-extraction. Remove only the white background from this exact photograph of the Vonixx IMPACT bottle. Make a clean ecommerce cutout with genuine transparent alpha. Keep the existing product, label, all printed letters and markings, liquid color, cap or trigger, shape, camera view and proportions unchanged. Do not redraw or retype the label or invent any text. Preserve the product's white plastic parts. Only the bottle itself remains, with a small clear transparent margin; no floor, no drop shadow, no reflection beneath it, no glow, no colored haze, no white halo, no additional objects, no baked checkerboard. Transparent pixels must reach exactly to the outside silhouette; maintain antialiased product edges.",
+      "output": "assets/cutouts/impact-all-purpose-cleaner.webp",
+      "size": [
+        281,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "qifor",
+      "source": "assets/images/qifor-wind-shield-pro.jpg",
+      "prompt": "Use case: background-extraction. Remove only the white background and the reflection on the floor from this exact QIFOR WIND SHIELD PRO bottle photograph. Keep the orange cap, long clear neck, golden liquid, black label and all original printed letters unchanged. Preserve the exact bottle shape and proportions, all photographed branding, and the original viewing angle. No redraw, redesign or invented text. Output only the complete original bottle centered with a little transparent margin and clean antialiased edges on genuine transparent alpha. No background, no scene, no shadow, no halo or glow, no reflection below the bottle, and no checkerboard pattern.",
+      "output": "assets/cutouts/qifor.webp",
+      "size": [
+        277,
+        900
+      ],
+      "alphaRange": [
+        0,
+        255
+      ]
+    }
+  ],
+  "logo": {
+    "source": "assets/branding/torquebox-wordmark.webp",
+    "output": "assets/branding/torquebox-wordmark-light-v2.svg",
+    "method": "Original wordmark rendered in a self-contained SVG with color-based native filters. Orange source pixels are isolated from the white letter silhouette, avoiding the former rectangular overlay clipping the initial O. No font substitution."
+  }
+}

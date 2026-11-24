@@ -44,8 +44,11 @@ def glyph(name,size=22):
     return f'<svg width="{size}" height="{size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{shapes[name]}</svg>'
 
 def brand(prefix=''):
-    src=prefix+'assets/branding/torquebox-wordmark.webp'
-    return f'<span class="reference-brand-art"><img src="{src}" alt="TORQUEBOX" width="1100" height="161"><img class="reference-brand-accent" src="{src}" alt="" aria-hidden="true" width="1100" height="161"></span>'
+    src=prefix+'assets/branding/torquebox-wordmark-light-v2.svg'
+    return f'<span class="reference-brand-art"><img src="{src}" alt="TORQUEBOX" width="1100" height="161"></span>'
+
+def card_asset(slug):
+    return f'assets/cutouts/{slug}.webp'
 
 def save_button(slug,title):
     return f'<button class="save-product" type="button" data-save-product="{slug}" aria-pressed="false" aria-label="Save {e(title)}">{glyph("heart",20)}</button>'
@@ -71,7 +74,7 @@ def head(title, desc, path, prefix='', page='', product=None):
 <link rel="canonical" href="https://torque-box.com/{path}"><meta property="og:title" content="{e(title)} | TORQUEBOX"><meta property="og:description" content="{e(desc)}"><meta property="og:type" content="website"><meta property="og:url" content="https://torque-box.com/{path}">
 <meta property="og:image" content="https://torque-box.com/assets/photography/reference-road-hero.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{prefix}assets/catalog-v3.css"><link rel="stylesheet" href="{prefix}assets/catalog-v5.css"><link rel="stylesheet" href="{prefix}assets/catalog-v6.css"><script defer src="{prefix}assets/catalog-v5.js"></script>
+<link rel="stylesheet" href="{prefix}assets/catalog-v3.css"><link rel="stylesheet" href="{prefix}assets/catalog-v5.css"><link rel="stylesheet" href="{prefix}assets/catalog-v6.css"><link rel="stylesheet" href="{prefix}assets/catalog-v7.css"><script defer src="{prefix}assets/catalog-v5.js"></script>
 </head><body class="photo-store market-store {page}"{product_attrs}>'''
 
 
@@ -92,12 +95,12 @@ def footer(prefix=''):
 
 
 def card(p,prefix='',recent=False):
-    url=prefix+'products/'+p['slug']+'.html';still=photos.pack(p);action=p['gallery'][0]
-    return f'''<article class="store-card reference-card" data-product-card data-product-slug="{p['slug']}" data-category="{p['category']}" data-title="{e(p['title'])}" data-search="{e(p['title']+' '+p['promise']+' '+p['surface']+' '+CATS[p['category']])}" style="{theme(p['category'])}"><a class="store-card-photo" href="{url}" tabindex="-1" aria-hidden="true"><img class="store-pack" src="{prefix}{still['src']}" alt="" width="800" height="800" loading="lazy" decoding="async"><img class="store-action" src="{prefix}{action['src']}" alt="" width="800" height="800" loading="lazy" decoding="async"></a>{save_button(p['slug'],p['title'])}<div class="store-card-copy"><h3><a href="{url}" aria-label="{e(p['title'])}"><span class="card-title-full">{e(p['title'])}</span><span class="card-title-short">{e(COMPACT[p['slug']])}</span></a></h3><span class="reference-card-meta">6 photos <i aria-hidden="true">·</i> <span>{SHORT[p['category']]}</span></span><span class="store-preview-label">Coming soon</span><a class="store-card-cta" href="{url}" aria-label="Explore {e(p['title'])}"><span class="card-cta-full">View product</span><span class="card-cta-short">View</span></a></div></article>'''
+    url=prefix+'products/'+p['slug']+'.html';still={'src':card_asset(p['slug'])}
+    return f'''<article class="store-card reference-card" data-product-card data-product-slug="{p['slug']}" data-category="{p['category']}" data-title="{e(p['title'])}" data-search="{e(p['title']+' '+p['promise']+' '+p['surface']+' '+CATS[p['category']])}" style="{theme(p['category'])}"><a class="store-card-photo" href="{url}" tabindex="-1" aria-hidden="true"><img class="store-pack" src="{prefix}{still['src']}" alt="" width="800" height="800" loading="lazy" decoding="async"></a>{save_button(p['slug'],p['title'])}<div class="store-card-copy"><h3><a href="{url}" aria-label="{e(p['title'])}"><span class="card-title-full">{e(p['title'])}</span><span class="card-title-short">{e(COMPACT[p['slug']])}</span></a></h3><span class="reference-card-meta">6 photos <i aria-hidden="true">·</i> <span>{SHORT[p['category']]}</span></span><span class="store-preview-label">Coming soon</span><a class="store-card-cta" href="{url}" aria-label="Explore {e(p['title'])}"><span class="card-cta-full">View product</span><span class="card-cta-short">View</span></a></div></article>'''
 
 
 def qifor_card():
-    return f'''<article class="store-card reference-card qifor-store-card" data-product-card data-product-slug="qifor" data-category="glass" data-title="QIFOR Wind Shield Pro" data-search="QIFOR windshield washer fluid glass cleaner concentrate" style="{theme('glass')}"><a class="store-card-photo" href="index.html#purchase-section" tabindex="-1" aria-hidden="true"><img class="store-pack" src="assets/images/qifor-wind-shield-pro.jpg" alt="" width="800" height="800" loading="lazy"></a>{save_button('qifor','QIFOR Wind Shield Pro')}<div class="store-card-copy"><h3><a href="index.html#purchase-section" aria-label="QIFOR Wind Shield Pro"><span class="card-title-full">QIFOR Wind Shield Pro</span><span class="card-title-short">QIFOR Glass Care</span></a></h3><span class="reference-card-meta">Glass care</span><span class="store-ready-label">Available now</span><a class="store-card-cta" href="index.html#purchase-section"><span class="card-cta-full">Shop QIFOR</span><span class="card-cta-short">Shop</span></a></div></article>'''
+    return f'''<article class="store-card reference-card qifor-store-card" data-product-card data-product-slug="qifor" data-category="glass" data-title="QIFOR Wind Shield Pro" data-search="QIFOR windshield washer fluid glass cleaner concentrate" style="{theme('glass')}"><a class="store-card-photo" href="index.html#purchase-section" tabindex="-1" aria-hidden="true"><img class="store-pack" src="assets/cutouts/qifor.webp" alt="" width="800" height="800" loading="lazy"></a>{save_button('qifor','QIFOR Wind Shield Pro')}<div class="store-card-copy"><h3><a href="index.html#purchase-section" aria-label="QIFOR Wind Shield Pro"><span class="card-title-full">QIFOR Wind Shield Pro</span><span class="card-title-short">QIFOR Glass Care</span></a></h3><span class="reference-card-meta">Glass care</span><span class="store-ready-label">Available now</span><a class="store-card-cta" href="index.html#purchase-section"><span class="card-cta-full">Shop QIFOR</span><span class="card-cta-short">Shop</span></a></div></article>'''
 
 
 def recent_section(prefix=''):
@@ -106,7 +109,7 @@ def recent_section(prefix=''):
 
 
 def category_tiles():
-    return ''.join(f'<a class="reference-category" href="collection.html?category={key}#collection"><img src="{photos.pack(BY_SLUG[PICKS[key]])["src"]}" alt="" width="240" height="200" loading="lazy"><strong><span class="category-name-full">{label}</span><span class="category-name-short">{TILE_NAMES[key]}</span></strong></a>' for key,label in SHORT.items())
+    return ''.join(f'<a class="reference-category" href="collection.html?category={key}#collection"><img src="{card_asset(PICKS[key])}" alt="" width="240" height="200" loading="lazy"><strong><span class="category-name-full">{label}</span><span class="category-name-short">{TILE_NAMES[key]}</span></strong></a>' for key,label in SHORT.items())
 
 
 def home_feedback():

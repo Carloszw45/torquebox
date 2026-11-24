@@ -1,0 +1,30 @@
+/* Transparent product photography and the corrected single-image wordmark. */
+.reference-brand-art>img {
+  display:block;
+  width:100%;
+  height:auto;
+  filter:none;
+  object-fit:contain;
+}
+.reference-card .store-pack {
+  mix-blend-mode:normal;
+  filter:none;
+  object-fit:contain;
+  opacity:1;
+}
+.reference-card:hover .store-pack {
+  opacity:1;
+  transform:none;
+}
+.reference-category>img {
+  mix-blend-mode:normal;
+  filter:none;
+  object-fit:contain;
+}
+@media (max-width:680px) {
+  .reference-brand { width:136px; }
+  .reference-card .store-pack { padding:12% 9%; }
+}
+@media (max-width:360px) {
+  .reference-brand { width:122px; }
+}
