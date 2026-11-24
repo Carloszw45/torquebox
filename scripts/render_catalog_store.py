@@ -71,7 +71,7 @@ def head(title, desc, path, prefix='', page='', product=None):
 <link rel="canonical" href="https://torque-box.com/{path}"><meta property="og:title" content="{e(title)} | TORQUEBOX"><meta property="og:description" content="{e(desc)}"><meta property="og:type" content="website"><meta property="og:url" content="https://torque-box.com/{path}">
 <meta property="og:image" content="https://torque-box.com/assets/photography/reference-road-hero.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{prefix}assets/catalog-v3.css"><link rel="stylesheet" href="{prefix}assets/catalog-v5.css"><script defer src="{prefix}assets/catalog-v5.js"></script>
+<link rel="stylesheet" href="{prefix}assets/catalog-v3.css"><link rel="stylesheet" href="{prefix}assets/catalog-v5.css"><link rel="stylesheet" href="{prefix}assets/catalog-v6.css"><script defer src="{prefix}assets/catalog-v5.js"></script>
 </head><body class="photo-store market-store {page}"{product_attrs}>'''
 
 
@@ -82,7 +82,7 @@ def header(prefix=''):
 <div class="store-announcement reference-announcement"><div class="shell"><span>{glyph('check',15)} Car care. Less effort.</span><a href="{prefix}index.html#purchase-section">QIFOR available in the store</a></div></div>
 <header class="store-header reference-header"><div class="shell reference-header-inner"><a class="reference-brand" href="{prefix}shop.html" aria-label="TorqueBox collection">{brand(prefix)}<small>CAR CARE. LESS EFFORT.</small></a>
 <nav class="reference-nav store-nav" aria-label="Main navigation"><a class="reference-home-link" href="{prefix}shop.html">Home</a><a href="{prefix}collection.html#collection">Shop</a><details class="reference-dropdown"><summary>Categories {glyph('down',13)}</summary><div>{categories}</div></details><a href="{prefix}shop.html#why-torquebox">About</a><a href="{prefix}support.html">Contact</a></nav>
-<form class="store-search reference-search" id="search" role="search" action="{prefix}collection.html#collection" method="get"><label class="sr-only" for="product-search">Search products</label><input type="search" id="product-search" name="q" placeholder="Search products…" autocomplete="off"><button type="submit" aria-label="Search collection">{glyph('search',19)}</button></form>
+<form class="store-search reference-search" id="search" role="search" action="{prefix}collection.html#collection" method="get"><label class="sr-only" for="product-search">Search products</label><input type="search" id="product-search" name="q" placeholder="Search…" autocomplete="off"><button type="submit" aria-label="Search collection">{glyph('search',19)}</button></form>
 <div class="reference-header-actions"><a href="{prefix}collection.html?saved=1#collection" class="saved-products-link" aria-label="Saved products">{glyph('heart',23)}<span data-saved-count hidden>0</span></a><a href="{prefix}index.html#purchase-section" aria-label="Shop QIFOR" class="reference-qifor-link">{glyph('bag',23)}<span data-qifor-count hidden>0</span></a></div></div></header><script id="catalog-slugs" type="application/json">{known}</script>'''
 
 
