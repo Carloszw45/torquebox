@@ -104,7 +104,52 @@
       "drying-towel-story.webp",
       "drying-towel-story.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/drying-towel-source-7.webp",
+        "kind": "application",
+        "alt": "Drying a black sports car with a microfiber towel",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/mcx-1200gsm-microfibre-drying-towel-car-detailing.webp?v=1791753326"
+      },
+      {
+        "src": "assets/catalog/drying-towel-1.webp",
+        "kind": "pack",
+        "alt": "MCX twisted-loop drying towel product view",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/mcx-drying-towel-single-2.png?v=1794070842"
+      },
+      {
+        "src": "assets/photography/drying-towel-source-5.webp",
+        "kind": "application",
+        "alt": "Drying towel resting on a wet car hood",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/CarMicrofibreDryingTowel2.jpg?v=1783023791"
+      },
+      {
+        "src": "assets/photography/drying-towel-source-6.webp",
+        "kind": "application",
+        "alt": "A drying towel being drawn across a clean wet panel",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/CarMicrofibreDryingTowel3.jpg?v=1783023791"
+      },
+      {
+        "src": "assets/photography/drying-towel-source-3.webp",
+        "kind": "detail",
+        "alt": "Close-up of the twisted microfiber pile",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/mcx-drying-towel-single-1.png?v=1794070827"
+      },
+      {
+        "src": "assets/photography/drying-towel-source-4.webp",
+        "kind": "detail",
+        "alt": "Folded double-sided microfiber drying towel",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/CarMicrofibreDryingTowel.png?v=1783023792"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "pressure-washer-gun",
@@ -211,7 +256,52 @@
       "pressure-washer-gun-story.webp",
       "pressure-washer-gun-story.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/pressure-washer-gun-source-9.webp",
+        "kind": "application",
+        "alt": "Rinsing a car with the short pressure-washer gun",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/yishi-g25-short-spray-gun-mclaren-750s-car-rinsing.png?v=1791984446"
+      },
+      {
+        "src": "assets/catalog/pressure-washer-gun-1.webp",
+        "kind": "pack",
+        "alt": "YISHI G25 compact pressure-washer gun product view",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/white-pink-pressure-washer-gun.png?v=1791983944"
+      },
+      {
+        "src": "assets/photography/pressure-washer-gun-source-6.webp",
+        "kind": "application",
+        "alt": "Compact trigger gun used with a foam attachment",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/yishi-g25-avalanche-snow-foam-cannon-lamborghini-huracan.png?v=1791984446"
+      },
+      {
+        "src": "assets/catalog/pressure-washer-gun-2.webp",
+        "kind": "pack",
+        "alt": "Side view of the short pressure-washer gun",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/yishi-g25-spray-gun-pink.png?v=1783453386"
+      },
+      {
+        "src": "assets/photography/pressure-washer-gun-source-10.webp",
+        "kind": "pack",
+        "alt": "Reference pressure-washer gun and compatible attachments",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/white-pink-spray-gun-bundle.png?v=1791984311"
+      },
+      {
+        "src": "assets/photography/pressure-washer-gun-source-12.webp",
+        "kind": "pack",
+        "alt": "Close view of the reference gun and nozzle accessories",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/Yishi-pink-pressure-washer-short-spray-gun-bundle_c7fb11b9-e724-4d78-9ced-dbdd5346b365.png?v=1791984596"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "foam-cannon",
@@ -318,7 +408,52 @@
       "foam-cannon-2.webp",
       "foam-cannon-2.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/catalog/foam-cannon-2.webp",
+        "kind": "application",
+        "alt": "Foam cannon applying foam to a car",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/easy-lock-blue-snow-foam-cannon-porsche-car-detailing.png?v=1791753677"
+      },
+      {
+        "src": "assets/catalog/foam-cannon-1.webp",
+        "kind": "pack",
+        "alt": "Blue Easy Lock foam cannon product view",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/snow-foam-cannon-bottle-blue.png?v=1783024668"
+      },
+      {
+        "src": "assets/photography/foam-cannon-source-4.webp",
+        "kind": "application",
+        "alt": "Reference foam cannon and bottle detail",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/snow-foam-cannon-bottle1.jpg?v=1783024720"
+      },
+      {
+        "src": "assets/photography/foam-cannon-source-5.webp",
+        "kind": "application",
+        "alt": "Foam cannon bottle and connector close-up",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/snow-foam-cannon-bottle2.jpg?v=1783024720"
+      },
+      {
+        "src": "assets/photography/foam-cannon-source-6.webp",
+        "kind": "application",
+        "alt": "Reference foam cannon application view",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/snow-foam-cannon-bottle3.jpg?v=1783024720"
+      },
+      {
+        "src": "assets/photography/foam-cannon-source-8.webp",
+        "kind": "application",
+        "alt": "Foam cannon connection and spray detail",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/snow-foam-cannon-bottle5.jpg?v=1783024719"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "air-blower",
@@ -434,7 +569,52 @@
       "air-blower-story.webp",
       "air-blower-story.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/blower-application.webp",
+        "kind": "application",
+        "alt": "Using directed air for contact-free vehicle drying",
+        "origin": "reference",
+        "source": "https://blocardryer.com/cdn/shop/files/Safe_Touchless_Drying_65a500c3-db28-46a9-89fa-5238ea00570d_1000x.jpg?v=1633120418"
+      },
+      {
+        "src": "assets/catalog/air-blower-1.webp",
+        "kind": "pack",
+        "alt": "BLO AIR-S handheld dryer product view",
+        "origin": "reference",
+        "source": "https://blocardryer.com/products/air-s-dryer"
+      },
+      {
+        "src": "assets/catalog/air-blower-2.webp",
+        "kind": "pack",
+        "alt": "Alternate view of the BLO AIR-S handheld dryer",
+        "origin": "reference",
+        "source": "https://blocardryer.com/products/air-s-dryer"
+      },
+      {
+        "src": "assets/photography/blower-side.webp",
+        "kind": "pack",
+        "alt": "Side and nozzle detail of the handheld car dryer",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0251/1018/4010/products/blo_air-s_20mb-3.jpg?v=1634065610"
+      },
+      {
+        "src": "assets/photography/blower-badge.webp",
+        "kind": "application",
+        "alt": "Moving water out of a car badge with a handheld dryer",
+        "origin": "reference",
+        "source": "https://blocardryer.com/cdn/shop/files/No_More_Drips_695c3f5b-71ff-4880-97b6-fbe774a90bff_1000x.jpg?v=1633120529"
+      },
+      {
+        "src": "assets/photography/blower-detail.webp",
+        "kind": "application",
+        "alt": "BLO AIR-S dryer in a vehicle detailing setting",
+        "origin": "reference",
+        "source": "https://blocardryer.com/cdn/shop/files/AIR-S_Banner_2048x.jpg?v=1633119126"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "v-floc-shampoo",
@@ -531,7 +711,52 @@
       "v-floc-shampoo-2.webp",
       "v-floc-shampoo-2.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/application-mix.webp",
+        "kind": "application",
+        "alt": "Measuring a car-care concentrate into water before use",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/catalog/v-floc-shampoo-1.webp",
+        "kind": "pack",
+        "alt": "Vonixx V-Floc Shampoo — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-v-floc-concentrated-car-shampoo-500ml.png?v=1792600252"
+      },
+      {
+        "src": "assets/catalog/v-floc-shampoo-2.webp",
+        "kind": "application",
+        "alt": "Vonixx V-Floc Shampoo — application reference 2",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-v-floc-snowfoam-mercedes-amg-gt.png?v=1791841489"
+      },
+      {
+        "src": "assets/photography/v-floc-shampoo-source-3.webp",
+        "kind": "application",
+        "alt": "Vonixx V-Floc Shampoo — application reference 3",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-v-floc-car-wash-shampoo-porsche-detailing.png?v=1791755208"
+      },
+      {
+        "src": "assets/photography/v-floc-shampoo-source-4.webp",
+        "kind": "application",
+        "alt": "Vonixx V-Floc Shampoo — application reference 4",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/002-vonixx-v-floc-car-shampoo-porsche-contact-wash.png?v=1792706621"
+      },
+      {
+        "src": "assets/photography/v-floc-shampoo-source-5.webp",
+        "kind": "pack",
+        "alt": "Vonixx V-Floc Shampoo — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-v-floc-concentrated-car-wash-shampoo-5l.jpg?v=1783326215"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "v-mol-prewash",
@@ -628,7 +853,52 @@
       "v-mol-prewash-story.webp",
       "v-mol-prewash-story.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/application-mix.webp",
+        "kind": "application",
+        "alt": "Measuring a wash concentrate into water before use",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/catalog/v-mol-prewash-1.webp",
+        "kind": "pack",
+        "alt": "Vonixx V-Mol Pre-Wash — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-v-mol-heavy-duty-descaler-wash-soap-500ml.png?v=1783328559"
+      },
+      {
+        "src": "assets/photography/v-mol-prewash-source-3.webp",
+        "kind": "application",
+        "alt": "Vonixx V-Mol Pre-Wash — application reference 3",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/051-vonixx-v-mol-range-rover-mud.png?v=1792708808"
+      },
+      {
+        "src": "assets/photography/v-mol-prewash-source-4.webp",
+        "kind": "application",
+        "alt": "Vonixx V-Mol Pre-Wash — application reference 4",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-v-mol-snowfoam-audi-r8-car-cleaning.png?v=1791841734"
+      },
+      {
+        "src": "assets/photography/v-mol-prewash-source-5.webp",
+        "kind": "application",
+        "alt": "Vonixx V-Mol Pre-Wash — application reference 5",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/052-vonixx-v-mol-bmw-wash.png?v=1792708807"
+      },
+      {
+        "src": "assets/photography/v-mol-prewash-source-6.webp",
+        "kind": "application",
+        "alt": "Vonixx V-Mol Pre-Wash — application reference 6",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/053-vonixx-v-mol-mercedes-rinse.png?v=1792708808"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "sintra-interior-cleaner",
@@ -725,7 +995,52 @@
       "sintra-interior-cleaner-2.webp",
       "sintra-interior-cleaner-2.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/application-interior.webp",
+        "kind": "application",
+        "alt": "Wiping a car dashboard with a clean microfiber cloth",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/catalog/sintra-interior-cleaner-1.webp",
+        "kind": "pack",
+        "alt": "Vonixx Sintra Interior Cleaner — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-sintra-fast-interior-cleaner-500ml.jpg?v=1783288809"
+      },
+      {
+        "src": "assets/catalog/sintra-interior-cleaner-2.webp",
+        "kind": "application",
+        "alt": "Vonixx Sintra Interior Cleaner — application reference 2",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-sintra-interior-cleaner-bentley-continental-gt.png?v=1791913714"
+      },
+      {
+        "src": "assets/photography/sintra-interior-cleaner-source-3.webp",
+        "kind": "application",
+        "alt": "Vonixx Sintra Interior Cleaner — application reference 3",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/007-vonixx-sintra-interior-cleaner-bentley-leather-seat.png?v=1792707342"
+      },
+      {
+        "src": "assets/photography/sintra-interior-cleaner-source-4.webp",
+        "kind": "application",
+        "alt": "Vonixx Sintra Interior Cleaner — application reference 4",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/008-vonixx-sintra-interior-cleaner-dashboard-plastics.png?v=1792707342"
+      },
+      {
+        "src": "assets/photography/sintra-interior-cleaner-source-5.webp",
+        "kind": "pack",
+        "alt": "Vonixx Sintra Interior Cleaner — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-sintra-interior-cleaner-5L.jpg?v=1790414647"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "glazy-glass-cleaner",
@@ -822,7 +1137,52 @@
       "glazy-glass-cleaner-story.webp",
       "glazy-glass-cleaner-story.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/application-glass.webp",
+        "kind": "application",
+        "alt": "Cleaning automotive side glass with a microfiber cloth",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/catalog/glazy-glass-cleaner-1.webp",
+        "kind": "pack",
+        "alt": "Vonixx Glazy Glass Cleaner — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-glazy-glass-cleaner-500ml.jpg?v=1783288808"
+      },
+      {
+        "src": "assets/photography/glazy-glass-cleaner-source-3.webp",
+        "kind": "application",
+        "alt": "Vonixx Glazy Glass Cleaner — application reference 3",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/045-vonixx-glazy-mercedes-glass.png?v=1792708661"
+      },
+      {
+        "src": "assets/photography/glazy-glass-cleaner-source-4.webp",
+        "kind": "application",
+        "alt": "Vonixx Glazy Glass Cleaner — application reference 4",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/047-vonixx-glazy-porsche-mirror.png?v=1792708661"
+      },
+      {
+        "src": "assets/photography/glazy-glass-cleaner-source-5.webp",
+        "kind": "application",
+        "alt": "Vonixx Glazy Glass Cleaner — application reference 5",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/046-vonixx-glazy-bmw-windscreen.png?v=1792708661"
+      },
+      {
+        "src": "assets/photography/glazy-glass-cleaner-source-6.webp",
+        "kind": "application",
+        "alt": "Vonixx Glazy Glass Cleaner — application reference 6",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-glazy-glass-cleaner-rolls-royce-ghost.png?v=1791913252"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "hydrox-fast-sealant",
@@ -919,7 +1279,52 @@
       "hydrox-fast-sealant-2.webp",
       "hydrox-fast-sealant-2.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/application-sealant.webp",
+        "kind": "application",
+        "alt": "Rinsing a clean wet painted panel during a finishing routine",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/catalog/hydrox-fast-sealant-1.webp",
+        "kind": "pack",
+        "alt": "Vonixx Hydrox Fast — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-hydrox-fast-ceramic-coating-500ml.jpg?v=1783288808"
+      },
+      {
+        "src": "assets/catalog/hydrox-fast-sealant-2.webp",
+        "kind": "application",
+        "alt": "Vonixx Hydrox Fast — application reference 2",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-hydrox-fast-aston-martin-db12-ceramic-spray.png?v=1791913661"
+      },
+      {
+        "src": "assets/photography/hydrox-fast-sealant-source-3.webp",
+        "kind": "application",
+        "alt": "Vonixx Hydrox Fast — application reference 3",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/018-vonixx-hydrox-fast-lamborghini-rinse-01.png?v=1792707884"
+      },
+      {
+        "src": "assets/photography/hydrox-fast-sealant-source-4.webp",
+        "kind": "application",
+        "alt": "Vonixx Hydrox Fast — application reference 4",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/019-vonixx-hydrox-fast-bentley-beading-02.png?v=1792707884"
+      },
+      {
+        "src": "assets/photography/hydrox-fast-sealant-source-5.webp",
+        "kind": "application",
+        "alt": "Vonixx Hydrox Fast — application reference 5",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/020-vonixx-hydrox-fast-mercedes-glass-03.png?v=1792707884"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "blend-spray-wax",
@@ -1016,7 +1421,52 @@
       "blend-spray-wax-2.webp",
       "blend-spray-wax-2.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/application-buff.webp",
+        "kind": "application",
+        "alt": "Buffing clean paintwork with a microfiber cloth",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/catalog/blend-spray-wax-1.webp",
+        "kind": "pack",
+        "alt": "Vonixx Blend Spray Wax — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-blend-ceramic-carnauba-spray-wax-500ml.jpg?v=1783110589"
+      },
+      {
+        "src": "assets/catalog/blend-spray-wax-2.webp",
+        "kind": "application",
+        "alt": "Vonixx Blend Spray Wax — application reference 2",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-blend-spray-wax-ferrari-roma-spider.png?v=1791913477"
+      },
+      {
+        "src": "assets/photography/blend-spray-wax-source-4.webp",
+        "kind": "application",
+        "alt": "Vonixx Blend Spray Wax — application reference 4",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/015-vonixx-blend-spray-wax-porsche-application-01.png?v=1792707796"
+      },
+      {
+        "src": "assets/photography/blend-spray-wax-source-3.webp",
+        "kind": "application",
+        "alt": "Vonixx Blend Spray Wax — application reference 3",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/016-vonixx-blend-spray-wax-ferrari-water-beading-02.png?v=1792707795"
+      },
+      {
+        "src": "assets/photography/blend-spray-wax-source-5.webp",
+        "kind": "application",
+        "alt": "Vonixx Blend Spray Wax — application reference 5",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/017-vonixx-blend-spray-wax-aston-martin-gloss-03.png?v=1792707796"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "delet-tire-cleaner",
@@ -1113,7 +1563,52 @@
       "delet-tire-cleaner-story.webp",
       "delet-tire-cleaner-story.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/application-tire-clean.webp",
+        "kind": "application",
+        "alt": "Brushing a tire sidewall with a rubber cleaner",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/catalog/delet-tire-cleaner-1.webp",
+        "kind": "pack",
+        "alt": "Vonixx Delet Tire Cleaner — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-delet-tyre-rubber-cleaner-500ml.jpg?v=1783110589"
+      },
+      {
+        "src": "assets/photography/delet-tire-cleaner-source-3.webp",
+        "kind": "application",
+        "alt": "Vonixx Delet Tire Cleaner — application reference 3",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/033-vonixx-delet-mercedes-tyre.png?v=1792708298"
+      },
+      {
+        "src": "assets/photography/delet-tire-cleaner-source-4.webp",
+        "kind": "application",
+        "alt": "Vonixx Delet Tire Cleaner — application reference 4",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/034-vonixx-delet-bmw-tyre.png?v=1792708297"
+      },
+      {
+        "src": "assets/photography/delet-tire-cleaner-source-5.webp",
+        "kind": "application",
+        "alt": "Vonixx Delet Tire Cleaner — application reference 5",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/035-vonixx-delet-porsche-rubber.png?v=1792708298"
+      },
+      {
+        "src": "assets/photography/delet-tire-cleaner-source-6.webp",
+        "kind": "application",
+        "alt": "Vonixx Delet Tire Cleaner — application reference 6",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-delet-tyre-rubber-cleaner-aston-martin-db12.png?v=1791913550"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "vexus-wheel-cleaner",
@@ -1210,7 +1705,52 @@
       "vexus-wheel-cleaner-2.webp",
       "vexus-wheel-cleaner-2.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/application-wheel-spray.webp",
+        "kind": "application",
+        "alt": "Applying a cleaning solution to a cool alloy wheel",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/catalog/vexus-wheel-cleaner-1.webp",
+        "kind": "pack",
+        "alt": "Vonixx Vexus Wheel Cleaner — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-vexus-wheel-engine-bay-cleaner-500ml.jpg?v=1783288810"
+      },
+      {
+        "src": "assets/catalog/vexus-wheel-cleaner-2.webp",
+        "kind": "application",
+        "alt": "Vonixx Vexus Wheel Cleaner — application reference 2",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/006-vonixx-vexus-engine-bay-cleaner-mercedes.png?v=1792707263"
+      },
+      {
+        "src": "assets/photography/vexus-wheel-cleaner-source-3.webp",
+        "kind": "pack",
+        "alt": "Vonixx Vexus Wheel Cleaner — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-vexus-wheel-engine-cleaner-5l.jpg?v=1783110589"
+      },
+      {
+        "src": "assets/photography/application-wheel-brush.webp",
+        "kind": "application",
+        "alt": "Cleaning alloy wheel spokes with a detailing brush",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/photography/application-engine.webp",
+        "kind": "application",
+        "alt": "Controlled brush cleaning in a cool engine bay",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "shiny-tire-dressing",
@@ -1307,7 +1847,52 @@
       "shiny-tire-dressing-story.webp",
       "shiny-tire-dressing-story.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/application-tire.webp",
+        "kind": "application",
+        "alt": "Applying dressing to a clean tire sidewall with a foam applicator",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/catalog/shiny-tire-dressing-1.webp",
+        "kind": "pack",
+        "alt": "Vonixx Shiny Tire Dressing — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-shiny-tyre-dressing-500ml.jpg?v=1783288808"
+      },
+      {
+        "src": "assets/photography/shiny-tire-dressing-source-5.webp",
+        "kind": "application",
+        "alt": "Vonixx Shiny Tire Dressing — application reference 5",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/022-vonixx-shiny-porsche-tyre-application-02.png?v=1792707961"
+      },
+      {
+        "src": "assets/photography/shiny-tire-dressing-source-4.webp",
+        "kind": "application",
+        "alt": "Vonixx Shiny Tire Dressing — application reference 4",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/023-vonixx-shiny-bmw-m4-competition-tyres-03.png?v=1792707961"
+      },
+      {
+        "src": "assets/photography/shiny-tire-dressing-source-3.webp",
+        "kind": "application",
+        "alt": "Vonixx Shiny Tire Dressing — application reference 3",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/021-vonixx-shiny-lamborghini-tyre-50-50-01.png?v=1792707960"
+      },
+      {
+        "src": "assets/catalog/shiny-tire-dressing-2.webp",
+        "kind": "application",
+        "alt": "Vonixx Shiny Tire Dressing — application reference 2",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-shiny-tyre-dressing-bmw-m3-before-after.png?v=1791756028"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "izer-iron-remover",
@@ -1404,7 +1989,52 @@
       "izer-iron-remover-2.webp",
       "izer-iron-remover-2.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/application-wheel-spray.webp",
+        "kind": "application",
+        "alt": "Applying a cleaning solution to a cool alloy wheel",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/catalog/izer-iron-remover-1.webp",
+        "kind": "pack",
+        "alt": "Vonixx Izer Iron Remover — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-izer-iron-fallout-remover-500ml.jpg?v=1783110589"
+      },
+      {
+        "src": "assets/catalog/izer-iron-remover-2.webp",
+        "kind": "application",
+        "alt": "Vonixx Izer Iron Remover — application reference 2",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/030-vonixx-izer-bmw-wheel.png?v=1792708230"
+      },
+      {
+        "src": "assets/photography/izer-iron-remover-source-3.webp",
+        "kind": "application",
+        "alt": "Vonixx Izer Iron Remover — application reference 3",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/031-vonixx-izer-porsche-paint.png?v=1792708230"
+      },
+      {
+        "src": "assets/photography/izer-iron-remover-source-4.webp",
+        "kind": "application",
+        "alt": "Vonixx Izer Iron Remover — application reference 4",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-izer-iron-fallout-remover-porsche-wheel-detailing.png?v=1791753492"
+      },
+      {
+        "src": "assets/photography/izer-iron-remover-source-5.webp",
+        "kind": "application",
+        "alt": "Vonixx Izer Iron Remover — application reference 5",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/032-vonixx-izer-audi-rinse.png?v=1792708230"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "slug": "impact-all-purpose-cleaner",
@@ -1501,6 +2131,51 @@
       "impact-all-purpose-cleaner-2.webp",
       "impact-all-purpose-cleaner-2.webp"
     ],
-    "sourceChecked": "2026-11-24"
+    "sourceChecked": "2026-11-24",
+    "gallery": [
+      {
+        "src": "assets/photography/application-fabric.webp",
+        "kind": "application",
+        "alt": "Wet extraction of a car carpet",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      },
+      {
+        "src": "assets/catalog/impact-all-purpose-cleaner-1.webp",
+        "kind": "pack",
+        "alt": "Vonixx Impact All-Purpose Cleaner — bottle and packaging",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/vonixx-impact-all-purpose-cleaner-degreaser-1-5l.png?v=1783289618"
+      },
+      {
+        "src": "assets/catalog/impact-all-purpose-cleaner-2.webp",
+        "kind": "application",
+        "alt": "Vonixx Impact All-Purpose Cleaner — application reference 2",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/012-vonixx-impact-carpet-cleaner-bentley-01.png?v=1792707587"
+      },
+      {
+        "src": "assets/photography/impact-all-purpose-cleaner-source-4.webp",
+        "kind": "application",
+        "alt": "Vonixx Impact All-Purpose Cleaner — application reference 4",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/013-vonixx-impact-engine-degreaser-mercedes-02.png?v=1792707587"
+      },
+      {
+        "src": "assets/photography/impact-all-purpose-cleaner-source-3.webp",
+        "kind": "application",
+        "alt": "Vonixx Impact All-Purpose Cleaner — application reference 3",
+        "origin": "reference",
+        "source": "https://cdn.shopify.com/s/files/1/0999/4698/7902/files/014-vonixx-impact-insect-remover-aston-martin-03.png?v=1792707587"
+      },
+      {
+        "src": "assets/photography/application-engine.webp",
+        "kind": "application",
+        "alt": "Controlled brush cleaning in a cool engine bay",
+        "origin": "generated",
+        "source": "AI-created illustrative application scene"
+      }
+    ],
+    "photoCount": 6
   }
 ]
