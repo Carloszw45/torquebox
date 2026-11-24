@@ -2,6 +2,26 @@
   const byId = (id) => document.getElementById(id);
   const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
   const formatPrice = (cents) => money.format(cents / 100);
+
+  // Counts are aggregated by event, country and screen class. No buyer identifiers are sent.
+  const storeEventSent = new Set();
+  function recordStoreEvent(event, once = false) {
+    if (navigator.globalPrivacyControl || navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
+    if (once && storeEventSent.has(event)) return;
+    if (once) storeEventSent.add(event);
+    const payload = JSON.stringify({
+      event,
+      device: window.matchMedia?.('(max-width: 767px)').matches ? 'mobile' : 'desktop',
+    });
+    try {
+      if (navigator.sendBeacon?.('/api/store-events', new Blob([payload], { type: 'application/json' }))) return;
+      fetch('/api/store-events', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: payload, credentials: 'same-origin', keepalive: true,
+      }).catch(() => {});
+    } catch { /* Analytics must never interrupt the purchase flow. */ }
+  }
+
   const cartKey = 'torquebox-cart-usd-v1';
   const bottlePhoto = 'assets/images/qifor-wind-shield-pro.jpg';
   const shippingCharge = 499;
@@ -77,7 +97,10 @@
     quantityInput.value = quantity;
     quantityMinus.disabled = quantity <= 1;
     quantityPlus.disabled = quantity >= 20;
-    byId('selection-volume').textContent = `${selectedBundle.bottles} × 120 mL (4.05 fl oz each)`;
+    const selectedBottles = selectedBundle.bottles * quantity;
+    byId('selection-volume').textContent = `${selectedBottles} ${selectedBottles === 1 ? 'bottle' : 'bottles'} · ${selectedBottles * 120} mL of concentrate`;
+    const deliveredSummary = byId('selected-delivered-total');
+    if (deliveredSummary) deliveredSummary.textContent = `${selectedBottles} ${selectedBottles === 1 ? 'bottle' : 'bottles'} · ${formatPrice(price + shipping.cost)} total ${shipping.cost ? 'including US shipping' : 'with free US shipping'}`;
     byId('atc-btn-text').textContent = `ADD TO CART — ${formatPrice(price)} USD`;
     byId('sticky-price').textContent = formatPrice(price);
     byId('sticky-bundle-label').textContent = selectedBundle.title;
@@ -274,6 +297,7 @@
   checkoutButton.addEventListener('click', async (event) => {
     if (!stripeReady || stripeLoading || !Object.keys(cart).length) return;
     stripeLoading = true;
+    recordStoreEvent('begin_checkout');
     updateCart();
     openModal('stripe-modal', event.currentTarget);
     checkoutMessage.textContent = 'Preparing your secure payment form…';
@@ -293,8 +317,10 @@
       }
       stripeCheckout = embedded;
       embedded.mount('#stripe-checkout');
+      recordStoreEvent('checkout_ready');
       checkoutMessage.textContent = 'Enter your name, email, US shipping address, and payment details below.';
     } catch (error) {
+      recordStoreEvent('checkout_error');
       if (activeModal?.id === 'stripe-modal') checkoutMessage.textContent = error.message;
     } finally {
       stripeLoading = false;
@@ -333,6 +359,7 @@
   function addToCart(event) {
     const { id, title } = selectedBundle;
     setCartQuantity(id, (cart[id] ?? 0) + quantity);
+    recordStoreEvent('add_to_cart');
     const toast = byId('toast');
     byId('toast-msg').textContent = `${title} (${quantity}×)`;
     toast.classList.remove('opacity-0', 'translate-y-[-10px]');
@@ -397,6 +424,8 @@
     });
     const activeThumb = thumbnails[galleryIndex];
     const source = activeThumb.dataset.src;
+    const galleryCaption = byId('gallery-caption');
+    if (galleryCaption) galleryCaption.textContent = activeThumb.dataset.caption || 'QIFOR Wind Shield Pro';
     if (galleryCounter) galleryCounter.textContent = (galleryIndex + 1) + ' / ' + thumbnails.length;
     if (!source) return;
     clearTimeout(imageTimer);
@@ -420,7 +449,8 @@
     stopGalleryAutoplay();
     if (prefersReducedMotion || thumbnails.length < 2 || document.hidden) return;
     if (gallery?.matches(':hover') || gallery?.contains(document.activeElement)) return;
-    galleryAutoTimer = setInterval(() => selectGalleryImage(galleryIndex + 1), 6500);
+    // The first product photo stays visible until the visitor chooses another image.
+    // Navigation by controls and swipe remains available.
   };
   const navigateGallery = (step) => {
     selectGalleryImage(galleryIndex + step);
@@ -700,4 +730,5 @@
   updateStickyBar();
   updateSelection();
   updateCart();
+  recordStoreEvent('page_view', true);
 })();
