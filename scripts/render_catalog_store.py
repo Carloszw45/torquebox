@@ -71,7 +71,7 @@ def head(title, desc, path, prefix='', page='', product=None):
 <link rel="canonical" href="https://torque-box.com/{path}"><meta property="og:title" content="{e(title)} | TORQUEBOX"><meta property="og:description" content="{e(desc)}"><meta property="og:type" content="website"><meta property="og:url" content="https://torque-box.com/{path}">
 <meta property="og:image" content="https://torque-box.com/assets/photography/reference-road-hero.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{prefix}assets/catalog-v3.css?v=20261124-photo-1"><link rel="stylesheet" href="{prefix}assets/catalog-v5.css?v=20261124-reference-1"><script defer src="{prefix}assets/catalog-v5.js?v=20261124-reference-1"></script>
+<link rel="stylesheet" href="{prefix}assets/catalog-v3.css"><link rel="stylesheet" href="{prefix}assets/catalog-v5.css"><script defer src="{prefix}assets/catalog-v5.js"></script>
 </head><body class="photo-store market-store {page}"{product_attrs}>'''
 
 
